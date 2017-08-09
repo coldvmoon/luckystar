@@ -1,0 +1,43 @@
+
+<div *ngIf="laborUnion">
+    <h2><span jhiTranslate="luckystarApp.laborUnion.detail.title">Labor Union</span> {{laborUnion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="luckystarApp.laborUnion.lId">L Id</span></dt>
+        <dd>
+            <span>{{laborUnion.lId}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.laborUnion.name">Name</span></dt>
+        <dd>
+            <span>{{laborUnion.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.laborUnion.regDate">Reg Date</span></dt>
+        <dd>
+            <span>{{laborUnion.regDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.laborUnion.state">State</span></dt>
+        <dd>
+            <span jhiTranslate="{{'luckystarApp.State.' + laborUnion.state}}">{{laborUnion.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.laborUnion.user">User</span></dt>
+        <dd>
+            <span *ngFor="let user of laborUnion.users; let last = last">
+                {{user.login}}{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'labor-union/'+ laborUnion.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

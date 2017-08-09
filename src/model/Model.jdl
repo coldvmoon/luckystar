@@ -1,0 +1,16 @@
+entity LaborUnion {
+	lId Integer required
+	name String required maxlength(50)
+	regDate LocalDate required
+	state State required
+}
+
+
+enum State {
+  ON,OFF
+}
+
+
+relationship ManyToMany {
+  LaborUnion{user(login)} to User{LaborUnion(name)}
+}

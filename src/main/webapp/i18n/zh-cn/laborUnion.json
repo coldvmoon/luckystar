@@ -1,0 +1,25 @@
+{
+    "luckystarApp": {
+        "laborUnion" : {
+            "home": {
+                "title": "Labor Unions",
+                "createLabel": "Create a new Labor Union",
+                "createOrEditLabel": "Create or edit a Labor Union"
+            },
+            "created": "A new Labor Union is created with identifier {{ param }}",
+            "updated": "A Labor Union is updated with identifier {{ param }}",
+            "deleted": "A Labor Union is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Labor Union {{ id }}?"
+            },
+            "detail": {
+                "title": "Labor Union"
+            },
+            "lId": "L Id",
+            "name": "Name",
+            "regDate": "Reg Date",
+            "state": "State",
+            "user": "User"
+        }
+    }
+}

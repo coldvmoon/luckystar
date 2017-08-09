@@ -1,0 +1,90 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLaborUnionLabel" jhiTranslate="luckystarApp.laborUnion.home.createOrEditLabel">Create or edit a Labor Union</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!laborUnion.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="laborUnion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.lId" for="field_lId">L Id</label>
+            <input type="number" class="form-control" name="lId" id="field_lId"
+                [(ngModel)]="laborUnion.lId" required />
+            <div [hidden]="!(editForm.controls.lId?.dirty && editForm.controls.lId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.lId?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="laborUnion.name" required maxlength="50" />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.regDate" for="field_regDate">Reg Date</label>
+            <div class="input-group">
+                <input id="field_regDate" type="text" class="form-control" name="regDate" ngbDatepicker  #regDateDp="ngbDatepicker" [(ngModel)]="laborUnion.regDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="regDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.regDate?.dirty && editForm.controls.regDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.regDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.state" for="field_state">State</label>
+            <select class="form-control" name="state" [(ngModel)]="laborUnion.state" id="field_state"  required>
+                <option value="ON" jhiTranslate="luckystarApp.State.ON">ON</option>
+                <option value="OFF" jhiTranslate="luckystarApp.State.OFF">OFF</option>
+            </select>
+            <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.state?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="luckystarApp.laborUnion.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="laborUnion.users">
+                <option [ngValue]="getSelected(laborUnion.users, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
