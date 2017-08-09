@@ -2,6 +2,12 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "chickenInfo",
+            "otherEntityName": "chickenInfo",
+            "otherEntityRelationshipName": "laborUnion"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "laborUnion",
             "relationshipName": "user",
@@ -46,6 +52,6 @@
     "changelogDate": "20170809155514",
     "entityTableName": "labor_union",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no"
 }

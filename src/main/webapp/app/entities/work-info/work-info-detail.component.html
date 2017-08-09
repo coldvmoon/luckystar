@@ -1,0 +1,73 @@
+
+<div *ngIf="workInfo">
+    <h2><span jhiTranslate="luckystarApp.workInfo.detail.title">Work Info</span> {{workInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="luckystarApp.workInfo.starLevel">Star Level</span></dt>
+        <dd>
+            <span>{{workInfo.starLevel}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.richLevel">Rich Level</span></dt>
+        <dd>
+            <span>{{workInfo.richLevel}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.fisrtBean">Fisrt Bean</span></dt>
+        <dd>
+            <span>{{workInfo.fisrtBean}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.beanTotal">Bean Total</span></dt>
+        <dd>
+            <span>{{workInfo.beanTotal}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.coin">Coin</span></dt>
+        <dd>
+            <span>{{workInfo.coin}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.coinTotal">Coin Total</span></dt>
+        <dd>
+            <span>{{workInfo.coinTotal}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.fansCount">Fans Count</span></dt>
+        <dd>
+            <span>{{workInfo.fansCount}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.followCount">Follow Count</span></dt>
+        <dd>
+            <span>{{workInfo.followCount}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.experience">Experience</span></dt>
+        <dd>
+            <span>{{workInfo.experience}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.workTime">Work Time</span></dt>
+        <dd>
+            <span>{{workInfo.workTime}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.curMonth">Cur Month</span></dt>
+        <dd>
+            <span>{{workInfo.curMonth}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.curDay">Cur Day</span></dt>
+        <dd>
+            <span>{{workInfo.curDay | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.lastTime">Last Time</span></dt>
+        <dd>
+            <span>{{workInfo.lastTime | date:'mediumDate'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'work-info/'+ workInfo.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

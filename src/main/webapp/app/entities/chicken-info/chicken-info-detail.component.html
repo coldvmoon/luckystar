@@ -1,0 +1,59 @@
+
+<div *ngIf="chickenInfo">
+    <h2><span jhiTranslate="luckystarApp.chickenInfo.detail.title">Chicken Info</span> {{chickenInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.userName">User Name</span></dt>
+        <dd>
+            <span>{{chickenInfo.userName}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.nickName">Nick Name</span></dt>
+        <dd>
+            <span>{{chickenInfo.nickName}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.starId">Star Id</span></dt>
+        <dd>
+            <span>{{chickenInfo.starId}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.regDate">Reg Date</span></dt>
+        <dd>
+            <span>{{chickenInfo.regDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.cookie">Cookie</span></dt>
+        <dd>
+            <span>{{chickenInfo.cookie}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.timeRate">Time Rate</span></dt>
+        <dd>
+            <span>{{chickenInfo.timeRate}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.beanRate">Bean Rate</span></dt>
+        <dd>
+            <span>{{chickenInfo.beanRate}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.state">State</span></dt>
+        <dd>
+            <span jhiTranslate="{{'luckystarApp.State.' + chickenInfo.state}}">{{chickenInfo.state}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.chickenInfo.laborUnion">Labor Union</span></dt>
+        <dd>
+            <div *ngIf="chickenInfo.laborUnion">
+                <a [routerLink]="['/labor-union', chickenInfo.laborUnion?.id]">{{chickenInfo.laborUnion?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'chicken-info/'+ chickenInfo.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,39 @@
+
+<div *ngIf="taskInfo">
+    <h2><span jhiTranslate="luckystarApp.taskInfo.detail.title">Task Info</span> {{taskInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="luckystarApp.taskInfo.minTask">Min Task</span></dt>
+        <dd>
+            <span>{{taskInfo.minTask}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.taskInfo.maxTask">Max Task</span></dt>
+        <dd>
+            <span>{{taskInfo.maxTask}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.taskInfo.curMonth">Cur Month</span></dt>
+        <dd>
+            <span>{{taskInfo.curMonth}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.taskInfo.laborUnion">Labor Union</span></dt>
+        <dd>
+            <div *ngIf="taskInfo.laborUnion">
+                <a [routerLink]="['/chicken-info', taskInfo.laborUnion?.id]">{{taskInfo.laborUnion?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'task-info/'+ taskInfo.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -12,6 +12,7 @@ export class LaborUnion implements BaseEntity {
         public name?: string,
         public regDate?: any,
         public state?: State,
+        public chickenInfos?: BaseEntity[],
         public users?: User[],
     ) {
     }

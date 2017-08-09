@@ -1,0 +1,24 @@
+{
+    "luckystarApp": {
+        "taskInfo" : {
+            "home": {
+                "title": "Task Infos",
+                "createLabel": "Create a new Task Info",
+                "createOrEditLabel": "Create or edit a Task Info"
+            },
+            "created": "A new Task Info is created with identifier {{ param }}",
+            "updated": "A Task Info is updated with identifier {{ param }}",
+            "deleted": "A Task Info is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Task Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Task Info"
+            },
+            "minTask": "Min Task",
+            "maxTask": "Max Task",
+            "curMonth": "Cur Month",
+            "laborUnion": "Labor Union"
+        }
+    }
+}

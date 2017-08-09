@@ -11,6 +11,48 @@ enum State {
 }
 
 
+entity ChickenInfo {
+	userName String required maxlength(50)
+	nickName String required maxlength(100)
+	starId Integer required
+	regDate LocalDate required
+	cookie String required maxlength(10480)
+	timeRate Double required
+	beanRate Double required
+	state State required
+}
+
+entity TaskInfo {
+	minTask Integer required
+	maxTask Integer required
+	curMonth Integer required
+}
+
+entity WorkInfo {
+	starLevel Integer required
+	richLevel Integer required
+	fisrtBean Double required
+	beanTotal Double required
+	coin Double required
+	coinTotal Double required
+	fansCount Integer required
+	followCount Integer required
+	experience Double required
+	workTime Integer required
+	curMonth Integer required
+	curDay LocalDate required
+	lastTime LocalDate required
+}
+
+relationship OneToMany {
+  LaborUnion{chickenInfo(userName)} to ChickenInfo{LaborUnion}
+	ChickenInfo{TaskInfo(curMonth)} to TaskInfo{LaborUnion}
+}
+
+
+
 relationship ManyToMany {
   LaborUnion{user(login)} to User{LaborUnion(name)}
 }
+
+paginate LaborUnion,ChickenInfo,TaskInfo,WorkInfo with pager

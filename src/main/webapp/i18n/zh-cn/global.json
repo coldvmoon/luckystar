@@ -8,6 +8,9 @@
             "entities": {
                 "main": "数据",
                 "laborUnion": "Labor Union",
+                "chickenInfo": "Chicken Info",
+                "taskInfo": "Task Info",
+                "workInfo": "Work Info",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

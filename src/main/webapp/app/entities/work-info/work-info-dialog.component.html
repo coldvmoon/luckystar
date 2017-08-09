@@ -1,0 +1,222 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myWorkInfoLabel" jhiTranslate="luckystarApp.workInfo.home.createOrEditLabel">Create or edit a Work Info</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!workInfo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="workInfo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.starLevel" for="field_starLevel">Star Level</label>
+            <input type="number" class="form-control" name="starLevel" id="field_starLevel"
+                [(ngModel)]="workInfo.starLevel" required />
+            <div [hidden]="!(editForm.controls.starLevel?.dirty && editForm.controls.starLevel?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.starLevel?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.starLevel?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.richLevel" for="field_richLevel">Rich Level</label>
+            <input type="number" class="form-control" name="richLevel" id="field_richLevel"
+                [(ngModel)]="workInfo.richLevel" required />
+            <div [hidden]="!(editForm.controls.richLevel?.dirty && editForm.controls.richLevel?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.richLevel?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.richLevel?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.fisrtBean" for="field_fisrtBean">Fisrt Bean</label>
+            <input type="number" class="form-control" name="fisrtBean" id="field_fisrtBean"
+                [(ngModel)]="workInfo.fisrtBean" required />
+            <div [hidden]="!(editForm.controls.fisrtBean?.dirty && editForm.controls.fisrtBean?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.fisrtBean?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.fisrtBean?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.beanTotal" for="field_beanTotal">Bean Total</label>
+            <input type="number" class="form-control" name="beanTotal" id="field_beanTotal"
+                [(ngModel)]="workInfo.beanTotal" required />
+            <div [hidden]="!(editForm.controls.beanTotal?.dirty && editForm.controls.beanTotal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.beanTotal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.beanTotal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.coin" for="field_coin">Coin</label>
+            <input type="number" class="form-control" name="coin" id="field_coin"
+                [(ngModel)]="workInfo.coin" required />
+            <div [hidden]="!(editForm.controls.coin?.dirty && editForm.controls.coin?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.coin?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.coin?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.coinTotal" for="field_coinTotal">Coin Total</label>
+            <input type="number" class="form-control" name="coinTotal" id="field_coinTotal"
+                [(ngModel)]="workInfo.coinTotal" required />
+            <div [hidden]="!(editForm.controls.coinTotal?.dirty && editForm.controls.coinTotal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.coinTotal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.coinTotal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.fansCount" for="field_fansCount">Fans Count</label>
+            <input type="number" class="form-control" name="fansCount" id="field_fansCount"
+                [(ngModel)]="workInfo.fansCount" required />
+            <div [hidden]="!(editForm.controls.fansCount?.dirty && editForm.controls.fansCount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.fansCount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.fansCount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.followCount" for="field_followCount">Follow Count</label>
+            <input type="number" class="form-control" name="followCount" id="field_followCount"
+                [(ngModel)]="workInfo.followCount" required />
+            <div [hidden]="!(editForm.controls.followCount?.dirty && editForm.controls.followCount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.followCount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.followCount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.experience" for="field_experience">Experience</label>
+            <input type="number" class="form-control" name="experience" id="field_experience"
+                [(ngModel)]="workInfo.experience" required />
+            <div [hidden]="!(editForm.controls.experience?.dirty && editForm.controls.experience?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.experience?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.experience?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.workTime" for="field_workTime">Work Time</label>
+            <input type="number" class="form-control" name="workTime" id="field_workTime"
+                [(ngModel)]="workInfo.workTime" required />
+            <div [hidden]="!(editForm.controls.workTime?.dirty && editForm.controls.workTime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.workTime?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.workTime?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.curMonth" for="field_curMonth">Cur Month</label>
+            <input type="number" class="form-control" name="curMonth" id="field_curMonth"
+                [(ngModel)]="workInfo.curMonth" required />
+            <div [hidden]="!(editForm.controls.curMonth?.dirty && editForm.controls.curMonth?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.curMonth?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.curMonth?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.curDay" for="field_curDay">Cur Day</label>
+            <div class="input-group">
+                <input id="field_curDay" type="text" class="form-control" name="curDay" ngbDatepicker  #curDayDp="ngbDatepicker" [(ngModel)]="workInfo.curDay"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="curDayDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.curDay?.dirty && editForm.controls.curDay?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.curDay?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.lastTime" for="field_lastTime">Last Time</label>
+            <div class="input-group">
+                <input id="field_lastTime" type="text" class="form-control" name="lastTime" ngbDatepicker  #lastTimeDp="ngbDatepicker" [(ngModel)]="workInfo.lastTime"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="lastTimeDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.lastTime?.dirty && editForm.controls.lastTime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastTime?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,5 +1,6 @@
 package com.luckystar.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -41,6 +42,10 @@ public class LaborUnion implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private State state;
+
+    @OneToMany(mappedBy = "laborUnion")
+    @JsonIgnore
+    private Set<ChickenInfo> chickenInfos = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "labor_union_user",
@@ -106,6 +111,31 @@ public class LaborUnion implements Serializable {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public Set<ChickenInfo> getChickenInfos() {
+        return chickenInfos;
+    }
+
+    public LaborUnion chickenInfos(Set<ChickenInfo> chickenInfos) {
+        this.chickenInfos = chickenInfos;
+        return this;
+    }
+
+    public LaborUnion addChickenInfo(ChickenInfo chickenInfo) {
+        this.chickenInfos.add(chickenInfo);
+        chickenInfo.setLaborUnion(this);
+        return this;
+    }
+
+    public LaborUnion removeChickenInfo(ChickenInfo chickenInfo) {
+        this.chickenInfos.remove(chickenInfo);
+        chickenInfo.setLaborUnion(null);
+        return this;
+    }
+
+    public void setChickenInfos(Set<ChickenInfo> chickenInfos) {
+        this.chickenInfos = chickenInfos;
     }
 
     public Set<User> getUsers() {

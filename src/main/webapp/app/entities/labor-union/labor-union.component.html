@@ -15,13 +15,12 @@
     <div class="table-responsive" *ngIf="laborUnions">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="luckystarApp.laborUnion.lId">L Id</span></th>
-            <th><span jhiTranslate="luckystarApp.laborUnion.name">Name</span></th>
-            <th><span jhiTranslate="luckystarApp.laborUnion.regDate">Reg Date</span></th>
-            <th><span jhiTranslate="luckystarApp.laborUnion.state">State</span></th>
-            <th><span jhiTranslate="luckystarApp.laborUnion.user">User</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lId"><span jhiTranslate="luckystarApp.laborUnion.lId">L Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="luckystarApp.laborUnion.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="regDate"><span jhiTranslate="luckystarApp.laborUnion.regDate">Reg Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="state"><span jhiTranslate="luckystarApp.laborUnion.state">State</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -32,11 +31,6 @@
                 <td>{{laborUnion.name}}</td>
                 <td>{{laborUnion.regDate | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'luckystarApp.State.' + laborUnion.state}}">{{laborUnion.state}}</td>
-                <td>
-                    <span *ngFor="let user of laborUnion.users; let last = last">
-                            {{user.login}}{{last ? '' : ', '}}
-                        </span>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -65,4 +59,13 @@
             </tbody>
         </table>
     </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div *ngIf="laborUnions && laborUnions.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

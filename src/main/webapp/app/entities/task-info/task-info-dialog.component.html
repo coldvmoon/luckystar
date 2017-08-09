@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTaskInfoLabel" jhiTranslate="luckystarApp.taskInfo.home.createOrEditLabel">Create or edit a Task Info</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!taskInfo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="taskInfo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.taskInfo.minTask" for="field_minTask">Min Task</label>
+            <input type="number" class="form-control" name="minTask" id="field_minTask"
+                [(ngModel)]="taskInfo.minTask" required />
+            <div [hidden]="!(editForm.controls.minTask?.dirty && editForm.controls.minTask?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.minTask?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.minTask?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.taskInfo.maxTask" for="field_maxTask">Max Task</label>
+            <input type="number" class="form-control" name="maxTask" id="field_maxTask"
+                [(ngModel)]="taskInfo.maxTask" required />
+            <div [hidden]="!(editForm.controls.maxTask?.dirty && editForm.controls.maxTask?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.maxTask?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.maxTask?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.taskInfo.curMonth" for="field_curMonth">Cur Month</label>
+            <input type="number" class="form-control" name="curMonth" id="field_curMonth"
+                [(ngModel)]="taskInfo.curMonth" required />
+            <div [hidden]="!(editForm.controls.curMonth?.dirty && editForm.controls.curMonth?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.curMonth?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.curMonth?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="luckystarApp.taskInfo.laborUnion" for="field_laborUnion">Labor Union</label>
+            <select class="form-control" id="field_laborUnion" name="laborUnion" [(ngModel)]="taskInfo.laborUnion" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="chickenInfoOption.id === taskInfo.laborUnion?.id ? taskInfo.laborUnion : chickenInfoOption" *ngFor="let chickenInfoOption of chickeninfos; trackBy: trackChickenInfoById">{{chickenInfoOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

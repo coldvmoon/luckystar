@@ -14,6 +14,7 @@ import {
     LaborUnionDeleteDialogComponent,
     laborUnionRoute,
     laborUnionPopupRoute,
+    LaborUnionResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -45,6 +46,7 @@ const ENTITY_STATES = [
     providers: [
         LaborUnionService,
         LaborUnionPopupService,
+        LaborUnionResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
