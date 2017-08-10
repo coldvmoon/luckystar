@@ -9,6 +9,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { WorkInfo } from './work-info.model';
 import { WorkInfoPopupService } from './work-info-popup.service';
 import { WorkInfoService } from './work-info.service';
+import { TaskInfo, TaskInfoService } from '../task-info';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-work-info-dialog',
@@ -18,19 +20,23 @@ export class WorkInfoDialogComponent implements OnInit {
 
     workInfo: WorkInfo;
     isSaving: boolean;
+
+    taskinfos: TaskInfo[];
     curDayDp: any;
-    lastTimeDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private workInfoService: WorkInfoService,
+        private taskInfoService: TaskInfoService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.taskInfoService.query()
+            .subscribe((res: ResponseWrapper) => { this.taskinfos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -71,6 +77,10 @@ export class WorkInfoDialogComponent implements OnInit {
 
     private onError(error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    trackTaskInfoById(index: number, item: TaskInfo) {
+        return item.id;
     }
 }
 

@@ -1,8 +1,8 @@
 import { BaseEntity } from './../../shared';
 
 const enum State {
-    'ON',
-    'OFF'
+    'OFF',
+    'ON'
 }
 
 export class ChickenInfo implements BaseEntity {

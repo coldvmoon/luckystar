@@ -4,15 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!--
-        Added the constraints for entity TaskInfo.
+        Added the constraints for entity WorkInfo.
     -->
-    <changeSet id="20170809162245-2" author="jhipster">
+    <changeSet id="20170809162246-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="chicken_info_id"
-                                 baseTableName="task_info"
-                                 constraintName="fk_task_info_chicken_info_id"
+        <addForeignKeyConstraint baseColumnNames="task_info_id"
+                                 baseTableName="work_info"
+                                 constraintName="fk_work_info_task_info_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="chicken_info"/>
+                                 referencedTableName="task_info"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -15,30 +15,26 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.chickenInfo.userName" for="field_userName">User Name</label>
             <input type="text" class="form-control" name="userName" id="field_userName"
-                [(ngModel)]="chickenInfo.userName" required maxlength="50" />
+                [(ngModel)]="chickenInfo.userName" required maxlength="10" />
             <div [hidden]="!(editForm.controls.userName?.dirty && editForm.controls.userName?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.userName?.errors?.required" jhiTranslate="entity.validation.required">
                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.userName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
-                   This field cannot be longer than 50 characters.
+                   [hidden]="!editForm.controls.userName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10 }">
+                   This field cannot be longer than 10 characters.
                 </small>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.chickenInfo.nickName" for="field_nickName">Nick Name</label>
             <input type="text" class="form-control" name="nickName" id="field_nickName"
-                [(ngModel)]="chickenInfo.nickName" required maxlength="100" />
+                [(ngModel)]="chickenInfo.nickName" maxlength="50" />
             <div [hidden]="!(editForm.controls.nickName?.dirty && editForm.controls.nickName?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.nickName?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.nickName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
-                   This field cannot be longer than 100 characters.
+                   [hidden]="!editForm.controls.nickName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 50 }">
+                   This field cannot be longer than 50 characters.
                 </small>
             </div>
         </div>
@@ -76,12 +72,8 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.chickenInfo.cookie" for="field_cookie">Cookie</label>
             <input type="text" class="form-control" name="cookie" id="field_cookie"
-                [(ngModel)]="chickenInfo.cookie" required maxlength="10480" />
+                [(ngModel)]="chickenInfo.cookie" maxlength="10480" />
             <div [hidden]="!(editForm.controls.cookie?.dirty && editForm.controls.cookie?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.cookie?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.cookie?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 10480 }">
                    This field cannot be longer than 10480 characters.
@@ -121,8 +113,8 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.chickenInfo.state" for="field_state">State</label>
             <select class="form-control" name="state" [(ngModel)]="chickenInfo.state" id="field_state"  required>
-                <option value="ON" jhiTranslate="luckystarApp.State.ON">ON</option>
                 <option value="OFF" jhiTranslate="luckystarApp.State.OFF">OFF</option>
+                <option value="ON" jhiTranslate="luckystarApp.State.ON">ON</option>
             </select>
             <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
                 <small class="form-text text-danger"

@@ -46,8 +46,8 @@ public class ChickenInfoResourceIntTest {
     private static final String DEFAULT_NICK_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NICK_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_STAR_ID = 1;
-    private static final Integer UPDATED_STAR_ID = 2;
+    private static final Long DEFAULT_STAR_ID = 1L;
+    private static final Long UPDATED_STAR_ID = 2L;
 
     private static final LocalDate DEFAULT_REG_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_REG_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -55,14 +55,14 @@ public class ChickenInfoResourceIntTest {
     private static final String DEFAULT_COOKIE = "AAAAAAAAAA";
     private static final String UPDATED_COOKIE = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_TIME_RATE = 1D;
-    private static final Double UPDATED_TIME_RATE = 2D;
+    private static final Float DEFAULT_TIME_RATE = 1F;
+    private static final Float UPDATED_TIME_RATE = 2F;
 
-    private static final Double DEFAULT_BEAN_RATE = 1D;
-    private static final Double UPDATED_BEAN_RATE = 2D;
+    private static final Float DEFAULT_BEAN_RATE = 1F;
+    private static final Float UPDATED_BEAN_RATE = 2F;
 
-    private static final State DEFAULT_STATE = State.ON;
-    private static final State UPDATED_STATE = State.OFF;
+    private static final State DEFAULT_STATE = State.OFF;
+    private static final State UPDATED_STATE = State.ON;
 
     @Autowired
     private ChickenInfoRepository chickenInfoRepository;
@@ -181,24 +181,6 @@ public class ChickenInfoResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNickNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = chickenInfoRepository.findAll().size();
-        // set the field null
-        chickenInfo.setNickName(null);
-
-        // Create the ChickenInfo, which fails.
-
-        restChickenInfoMockMvc.perform(post("/api/chicken-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(chickenInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<ChickenInfo> chickenInfoList = chickenInfoRepository.findAll();
-        assertThat(chickenInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkStarIdIsRequired() throws Exception {
         int databaseSizeBeforeTest = chickenInfoRepository.findAll().size();
         // set the field null
@@ -221,24 +203,6 @@ public class ChickenInfoResourceIntTest {
         int databaseSizeBeforeTest = chickenInfoRepository.findAll().size();
         // set the field null
         chickenInfo.setRegDate(null);
-
-        // Create the ChickenInfo, which fails.
-
-        restChickenInfoMockMvc.perform(post("/api/chicken-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(chickenInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<ChickenInfo> chickenInfoList = chickenInfoRepository.findAll();
-        assertThat(chickenInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkCookieIsRequired() throws Exception {
-        int databaseSizeBeforeTest = chickenInfoRepository.findAll().size();
-        // set the field null
-        chickenInfo.setCookie(null);
 
         // Create the ChickenInfo, which fails.
 
@@ -318,7 +282,7 @@ public class ChickenInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(chickenInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].nickName").value(hasItem(DEFAULT_NICK_NAME.toString())))
-            .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID)))
+            .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID.intValue())))
             .andExpect(jsonPath("$.[*].regDate").value(hasItem(DEFAULT_REG_DATE.toString())))
             .andExpect(jsonPath("$.[*].cookie").value(hasItem(DEFAULT_COOKIE.toString())))
             .andExpect(jsonPath("$.[*].timeRate").value(hasItem(DEFAULT_TIME_RATE.doubleValue())))
@@ -339,7 +303,7 @@ public class ChickenInfoResourceIntTest {
             .andExpect(jsonPath("$.id").value(chickenInfo.getId().intValue()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.nickName").value(DEFAULT_NICK_NAME.toString()))
-            .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID))
+            .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID.intValue()))
             .andExpect(jsonPath("$.regDate").value(DEFAULT_REG_DATE.toString()))
             .andExpect(jsonPath("$.cookie").value(DEFAULT_COOKIE.toString()))
             .andExpect(jsonPath("$.timeRate").value(DEFAULT_TIME_RATE.doubleValue()))

@@ -13,5 +13,6 @@
     <include file="config/liquibase/changelog/20170809155514_added_entity_constraints_LaborUnion.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170809162244_added_entity_constraints_ChickenInfo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170809162245_added_entity_constraints_TaskInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170809162246_added_entity_constraints_WorkInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

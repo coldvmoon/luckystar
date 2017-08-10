@@ -1,6 +1,7 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatePipe } from '@angular/common';
 import { WorkInfo } from './work-info.model';
 import { WorkInfoService } from './work-info.service';
 
@@ -9,6 +10,7 @@ export class WorkInfoPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
+        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private workInfoService: WorkInfoService
@@ -33,13 +35,8 @@ export class WorkInfoPopupService {
                             day: workInfo.curDay.getDate()
                         };
                     }
-                    if (workInfo.lastTime) {
-                        workInfo.lastTime = {
-                            year: workInfo.lastTime.getFullYear(),
-                            month: workInfo.lastTime.getMonth() + 1,
-                            day: workInfo.lastTime.getDate()
-                        };
-                    }
+                    workInfo.lastTime = this.datePipe
+                        .transform(workInfo.lastTime, 'yyyy-MM-ddThh:mm');
                     this.ngbModalRef = this.workInfoModalRef(component, workInfo);
                     resolve(this.ngbModalRef);
                 });

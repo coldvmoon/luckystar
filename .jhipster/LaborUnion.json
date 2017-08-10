@@ -19,6 +19,7 @@
     "fields": [
         {
             "fieldName": "lId",
+            "javadoc": "公会id",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
@@ -26,6 +27,7 @@
         },
         {
             "fieldName": "name",
+            "javadoc": "公会名称",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
@@ -35,6 +37,7 @@
         },
         {
             "fieldName": "regDate",
+            "javadoc": "注册时间",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"
@@ -42,8 +45,9 @@
         },
         {
             "fieldName": "state",
+            "javadoc": "0：停用 1：在用",
             "fieldType": "State",
-            "fieldValues": "ON,OFF",
+            "fieldValues": "OFF,ON",
             "fieldValidateRules": [
                 "required"
             ]

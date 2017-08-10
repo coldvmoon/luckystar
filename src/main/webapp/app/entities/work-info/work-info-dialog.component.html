@@ -13,6 +13,21 @@
                    [(ngModel)]="workInfo.id" readonly />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.starId" for="field_starId">Star Id</label>
+            <input type="number" class="form-control" name="starId" id="field_starId"
+                [(ngModel)]="workInfo.starId" required />
+            <div [hidden]="!(editForm.controls.starId?.dirty && editForm.controls.starId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.starId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.starId?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.starLevel" for="field_starLevel">Star Level</label>
             <input type="number" class="form-control" name="starLevel" id="field_starLevel"
                 [(ngModel)]="workInfo.starLevel" required />
@@ -195,21 +210,29 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.workInfo.lastTime" for="field_lastTime">Last Time</label>
-            <div class="input-group">
-                <input id="field_lastTime" type="text" class="form-control" name="lastTime" ngbDatepicker  #lastTimeDp="ngbDatepicker" [(ngModel)]="workInfo.lastTime"
-                required/>
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" (click)="lastTimeDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
+            <div class="d-flex">
+                <input id="field_lastTime" type="datetime-local" class="form-control" name="lastTime" [(ngModel)]="workInfo.lastTime"
+                required  />
             </div>
             <div [hidden]="!(editForm.controls.lastTime?.dirty && editForm.controls.lastTime?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.lastTime?.errors?.required" jhiTranslate="entity.validation.required">
                    This field is required.
                 </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.lastTime?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
             </div>
         </div>
 
+        <div class="form-group">
+            <label jhiTranslate="luckystarApp.workInfo.taskInfo" for="field_taskInfo">Task Info</label>
+            <select class="form-control" id="field_taskInfo" name="taskInfo" [(ngModel)]="workInfo.taskInfo" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="taskInfoOption.id === workInfo.taskInfo?.id ? workInfo.taskInfo : taskInfoOption" *ngFor="let taskInfoOption of taskinfos; trackBy: trackTaskInfoById">{{taskInfoOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">

@@ -15,6 +15,7 @@
             "detail": {
                 "title": "Work Info"
             },
+            "starId": "Star Id",
             "starLevel": "Star Level",
             "richLevel": "Rich Level",
             "fisrtBean": "Fisrt Bean",
@@ -27,7 +28,8 @@
             "workTime": "Work Time",
             "curMonth": "Cur Month",
             "curDay": "Cur Day",
-            "lastTime": "Last Time"
+            "lastTime": "Last Time",
+            "taskInfo": "Task Info"
         }
     }
 }

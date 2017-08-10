@@ -2,8 +2,8 @@
     "luckystarApp": {
         "State" : {
             "null": "",
-            "ON": "ON",
-            "OFF": "OFF"
+            "OFF": "OFF",
+            "ON": "ON"
         }
     }
 }

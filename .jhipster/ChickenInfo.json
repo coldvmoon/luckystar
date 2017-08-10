@@ -5,7 +5,7 @@
             "relationshipType": "one-to-many",
             "relationshipName": "taskInfo",
             "otherEntityName": "taskInfo",
-            "otherEntityRelationshipName": "laborUnion"
+            "otherEntityRelationshipName": "chickenInfo"
         },
         {
             "relationshipType": "many-to-one",
@@ -17,31 +17,34 @@
     "fields": [
         {
             "fieldName": "userName",
+            "javadoc": "真名",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "nickName",
+            "javadoc": "艺名",
+            "fieldType": "String",
+            "fieldValidateRules": [
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 50
         },
         {
-            "fieldName": "nickName",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required",
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 100
-        },
-        {
             "fieldName": "starId",
-            "fieldType": "Integer",
+            "javadoc": "繁星id",
+            "fieldType": "Long",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "regDate",
+            "javadoc": "注册时间",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"
@@ -49,31 +52,34 @@
         },
         {
             "fieldName": "cookie",
+            "javadoc": "登录后的cookie信息，需要人工定期维护",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 10480
         },
         {
             "fieldName": "timeRate",
-            "fieldType": "Double",
+            "javadoc": "考勤倍率",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "beanRate",
-            "fieldType": "Double",
+            "javadoc": "星豆倍率",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "state",
+            "javadoc": "0：停用 1：在用",
             "fieldType": "State",
-            "fieldValues": "ON,OFF",
+            "fieldValues": "OFF,ON",
             "fieldValidateRules": [
                 "required"
             ]

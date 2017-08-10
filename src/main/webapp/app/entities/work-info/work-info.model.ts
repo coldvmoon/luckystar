@@ -3,6 +3,7 @@ import { BaseEntity } from './../../shared';
 export class WorkInfo implements BaseEntity {
     constructor(
         public id?: number,
+        public starId?: number,
         public starLevel?: number,
         public richLevel?: number,
         public fisrtBean?: number,
@@ -16,6 +17,7 @@ export class WorkInfo implements BaseEntity {
         public curMonth?: number,
         public curDay?: any,
         public lastTime?: any,
+        public taskInfo?: BaseEntity,
     ) {
     }
 }

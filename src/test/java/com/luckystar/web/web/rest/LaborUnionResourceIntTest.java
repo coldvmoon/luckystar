@@ -49,8 +49,8 @@ public class LaborUnionResourceIntTest {
     private static final LocalDate DEFAULT_REG_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_REG_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final State DEFAULT_STATE = State.ON;
-    private static final State UPDATED_STATE = State.OFF;
+    private static final State DEFAULT_STATE = State.OFF;
+    private static final State UPDATED_STATE = State.ON;
 
     @Autowired
     private LaborUnionRepository laborUnionRepository;

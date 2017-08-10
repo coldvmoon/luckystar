@@ -61,15 +61,15 @@ export class WorkInfoService {
         entity.curDay = this.dateUtils
             .convertLocalDateFromServer(entity.curDay);
         entity.lastTime = this.dateUtils
-            .convertLocalDateFromServer(entity.lastTime);
+            .convertDateTimeFromServer(entity.lastTime);
     }
 
     private convert(workInfo: WorkInfo): WorkInfo {
         const copy: WorkInfo = Object.assign({}, workInfo);
         copy.curDay = this.dateUtils
             .convertLocalDateToServer(workInfo.curDay);
-        copy.lastTime = this.dateUtils
-            .convertLocalDateToServer(workInfo.lastTime);
+
+        copy.lastTime = this.dateUtils.toDate(workInfo.lastTime);
         return copy;
     }
 }

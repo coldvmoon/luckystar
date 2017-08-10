@@ -1,9 +1,13 @@
 package com.luckystar.web.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -19,20 +23,36 @@ public class TaskInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 任务数
+     */
     @NotNull
+    @ApiModelProperty(value = "任务数", required = true)
     @Column(name = "min_task", nullable = false)
     private Integer minTask;
 
+    /**
+     * 目标数
+     */
     @NotNull
+    @ApiModelProperty(value = "目标数", required = true)
     @Column(name = "max_task", nullable = false)
     private Integer maxTask;
 
+    /**
+     * 月份
+     */
     @NotNull
+    @ApiModelProperty(value = "月份", required = true)
     @Column(name = "cur_month", nullable = false)
     private Integer curMonth;
 
+    @OneToMany(mappedBy = "taskInfo")
+    @JsonIgnore
+    private Set<WorkInfo> workInfos = new HashSet<>();
+
     @ManyToOne
-    private ChickenInfo laborUnion;
+    private ChickenInfo chickenInfo;
 
     public Long getId() {
         return id;
@@ -81,17 +101,42 @@ public class TaskInfo implements Serializable {
         this.curMonth = curMonth;
     }
 
-    public ChickenInfo getLaborUnion() {
-        return laborUnion;
+    public Set<WorkInfo> getWorkInfos() {
+        return workInfos;
     }
 
-    public TaskInfo laborUnion(ChickenInfo chickenInfo) {
-        this.laborUnion = chickenInfo;
+    public TaskInfo workInfos(Set<WorkInfo> workInfos) {
+        this.workInfos = workInfos;
         return this;
     }
 
-    public void setLaborUnion(ChickenInfo chickenInfo) {
-        this.laborUnion = chickenInfo;
+    public TaskInfo addWorkInfo(WorkInfo workInfo) {
+        this.workInfos.add(workInfo);
+        workInfo.setTaskInfo(this);
+        return this;
+    }
+
+    public TaskInfo removeWorkInfo(WorkInfo workInfo) {
+        this.workInfos.remove(workInfo);
+        workInfo.setTaskInfo(null);
+        return this;
+    }
+
+    public void setWorkInfos(Set<WorkInfo> workInfos) {
+        this.workInfos = workInfos;
+    }
+
+    public ChickenInfo getChickenInfo() {
+        return chickenInfo;
+    }
+
+    public TaskInfo chickenInfo(ChickenInfo chickenInfo) {
+        this.chickenInfo = chickenInfo;
+        return this;
+    }
+
+    public void setChickenInfo(ChickenInfo chickenInfo) {
+        this.chickenInfo = chickenInfo;
     }
 
     @Override

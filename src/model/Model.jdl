@@ -1,54 +1,56 @@
 entity LaborUnion {
-	lId Integer required
-	name String required maxlength(50)
-	regDate LocalDate required
-	state State required
+	lId Integer required /** 公会id */
+	name String required maxlength(50) /** 公会名称 */
+	regDate LocalDate required /** 注册时间 */
+
 }
 
-
-enum State {
-  ON,OFF
+enum State1 {
+    OFF,ON
 }
-
 
 entity ChickenInfo {
-	userName String required maxlength(50)
-	nickName String required maxlength(100)
-	starId Integer required
-	regDate LocalDate required
-	cookie String required maxlength(10480)
-	timeRate Double required
-	beanRate Double required
-	state State required
+	userName String required maxlength(10) /** 真名 */
+	nickName String maxlength(50) /** 艺名 */
+	starId Long required  /** 繁星id */
+	regDate LocalDate required /** 注册时间 */
+	cookie String maxlength(10480) /** 登录后的cookie信息，需要人工定期维护 */
+	timeRate Float required  /** 考勤倍率 */
+	beanRate Float required /** 星豆倍率 */
 }
 
 entity TaskInfo {
-	minTask Integer required
-	maxTask Integer required
-	curMonth Integer required
+	minTask Integer required  /** 任务数 */
+	maxTask Integer required  /** 目标数 */
+	curMonth Integer required  /** 月份 */
 }
 
 entity WorkInfo {
-	starLevel Integer required
-	richLevel Integer required
-	fisrtBean Double required
-	beanTotal Double required
-	coin Double required
-	coinTotal Double required
-	fansCount Integer required
-	followCount Integer required
-	experience Double required
-	workTime Integer required
-	curMonth Integer required
-	curDay LocalDate required
-	lastTime LocalDate required
+	starId Long required /** 繁星id */
+	starLevel Integer required /** 繁星等级 */
+	richLevel Integer required /** 财富等级 */
+	fisrtBean Float required /** 当天初始星豆数 */
+	beanTotal Float required /** 任务数 */
+	coin Float required  /** 星币数 */
+	coinTotal Float required  /** 星币总数 */
+	fansCount Integer required /** 被关注数 */
+	followCount Integer required /** 关注数 */
+	experience Float required /** 经验值 */
+	workTime Integer required /** 工作时长 */
+	curMonth Integer required /** 当前月份 */
+	curDay LocalDate required /** 当前天 */
+	lastTime ZonedDateTime required /** 最后更新时间 */
 }
 
 relationship OneToMany {
-  LaborUnion{chickenInfo(userName)} to ChickenInfo{LaborUnion}
-	ChickenInfo{TaskInfo(curMonth)} to TaskInfo{LaborUnion}
+  LaborUnion{ChickenInfo(userName)} to ChickenInfo{LaborUnion}
+	ChickenInfo{TaskInfo(curMonth)} to TaskInfo{ChickenInfo}
+	TaskInfo{WorkInfo(curMonth)} to WorkInfo{TaskInfo}
 }
 
+enum State {
+    OFF,ON
+}
 
 
 relationship ManyToMany {

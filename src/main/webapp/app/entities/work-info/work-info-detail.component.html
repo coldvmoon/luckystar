@@ -4,6 +4,10 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="luckystarApp.workInfo.starId">Star Id</span></dt>
+        <dd>
+            <span>{{workInfo.starId}}</span>
+        </dd>
         <dt><span jhiTranslate="luckystarApp.workInfo.starLevel">Star Level</span></dt>
         <dd>
             <span>{{workInfo.starLevel}}</span>
@@ -54,7 +58,13 @@
         </dd>
         <dt><span jhiTranslate="luckystarApp.workInfo.lastTime">Last Time</span></dt>
         <dd>
-            <span>{{workInfo.lastTime | date:'mediumDate'}}</span>
+            <span>{{workInfo.lastTime | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="luckystarApp.workInfo.taskInfo">Task Info</span></dt>
+        <dd>
+            <div *ngIf="workInfo.taskInfo">
+                <a [routerLink]="['/task-info', workInfo.taskInfo?.id]">{{workInfo.taskInfo?.id}}</a>
+            </div>
         </dd>
     </dl>
 

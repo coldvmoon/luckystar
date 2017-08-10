@@ -34,7 +34,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="labor_union_id" type="bigint">
+            <column name="chicken_info_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

@@ -6,7 +6,8 @@ export class TaskInfo implements BaseEntity {
         public minTask?: number,
         public maxTask?: number,
         public curMonth?: number,
-        public laborUnion?: BaseEntity,
+        public workInfos?: BaseEntity[],
+        public chickenInfo?: BaseEntity,
     ) {
     }
 }

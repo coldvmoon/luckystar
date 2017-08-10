@@ -1,6 +1,7 @@
 package com.luckystar.web.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -25,20 +26,36 @@ public class LaborUnion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 公会id
+     */
     @NotNull
+    @ApiModelProperty(value = "公会id", required = true)
     @Column(name = "l_id", nullable = false)
     private Integer lId;
 
+    /**
+     * 公会名称
+     */
     @NotNull
     @Size(max = 50)
+    @ApiModelProperty(value = "公会名称", required = true)
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * 注册时间
+     */
     @NotNull
+    @ApiModelProperty(value = "注册时间", required = true)
     @Column(name = "reg_date", nullable = false)
     private LocalDate regDate;
 
+    /**
+     * 0：停用 1：在用
+     */
     @NotNull
+    @ApiModelProperty(value = "0：停用 1：在用", required = true)
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private State state;

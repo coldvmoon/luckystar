@@ -17,6 +17,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="starId"><span jhiTranslate="luckystarApp.workInfo.starId">Star Id</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="starLevel"><span jhiTranslate="luckystarApp.workInfo.starLevel">Star Level</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="richLevel"><span jhiTranslate="luckystarApp.workInfo.richLevel">Rich Level</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="fisrtBean"><span jhiTranslate="luckystarApp.workInfo.fisrtBean">Fisrt Bean</span> <span class="fa fa-sort"></span></th>
@@ -30,12 +31,14 @@
             <th jhiSortBy="curMonth"><span jhiTranslate="luckystarApp.workInfo.curMonth">Cur Month</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="curDay"><span jhiTranslate="luckystarApp.workInfo.curDay">Cur Day</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastTime"><span jhiTranslate="luckystarApp.workInfo.lastTime">Last Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="taskInfo.id"><span jhiTranslate="luckystarApp.workInfo.taskInfo">Task Info</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let workInfo of workInfos ;trackBy: trackId">
                 <td><a [routerLink]="['../work-info', workInfo.id ]">{{workInfo.id}}</a></td>
+                <td>{{workInfo.starId}}</td>
                 <td>{{workInfo.starLevel}}</td>
                 <td>{{workInfo.richLevel}}</td>
                 <td>{{workInfo.fisrtBean}}</td>
@@ -48,7 +51,12 @@
                 <td>{{workInfo.workTime}}</td>
                 <td>{{workInfo.curMonth}}</td>
                 <td>{{workInfo.curDay | date:'mediumDate'}}</td>
-                <td>{{workInfo.lastTime | date:'mediumDate'}}</td>
+                <td>{{workInfo.lastTime | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="workInfo.taskInfo">
+                        <a [routerLink]="['../task-info', workInfo.taskInfo?.id ]" >{{workInfo.taskInfo?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

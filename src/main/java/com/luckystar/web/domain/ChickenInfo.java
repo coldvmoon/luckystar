@@ -1,6 +1,7 @@
 package com.luckystar.web.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -25,43 +26,73 @@ public class ChickenInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 真名
+     */
     @NotNull
-    @Size(max = 50)
-    @Column(name = "user_name", length = 50, nullable = false)
+    @Size(max = 10)
+    @ApiModelProperty(value = "真名", required = true)
+    @Column(name = "user_name", length = 10, nullable = false)
     private String userName;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(name = "nick_name", length = 100, nullable = false)
+    /**
+     * 艺名
+     */
+    @Size(max = 50)
+    @ApiModelProperty(value = "艺名")
+    @Column(name = "nick_name", length = 50)
     private String nickName;
 
+    /**
+     * 繁星id
+     */
     @NotNull
+    @ApiModelProperty(value = "繁星id", required = true)
     @Column(name = "star_id", nullable = false)
-    private Integer starId;
+    private Long starId;
 
+    /**
+     * 注册时间
+     */
     @NotNull
+    @ApiModelProperty(value = "注册时间", required = true)
     @Column(name = "reg_date", nullable = false)
     private LocalDate regDate;
 
-    @NotNull
+    /**
+     * 登录后的cookie信息，需要人工定期维护
+     */
     @Size(max = 10480)
-    @Column(name = "cookie", length = 10480, nullable = false)
+    @ApiModelProperty(value = "登录后的cookie信息，需要人工定期维护")
+    @Column(name = "cookie", length = 10480)
     private String cookie;
 
+    /**
+     * 考勤倍率
+     */
     @NotNull
+    @ApiModelProperty(value = "考勤倍率", required = true)
     @Column(name = "time_rate", nullable = false)
-    private Double timeRate;
+    private Float timeRate;
 
+    /**
+     * 星豆倍率
+     */
     @NotNull
+    @ApiModelProperty(value = "星豆倍率", required = true)
     @Column(name = "bean_rate", nullable = false)
-    private Double beanRate;
+    private Float beanRate;
 
+    /**
+     * 0：停用 1：在用
+     */
     @NotNull
+    @ApiModelProperty(value = "0：停用 1：在用", required = true)
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private State state;
 
-    @OneToMany(mappedBy = "laborUnion")
+    @OneToMany(mappedBy = "chickenInfo")
     @JsonIgnore
     private Set<TaskInfo> taskInfos = new HashSet<>();
 
@@ -102,16 +133,16 @@ public class ChickenInfo implements Serializable {
         this.nickName = nickName;
     }
 
-    public Integer getStarId() {
+    public Long getStarId() {
         return starId;
     }
 
-    public ChickenInfo starId(Integer starId) {
+    public ChickenInfo starId(Long starId) {
         this.starId = starId;
         return this;
     }
 
-    public void setStarId(Integer starId) {
+    public void setStarId(Long starId) {
         this.starId = starId;
     }
 
@@ -141,29 +172,29 @@ public class ChickenInfo implements Serializable {
         this.cookie = cookie;
     }
 
-    public Double getTimeRate() {
+    public Float getTimeRate() {
         return timeRate;
     }
 
-    public ChickenInfo timeRate(Double timeRate) {
+    public ChickenInfo timeRate(Float timeRate) {
         this.timeRate = timeRate;
         return this;
     }
 
-    public void setTimeRate(Double timeRate) {
+    public void setTimeRate(Float timeRate) {
         this.timeRate = timeRate;
     }
 
-    public Double getBeanRate() {
+    public Float getBeanRate() {
         return beanRate;
     }
 
-    public ChickenInfo beanRate(Double beanRate) {
+    public ChickenInfo beanRate(Float beanRate) {
         this.beanRate = beanRate;
         return this;
     }
 
-    public void setBeanRate(Double beanRate) {
+    public void setBeanRate(Float beanRate) {
         this.beanRate = beanRate;
     }
 
@@ -191,13 +222,13 @@ public class ChickenInfo implements Serializable {
 
     public ChickenInfo addTaskInfo(TaskInfo taskInfo) {
         this.taskInfos.add(taskInfo);
-        taskInfo.setLaborUnion(this);
+        taskInfo.setChickenInfo(this);
         return this;
     }
 
     public ChickenInfo removeTaskInfo(TaskInfo taskInfo) {
         this.taskInfos.remove(taskInfo);
-        taskInfo.setLaborUnion(null);
+        taskInfo.setChickenInfo(null);
         return this;
     }
 

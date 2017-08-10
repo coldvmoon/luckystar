@@ -2,8 +2,14 @@
     "fluentMethods": true,
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "workInfo",
+            "otherEntityName": "workInfo",
+            "otherEntityRelationshipName": "taskInfo"
+        },
+        {
             "relationshipType": "many-to-one",
-            "relationshipName": "laborUnion",
+            "relationshipName": "chickenInfo",
             "otherEntityName": "chickenInfo",
             "otherEntityField": "id"
         }
@@ -11,6 +17,7 @@
     "fields": [
         {
             "fieldName": "minTask",
+            "javadoc": "任务数",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
@@ -18,6 +25,7 @@
         },
         {
             "fieldName": "maxTask",
+            "javadoc": "目标数",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
@@ -25,6 +33,7 @@
         },
         {
             "fieldName": "curMonth",
+            "javadoc": "月份",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"

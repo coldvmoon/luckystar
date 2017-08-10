@@ -61,8 +61,8 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.state" for="field_state">State</label>
             <select class="form-control" name="state" [(ngModel)]="laborUnion.state" id="field_state"  required>
-                <option value="ON" jhiTranslate="luckystarApp.State.ON">ON</option>
                 <option value="OFF" jhiTranslate="luckystarApp.State.OFF">OFF</option>
+                <option value="ON" jhiTranslate="luckystarApp.State.ON">ON</option>
             </select>
             <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
                 <small class="form-text text-danger"

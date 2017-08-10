@@ -1,10 +1,12 @@
 package com.luckystar.web.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -20,57 +22,120 @@ public class WorkInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 繁星id
+     */
     @NotNull
+    @ApiModelProperty(value = "繁星id", required = true)
+    @Column(name = "star_id", nullable = false)
+    private Long starId;
+
+    /**
+     * 繁星等级
+     */
+    @NotNull
+    @ApiModelProperty(value = "繁星等级", required = true)
     @Column(name = "star_level", nullable = false)
     private Integer starLevel;
 
+    /**
+     * 财富等级
+     */
     @NotNull
+    @ApiModelProperty(value = "财富等级", required = true)
     @Column(name = "rich_level", nullable = false)
     private Integer richLevel;
 
+    /**
+     * 当天初始星豆数
+     */
     @NotNull
+    @ApiModelProperty(value = "当天初始星豆数", required = true)
     @Column(name = "fisrt_bean", nullable = false)
-    private Double fisrtBean;
+    private Float fisrtBean;
 
+    /**
+     * 任务数
+     */
     @NotNull
+    @ApiModelProperty(value = "任务数", required = true)
     @Column(name = "bean_total", nullable = false)
-    private Double beanTotal;
+    private Float beanTotal;
 
+    /**
+     * 星币数
+     */
     @NotNull
+    @ApiModelProperty(value = "星币数", required = true)
     @Column(name = "coin", nullable = false)
-    private Double coin;
+    private Float coin;
 
+    /**
+     * 星币总数
+     */
     @NotNull
+    @ApiModelProperty(value = "星币总数", required = true)
     @Column(name = "coin_total", nullable = false)
-    private Double coinTotal;
+    private Float coinTotal;
 
+    /**
+     * 被关注数
+     */
     @NotNull
+    @ApiModelProperty(value = "被关注数", required = true)
     @Column(name = "fans_count", nullable = false)
     private Integer fansCount;
 
+    /**
+     * 关注数
+     */
     @NotNull
+    @ApiModelProperty(value = "关注数", required = true)
     @Column(name = "follow_count", nullable = false)
     private Integer followCount;
 
+    /**
+     * 经验值
+     */
     @NotNull
+    @ApiModelProperty(value = "经验值", required = true)
     @Column(name = "experience", nullable = false)
-    private Double experience;
+    private Float experience;
 
+    /**
+     * 工作时长
+     */
     @NotNull
+    @ApiModelProperty(value = "工作时长", required = true)
     @Column(name = "work_time", nullable = false)
     private Integer workTime;
 
+    /**
+     * 当前月份
+     */
     @NotNull
+    @ApiModelProperty(value = "当前月份", required = true)
     @Column(name = "cur_month", nullable = false)
     private Integer curMonth;
 
+    /**
+     * 当前天
+     */
     @NotNull
+    @ApiModelProperty(value = "当前天", required = true)
     @Column(name = "cur_day", nullable = false)
     private LocalDate curDay;
 
+    /**
+     * 最后更新时间
+     */
     @NotNull
+    @ApiModelProperty(value = "最后更新时间", required = true)
     @Column(name = "last_time", nullable = false)
-    private LocalDate lastTime;
+    private ZonedDateTime lastTime;
+
+    @ManyToOne
+    private TaskInfo taskInfo;
 
     public Long getId() {
         return id;
@@ -78,6 +143,19 @@ public class WorkInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getStarId() {
+        return starId;
+    }
+
+    public WorkInfo starId(Long starId) {
+        this.starId = starId;
+        return this;
+    }
+
+    public void setStarId(Long starId) {
+        this.starId = starId;
     }
 
     public Integer getStarLevel() {
@@ -106,55 +184,55 @@ public class WorkInfo implements Serializable {
         this.richLevel = richLevel;
     }
 
-    public Double getFisrtBean() {
+    public Float getFisrtBean() {
         return fisrtBean;
     }
 
-    public WorkInfo fisrtBean(Double fisrtBean) {
+    public WorkInfo fisrtBean(Float fisrtBean) {
         this.fisrtBean = fisrtBean;
         return this;
     }
 
-    public void setFisrtBean(Double fisrtBean) {
+    public void setFisrtBean(Float fisrtBean) {
         this.fisrtBean = fisrtBean;
     }
 
-    public Double getBeanTotal() {
+    public Float getBeanTotal() {
         return beanTotal;
     }
 
-    public WorkInfo beanTotal(Double beanTotal) {
+    public WorkInfo beanTotal(Float beanTotal) {
         this.beanTotal = beanTotal;
         return this;
     }
 
-    public void setBeanTotal(Double beanTotal) {
+    public void setBeanTotal(Float beanTotal) {
         this.beanTotal = beanTotal;
     }
 
-    public Double getCoin() {
+    public Float getCoin() {
         return coin;
     }
 
-    public WorkInfo coin(Double coin) {
+    public WorkInfo coin(Float coin) {
         this.coin = coin;
         return this;
     }
 
-    public void setCoin(Double coin) {
+    public void setCoin(Float coin) {
         this.coin = coin;
     }
 
-    public Double getCoinTotal() {
+    public Float getCoinTotal() {
         return coinTotal;
     }
 
-    public WorkInfo coinTotal(Double coinTotal) {
+    public WorkInfo coinTotal(Float coinTotal) {
         this.coinTotal = coinTotal;
         return this;
     }
 
-    public void setCoinTotal(Double coinTotal) {
+    public void setCoinTotal(Float coinTotal) {
         this.coinTotal = coinTotal;
     }
 
@@ -184,16 +262,16 @@ public class WorkInfo implements Serializable {
         this.followCount = followCount;
     }
 
-    public Double getExperience() {
+    public Float getExperience() {
         return experience;
     }
 
-    public WorkInfo experience(Double experience) {
+    public WorkInfo experience(Float experience) {
         this.experience = experience;
         return this;
     }
 
-    public void setExperience(Double experience) {
+    public void setExperience(Float experience) {
         this.experience = experience;
     }
 
@@ -236,17 +314,30 @@ public class WorkInfo implements Serializable {
         this.curDay = curDay;
     }
 
-    public LocalDate getLastTime() {
+    public ZonedDateTime getLastTime() {
         return lastTime;
     }
 
-    public WorkInfo lastTime(LocalDate lastTime) {
+    public WorkInfo lastTime(ZonedDateTime lastTime) {
         this.lastTime = lastTime;
         return this;
     }
 
-    public void setLastTime(LocalDate lastTime) {
+    public void setLastTime(ZonedDateTime lastTime) {
         this.lastTime = lastTime;
+    }
+
+    public TaskInfo getTaskInfo() {
+        return taskInfo;
+    }
+
+    public WorkInfo taskInfo(TaskInfo taskInfo) {
+        this.taskInfo = taskInfo;
+        return this;
+    }
+
+    public void setTaskInfo(TaskInfo taskInfo) {
+        this.taskInfo = taskInfo;
     }
 
     @Override
@@ -273,6 +364,7 @@ public class WorkInfo implements Serializable {
     public String toString() {
         return "WorkInfo{" +
             "id=" + getId() +
+            ", starId='" + getStarId() + "'" +
             ", starLevel='" + getStarLevel() + "'" +
             ", richLevel='" + getRichLevel() + "'" +
             ", fisrtBean='" + getFisrtBean() + "'" +

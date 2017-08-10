@@ -20,7 +20,7 @@
             <th jhiSortBy="minTask"><span jhiTranslate="luckystarApp.taskInfo.minTask">Min Task</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="maxTask"><span jhiTranslate="luckystarApp.taskInfo.maxTask">Max Task</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="curMonth"><span jhiTranslate="luckystarApp.taskInfo.curMonth">Cur Month</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="laborUnion.id"><span jhiTranslate="luckystarApp.taskInfo.laborUnion">Labor Union</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="chickenInfo.id"><span jhiTranslate="luckystarApp.taskInfo.chickenInfo">Chicken Info</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,8 +31,8 @@
                 <td>{{taskInfo.maxTask}}</td>
                 <td>{{taskInfo.curMonth}}</td>
                 <td>
-                    <div *ngIf="taskInfo.laborUnion">
-                        <a [routerLink]="['../chicken-info', taskInfo.laborUnion?.id ]" >{{taskInfo.laborUnion?.id}}</a>
+                    <div *ngIf="taskInfo.chickenInfo">
+                        <a [routerLink]="['../chicken-info', taskInfo.chickenInfo?.id ]" >{{taskInfo.chickenInfo?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

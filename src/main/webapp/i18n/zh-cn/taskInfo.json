@@ -18,7 +18,8 @@
             "minTask": "Min Task",
             "maxTask": "Max Task",
             "curMonth": "Cur Month",
-            "laborUnion": "Labor Union"
+            "workInfo": "Work Info",
+            "chickenInfo": "Chicken Info"
         }
     }
 }

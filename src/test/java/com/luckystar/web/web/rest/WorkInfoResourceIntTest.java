@@ -22,9 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static com.luckystar.web.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -39,23 +43,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = LuckystarApp.class)
 public class WorkInfoResourceIntTest {
 
+    private static final Long DEFAULT_STAR_ID = 1L;
+    private static final Long UPDATED_STAR_ID = 2L;
+
     private static final Integer DEFAULT_STAR_LEVEL = 1;
     private static final Integer UPDATED_STAR_LEVEL = 2;
 
     private static final Integer DEFAULT_RICH_LEVEL = 1;
     private static final Integer UPDATED_RICH_LEVEL = 2;
 
-    private static final Double DEFAULT_FISRT_BEAN = 1D;
-    private static final Double UPDATED_FISRT_BEAN = 2D;
+    private static final Float DEFAULT_FISRT_BEAN = 1F;
+    private static final Float UPDATED_FISRT_BEAN = 2F;
 
-    private static final Double DEFAULT_BEAN_TOTAL = 1D;
-    private static final Double UPDATED_BEAN_TOTAL = 2D;
+    private static final Float DEFAULT_BEAN_TOTAL = 1F;
+    private static final Float UPDATED_BEAN_TOTAL = 2F;
 
-    private static final Double DEFAULT_COIN = 1D;
-    private static final Double UPDATED_COIN = 2D;
+    private static final Float DEFAULT_COIN = 1F;
+    private static final Float UPDATED_COIN = 2F;
 
-    private static final Double DEFAULT_COIN_TOTAL = 1D;
-    private static final Double UPDATED_COIN_TOTAL = 2D;
+    private static final Float DEFAULT_COIN_TOTAL = 1F;
+    private static final Float UPDATED_COIN_TOTAL = 2F;
 
     private static final Integer DEFAULT_FANS_COUNT = 1;
     private static final Integer UPDATED_FANS_COUNT = 2;
@@ -63,8 +70,8 @@ public class WorkInfoResourceIntTest {
     private static final Integer DEFAULT_FOLLOW_COUNT = 1;
     private static final Integer UPDATED_FOLLOW_COUNT = 2;
 
-    private static final Double DEFAULT_EXPERIENCE = 1D;
-    private static final Double UPDATED_EXPERIENCE = 2D;
+    private static final Float DEFAULT_EXPERIENCE = 1F;
+    private static final Float UPDATED_EXPERIENCE = 2F;
 
     private static final Integer DEFAULT_WORK_TIME = 1;
     private static final Integer UPDATED_WORK_TIME = 2;
@@ -75,8 +82,8 @@ public class WorkInfoResourceIntTest {
     private static final LocalDate DEFAULT_CUR_DAY = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CUR_DAY = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_LAST_TIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_LAST_TIME = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_LAST_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_LAST_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private WorkInfoRepository workInfoRepository;
@@ -115,6 +122,7 @@ public class WorkInfoResourceIntTest {
      */
     public static WorkInfo createEntity(EntityManager em) {
         WorkInfo workInfo = new WorkInfo()
+            .starId(DEFAULT_STAR_ID)
             .starLevel(DEFAULT_STAR_LEVEL)
             .richLevel(DEFAULT_RICH_LEVEL)
             .fisrtBean(DEFAULT_FISRT_BEAN)
@@ -151,6 +159,7 @@ public class WorkInfoResourceIntTest {
         List<WorkInfo> workInfoList = workInfoRepository.findAll();
         assertThat(workInfoList).hasSize(databaseSizeBeforeCreate + 1);
         WorkInfo testWorkInfo = workInfoList.get(workInfoList.size() - 1);
+        assertThat(testWorkInfo.getStarId()).isEqualTo(DEFAULT_STAR_ID);
         assertThat(testWorkInfo.getStarLevel()).isEqualTo(DEFAULT_STAR_LEVEL);
         assertThat(testWorkInfo.getRichLevel()).isEqualTo(DEFAULT_RICH_LEVEL);
         assertThat(testWorkInfo.getFisrtBean()).isEqualTo(DEFAULT_FISRT_BEAN);
@@ -183,6 +192,24 @@ public class WorkInfoResourceIntTest {
         // Validate the Alice in the database
         List<WorkInfo> workInfoList = workInfoRepository.findAll();
         assertThat(workInfoList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkStarIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
+        // set the field null
+        workInfo.setStarId(null);
+
+        // Create the WorkInfo, which fails.
+
+        restWorkInfoMockMvc.perform(post("/api/work-infos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
+            .andExpect(status().isBadRequest());
+
+        List<WorkInfo> workInfoList = workInfoRepository.findAll();
+        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -430,6 +457,7 @@ public class WorkInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workInfo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID.intValue())))
             .andExpect(jsonPath("$.[*].starLevel").value(hasItem(DEFAULT_STAR_LEVEL)))
             .andExpect(jsonPath("$.[*].richLevel").value(hasItem(DEFAULT_RICH_LEVEL)))
             .andExpect(jsonPath("$.[*].fisrtBean").value(hasItem(DEFAULT_FISRT_BEAN.doubleValue())))
@@ -442,7 +470,7 @@ public class WorkInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].workTime").value(hasItem(DEFAULT_WORK_TIME)))
             .andExpect(jsonPath("$.[*].curMonth").value(hasItem(DEFAULT_CUR_MONTH)))
             .andExpect(jsonPath("$.[*].curDay").value(hasItem(DEFAULT_CUR_DAY.toString())))
-            .andExpect(jsonPath("$.[*].lastTime").value(hasItem(DEFAULT_LAST_TIME.toString())));
+            .andExpect(jsonPath("$.[*].lastTime").value(hasItem(sameInstant(DEFAULT_LAST_TIME))));
     }
 
     @Test
@@ -456,6 +484,7 @@ public class WorkInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(workInfo.getId().intValue()))
+            .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID.intValue()))
             .andExpect(jsonPath("$.starLevel").value(DEFAULT_STAR_LEVEL))
             .andExpect(jsonPath("$.richLevel").value(DEFAULT_RICH_LEVEL))
             .andExpect(jsonPath("$.fisrtBean").value(DEFAULT_FISRT_BEAN.doubleValue()))
@@ -468,7 +497,7 @@ public class WorkInfoResourceIntTest {
             .andExpect(jsonPath("$.workTime").value(DEFAULT_WORK_TIME))
             .andExpect(jsonPath("$.curMonth").value(DEFAULT_CUR_MONTH))
             .andExpect(jsonPath("$.curDay").value(DEFAULT_CUR_DAY.toString()))
-            .andExpect(jsonPath("$.lastTime").value(DEFAULT_LAST_TIME.toString()));
+            .andExpect(jsonPath("$.lastTime").value(sameInstant(DEFAULT_LAST_TIME)));
     }
 
     @Test
@@ -489,6 +518,7 @@ public class WorkInfoResourceIntTest {
         // Update the workInfo
         WorkInfo updatedWorkInfo = workInfoRepository.findOne(workInfo.getId());
         updatedWorkInfo
+            .starId(UPDATED_STAR_ID)
             .starLevel(UPDATED_STAR_LEVEL)
             .richLevel(UPDATED_RICH_LEVEL)
             .fisrtBean(UPDATED_FISRT_BEAN)
@@ -512,6 +542,7 @@ public class WorkInfoResourceIntTest {
         List<WorkInfo> workInfoList = workInfoRepository.findAll();
         assertThat(workInfoList).hasSize(databaseSizeBeforeUpdate);
         WorkInfo testWorkInfo = workInfoList.get(workInfoList.size() - 1);
+        assertThat(testWorkInfo.getStarId()).isEqualTo(UPDATED_STAR_ID);
         assertThat(testWorkInfo.getStarLevel()).isEqualTo(UPDATED_STAR_LEVEL);
         assertThat(testWorkInfo.getRichLevel()).isEqualTo(UPDATED_RICH_LEVEL);
         assertThat(testWorkInfo.getFisrtBean()).isEqualTo(UPDATED_FISRT_BEAN);
