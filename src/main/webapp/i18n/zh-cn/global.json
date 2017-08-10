@@ -5,6 +5,11 @@
         "menu": {
             "home": "首页",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "dashboard":{
+                "main": "展版",
+                "kpi":"业绩",
+                "attendance":"考勤"
+            },
             "entities": {
                 "main": "数据",
                 "laborUnion": "Labor Union",
