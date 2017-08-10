@@ -125,6 +125,6 @@
     "changelogDate": "20170809162246",
     "entityTableName": "work_info",
     "dto": "no",
-    "pagination": "pager",
+    "pagination": "no",
     "service": "no"
 }

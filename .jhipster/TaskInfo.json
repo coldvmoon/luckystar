@@ -43,6 +43,6 @@
     "changelogDate": "20170809162245",
     "entityTableName": "task_info",
     "dto": "no",
-    "pagination": "pager",
+    "pagination": "no",
     "service": "no"
 }

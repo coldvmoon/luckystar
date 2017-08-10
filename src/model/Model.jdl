@@ -2,12 +2,9 @@ entity LaborUnion {
 	lId Integer required /** 公会id */
 	name String required maxlength(50) /** 公会名称 */
 	regDate LocalDate required /** 注册时间 */
-
+	state State required /** 0：停用 1：在用 */
 }
 
-enum State1 {
-    OFF,ON
-}
 
 entity ChickenInfo {
 	userName String required maxlength(10) /** 真名 */
@@ -17,6 +14,7 @@ entity ChickenInfo {
 	cookie String maxlength(10480) /** 登录后的cookie信息，需要人工定期维护 */
 	timeRate Float required  /** 考勤倍率 */
 	beanRate Float required /** 星豆倍率 */
+	state State required /** 0：停用 1：在用 */
 }
 
 entity TaskInfo {
@@ -43,13 +41,16 @@ entity WorkInfo {
 }
 
 relationship OneToMany {
-  LaborUnion{ChickenInfo(userName)} to ChickenInfo{LaborUnion}
+  	LaborUnion{ChickenInfo(userName)} to ChickenInfo{LaborUnion}
+}
+relationship OneToMany {
 	ChickenInfo{TaskInfo(curMonth)} to TaskInfo{ChickenInfo}
+}
+relationship OneToMany {
 	TaskInfo{WorkInfo(curMonth)} to WorkInfo{TaskInfo}
 }
-
 enum State {
-    OFF,ON
+    OFF, ON
 }
 
 
@@ -57,4 +58,6 @@ relationship ManyToMany {
   LaborUnion{user(login)} to User{LaborUnion(name)}
 }
 
-paginate LaborUnion,ChickenInfo,TaskInfo,WorkInfo with pager
+paginate LaborUnion,ChickenInfo with pager
+
+paginate LaborUnion,ChickenInfo with pager

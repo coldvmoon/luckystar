@@ -13,7 +13,6 @@ import {
     WorkInfoDeleteDialogComponent,
     workInfoRoute,
     workInfoPopupRoute,
-    WorkInfoResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -44,7 +43,6 @@ const ENTITY_STATES = [
     providers: [
         WorkInfoService,
         WorkInfoPopupService,
-        WorkInfoResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
