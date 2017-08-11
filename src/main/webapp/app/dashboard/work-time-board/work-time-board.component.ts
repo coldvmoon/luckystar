@@ -34,7 +34,7 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     private onSuccess(data, headers) {
         var map = {};
         var tmp = {};
-        for (var x in data) {
+        for (let x in data) {
             if (!map[data[x].starId]) {
                 map[data[x].starId] = {data: data[x], date: {}};
             }
@@ -42,12 +42,12 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
             tmp[data[x].curDay] = true;
         }
         this.data=[];
-        for(var x in map){
+        for(let x in map){
             this.data.push(map[x])
         }
 
         this.uniqueDate=[];
-        for(var x in tmp){
+        for(let x in tmp){
             this.uniqueDate.push(x);
         }
     }

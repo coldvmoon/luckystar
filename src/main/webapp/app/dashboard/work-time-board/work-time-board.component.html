@@ -20,8 +20,8 @@
             <td>{{row.data.starId}}</td>
             <td>{{row.data.totalTime}}</td>
             <!--<td>{{row.data.totalTime}}</td>-->
-            <td *ngFor="let day of uniqueDate">
-                {{row.date[day]}}
+            <td *ngFor="let day of uniqueDate" ng>
+                {{row.date[day]?row.date[day]:'--'}}
             </td>
         </tr>
         </tbody>
