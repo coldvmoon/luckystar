@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 
 import {
-    chickenInfoBoardRoute
+    chickenInfoBoardRoute,
+    workTimeBoardRoute
 } from './';
 
 const DASHBOARD_ROUTES = [
-    chickenInfoBoardRoute
+    chickenInfoBoardRoute,
+    workTimeBoardRoute
 ];
 
 export const dashboardState: Routes = [{

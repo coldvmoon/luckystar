@@ -8,6 +8,8 @@ import {
     ChickenInfoBoardComponent,
     dashboardState
 } from './';
+import {WorkTimeBoardComponent} from "./work-time-board/work-time-board.component";
+import {WorkTimeBoardService} from "./work-time-board/work-time-board.service";
 
 @NgModule({
     imports: [
@@ -15,11 +17,14 @@ import {
         RouterModule.forRoot(dashboardState, { useHash: true })
     ],
     declarations: [
-        ChickenInfoBoardComponent
+        ChickenInfoBoardComponent,
+        WorkTimeBoardComponent
     ],
     providers: [
         ChickenInfoBoardService,
-        ChickenInfoBoardComponent
+        ChickenInfoBoardComponent,
+        WorkTimeBoardService,
+        WorkTimeBoardComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
