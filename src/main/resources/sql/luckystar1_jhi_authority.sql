@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: luckystar
+-- Host: localhost    Database: luckystar1
 -- ------------------------------------------------------
 -- Server version	5.7.19
 
@@ -16,29 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `jhi_persistent_audit_event`
+-- Table structure for table `jhi_authority`
 --
 
-DROP TABLE IF EXISTS `jhi_persistent_audit_event`;
+DROP TABLE IF EXISTS `jhi_authority`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jhi_persistent_audit_event` (
-  `event_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `principal` varchar(50) NOT NULL,
-  `event_date` timestamp NULL DEFAULT NULL,
-  `event_type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`event_id`),
-  KEY `idx_persistent_audit_event` (`principal`,`event_date`)
+CREATE TABLE `jhi_authority` (
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jhi_persistent_audit_event`
+-- Dumping data for table `jhi_authority`
 --
 
-LOCK TABLES `jhi_persistent_audit_event` WRITE;
-/*!40000 ALTER TABLE `jhi_persistent_audit_event` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
+LOCK TABLES `jhi_authority` WRITE;
+/*!40000 ALTER TABLE `jhi_authority` DISABLE KEYS */;
+INSERT INTO `jhi_authority` VALUES ('ROLE_ADMIN'),('ROLE_USER');
+/*!40000 ALTER TABLE `jhi_authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-10 21:01:08
+-- Dump completed on 2017-08-11 21:16:51

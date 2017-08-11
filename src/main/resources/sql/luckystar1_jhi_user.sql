@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: luckystar
+-- Host: localhost    Database: luckystar1
 -- ------------------------------------------------------
 -- Server version	5.7.19
 
@@ -35,7 +35,7 @@ CREATE TABLE `jhi_user` (
   `activation_key` varchar(20) DEFAULT NULL,
   `reset_key` varchar(20) DEFAULT NULL,
   `created_by` varchar(50) NOT NULL,
-  `created_date` timestamp NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `reset_date` timestamp NULL DEFAULT NULL,
   `last_modified_by` varchar(50) DEFAULT NULL,
   `last_modified_date` timestamp NULL DEFAULT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `jhi_user` (
 
 LOCK TABLES `jhi_user` WRITE;
 /*!40000 ALTER TABLE `jhi_user` DISABLE KEYS */;
-INSERT INTO `jhi_user` VALUES (1,'system','$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG','System','System','system@localhost','','','zh-cn',NULL,NULL,'system','2017-08-10 12:44:30',NULL,'system',NULL),(2,'anonymoususer','$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO','Anonymous','User','anonymous@localhost','','','zh-cn',NULL,NULL,'system','2017-08-10 12:44:30',NULL,'system',NULL),(3,'admin','$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC','Administrator','Administrator','admin@localhost','','','zh-cn',NULL,NULL,'system','2017-08-10 12:44:30',NULL,'system',NULL),(4,'user','$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K','User','User','user@localhost','','','zh-cn',NULL,NULL,'system','2017-08-10 12:44:30',NULL,'system',NULL);
+INSERT INTO `jhi_user` VALUES (1,'system','$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG','System','System','system@localhost','','','zh-cn',NULL,NULL,'system','2017-08-11 05:49:22',NULL,'system',NULL),(2,'anonymoususer','$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO','Anonymous','User','anonymous@localhost','','','zh-cn',NULL,NULL,'system','2017-08-11 05:49:22',NULL,'system',NULL),(3,'admin','$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC','Administrator','Administrator','admin@localhost','','','zh-cn',NULL,NULL,'system','2017-08-11 05:49:22',NULL,'system',NULL),(4,'user','$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K','User','User','user@localhost','','','zh-cn',NULL,NULL,'system','2017-08-11 05:49:22',NULL,'system',NULL);
 /*!40000 ALTER TABLE `jhi_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -66,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-10 21:01:07
+-- Dump completed on 2017-08-11 21:16:51

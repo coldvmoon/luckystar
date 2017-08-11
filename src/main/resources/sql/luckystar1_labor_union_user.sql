@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: luckystar
+-- Host: localhost    Database: luckystar1
 -- ------------------------------------------------------
 -- Server version	5.7.19
 
@@ -16,32 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `task_info`
+-- Table structure for table `labor_union_user`
 --
 
-DROP TABLE IF EXISTS `task_info`;
+DROP TABLE IF EXISTS `labor_union_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `min_task` int(11) NOT NULL COMMENT '任务数',
-  `max_task` int(11) NOT NULL COMMENT '目标数',
-  `cur_month` int(11) NOT NULL COMMENT '月份',
-  `chicken_info_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_task_info_chicken_info_id` (`chicken_info_id`),
-  CONSTRAINT `fk_task_info_chicken_info_id` FOREIGN KEY (`chicken_info_id`) REFERENCES `chicken_info` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `labor_union_user` (
+  `users_id` bigint(20) NOT NULL,
+  `labor_unions_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`labor_unions_id`,`users_id`),
+  KEY `fk_labor_union_user_users_id` (`users_id`),
+  CONSTRAINT `fk_labor_union_user_labor_unions_id` FOREIGN KEY (`labor_unions_id`) REFERENCES `labor_union` (`id`),
+  CONSTRAINT `fk_labor_union_user_users_id` FOREIGN KEY (`users_id`) REFERENCES `jhi_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `task_info`
+-- Dumping data for table `labor_union_user`
 --
 
-LOCK TABLES `task_info` WRITE;
-/*!40000 ALTER TABLE `task_info` DISABLE KEYS */;
-INSERT INTO `task_info` VALUES (1,150,200,201708,1);
-/*!40000 ALTER TABLE `task_info` ENABLE KEYS */;
+LOCK TABLES `labor_union_user` WRITE;
+/*!40000 ALTER TABLE `labor_union_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `labor_union_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-10 21:01:08
+-- Dump completed on 2017-08-11 21:16:51

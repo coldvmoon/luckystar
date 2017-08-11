@@ -6,24 +6,25 @@
             <th >艺名</th>
             <th >繁星ID</th>
             <th>时间(参考)</th>
-            <th>天数</th>
+            <!--<th>天数</th>-->
+            <th *ngFor="let day of uniqueDate">
+                {{day}}
+            </th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let row of data">
-            <td>{{row.userName}}</td>
-            <td>{{row.nickName}}</td>
-            <td>{{row.starId}}</td>
-            <td>{{row.starLevel}}</td>
-            <td>{{row.fansCount}}</td>
-            <td>{{row.beanByDay}}</td>
-            <td>{{row.beanByMonth}}</td>
-            <td>{{row.minTask}}</td>
-            <td>{{row.maxTask}}</td>
-            <td>{{row.workTimeByMonth}}</td>
-            <td>{{row.workTimeByDay}}</td>
-            <td>{{row.regDate}}</td>
+            <!--{{row}}-->
+            <td>{{row.data.userName}}</td>
+            <td>{{row.data.nickName}}</td>
+            <td>{{row.data.starId}}</td>
+            <td>{{row.data.totalTime}}</td>
+            <!--<td>{{row.data.totalTime}}</td>-->
+            <td *ngFor="let day of uniqueDate">
+                {{row.date[day]}}
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
+<script src="underscore-min.js"></script>

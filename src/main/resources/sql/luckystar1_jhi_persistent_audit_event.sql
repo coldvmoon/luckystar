@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: luckystar
+-- Host: localhost    Database: luckystar1
 -- ------------------------------------------------------
 -- Server version	5.7.19
 
@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `DATABASECHANGELOGLOCK`
+-- Table structure for table `jhi_persistent_audit_event`
 --
 
-DROP TABLE IF EXISTS `DATABASECHANGELOGLOCK`;
+DROP TABLE IF EXISTS `jhi_persistent_audit_event`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `DATABASECHANGELOGLOCK` (
-  `ID` int(11) NOT NULL,
-  `LOCKED` bit(1) NOT NULL,
-  `LOCKGRANTED` datetime DEFAULT NULL,
-  `LOCKEDBY` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `jhi_persistent_audit_event` (
+  `event_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `principal` varchar(50) NOT NULL,
+  `event_date` timestamp NULL DEFAULT NULL,
+  `event_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`event_id`),
+  KEY `idx_persistent_audit_event` (`principal`,`event_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DATABASECHANGELOGLOCK`
+-- Dumping data for table `jhi_persistent_audit_event`
 --
 
-LOCK TABLES `DATABASECHANGELOGLOCK` WRITE;
-/*!40000 ALTER TABLE `DATABASECHANGELOGLOCK` DISABLE KEYS */;
-INSERT INTO `DATABASECHANGELOGLOCK` VALUES (1,'\0',NULL,NULL);
-/*!40000 ALTER TABLE `DATABASECHANGELOGLOCK` ENABLE KEYS */;
+LOCK TABLES `jhi_persistent_audit_event` WRITE;
+/*!40000 ALTER TABLE `jhi_persistent_audit_event` DISABLE KEYS */;
+INSERT INTO `jhi_persistent_audit_event` VALUES (1,'admin','2017-08-11 06:02:21','AUTHENTICATION_SUCCESS');
+/*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-10 21:01:08
+-- Dump completed on 2017-08-11 21:16:52
