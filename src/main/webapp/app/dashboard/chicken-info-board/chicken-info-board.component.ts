@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+
+import { ITEMS_PER_PAGE, Principal, ResponseWrapper,TimeFormat } from '../../shared';
 
 import {ChickenInfoBoardService} from './chicken-info-board.service'
 

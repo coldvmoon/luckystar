@@ -6,7 +6,8 @@
             <th scope="col">姓名</th>
             <th scope="col">艺名</th>
             <th scope="col">繁星ID</th>
-            <th scope="col">级别</th>
+            <th scope="col">明星等级</th>
+            <th scope="col">财富等级</th>
             <th scope="col">关注数</th>
             <th scope="col">星豆数</th>
             <th scope="col">月总数</th>
@@ -24,12 +25,13 @@
             <td>{{row.nickName}}</td>
             <td>{{row.starId}}</td>
             <td>{{row.starLevel}}</td>
+            <td>{{row.richLevel}}</td>
             <td>{{row.fansCount}}</td>
             <td>{{row.beanByDay}}</td>
             <td>{{row.beanByMonth}}</td>
             <td>{{row.minTask}}</td>
             <td>{{row.maxTask}}</td>
-            <td>{{row.workTimeByMonth}}</td>
+            <td>{{row.workTimeByMonth|timeFormat}}</td>
             <td>{{row.workTimeByDay}}</td>
             <td>{{row.regDate | date:'mediumDate'}}</td>
         </tr>

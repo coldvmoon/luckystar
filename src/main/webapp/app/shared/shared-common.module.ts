@@ -6,7 +6,8 @@ import {
     JhiLanguageHelper,
     FindLanguageFromKeyPipe,
     JhiAlertComponent,
-    JhiAlertErrorComponent
+    JhiAlertErrorComponent,
+    TimeFormat
 } from './';
 
 @NgModule({
@@ -16,7 +17,8 @@ import {
     declarations: [
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
+        TimeFormat
     ],
     providers: [
         JhiLanguageHelper,
@@ -30,7 +32,8 @@ import {
         LuckystarSharedLibsModule,
         FindLanguageFromKeyPipe,
         JhiAlertComponent,
-        JhiAlertErrorComponent
+        JhiAlertErrorComponent,
+        TimeFormat
     ]
 })
 export class LuckystarSharedCommonModule {}

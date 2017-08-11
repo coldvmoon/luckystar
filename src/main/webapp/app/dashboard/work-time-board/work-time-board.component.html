@@ -6,9 +6,10 @@
             <th >艺名</th>
             <th >繁星ID</th>
             <th>时间(参考)</th>
+            <th>考勤天数</th>
             <!--<th>天数</th>-->
             <th *ngFor="let day of uniqueDate">
-                {{day}}
+                {{day| date:'mediumDate'}}
             </th>
         </tr>
         </thead>
@@ -18,10 +19,11 @@
             <td>{{row.data.userName}}</td>
             <td>{{row.data.nickName}}</td>
             <td>{{row.data.starId}}</td>
-            <td>{{row.data.totalTime}}</td>
+            <td>{{row.data.totalTime|timeFormat}}</td>
+            <td>{{row.data.totalDay}}</td>
             <!--<td>{{row.data.totalTime}}</td>-->
             <td *ngFor="let day of uniqueDate" ng>
-                {{row.date[day]?row.date[day]:'--'}}
+                {{(row.date[day]?row.date[day]:0) |timeFormat}}
             </td>
         </tr>
         </tbody>
