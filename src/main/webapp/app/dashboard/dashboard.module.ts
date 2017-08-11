@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { LuckystarSharedModule } from '../shared';
 
 import {
+    ChickenInfoBoardService,
     ChickenInfoBoardComponent,
     dashboardState
 } from './';
@@ -17,6 +18,7 @@ import {
         ChickenInfoBoardComponent
     ],
     providers: [
+        ChickenInfoBoardService,
         ChickenInfoBoardComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -13,11 +13,11 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface LaborUnionRepository extends JpaRepository<LaborUnion,Long> {
-    
+
     @Query("select distinct labor_union from LaborUnion labor_union left join fetch labor_union.users")
     List<LaborUnion> findAllWithEagerRelationships();
 
     @Query("select labor_union from LaborUnion labor_union left join fetch labor_union.users where labor_union.id =:id")
     LaborUnion findOneWithEagerRelationships(@Param("id") Long id);
-    
+
 }
