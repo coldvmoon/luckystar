@@ -1,1 +1,38 @@
-test
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <!--<th scope="col">排序</th>-->
+            <th scope="col">姓名</th>
+            <th scope="col">艺名</th>
+            <th scope="col">繁星ID</th>
+            <th scope="col">级别</th>
+            <th scope="col">关注数</th>
+            <th scope="col">星豆数</th>
+            <th scope="col">月总数</th>
+            <th scope="col">任务数</th>
+            <th scope="col">目标数</th>
+            <th scope="col">时长</th>
+            <th scope="col">天数</th>
+            <th scope="col">开播日期</th>
+            <!--<th scope="col">状态</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let row of data">
+            <td>{{row.userName}}</td>
+            <td>{{row.nickName}}</td>
+            <td>{{row.starId}}</td>
+            <td>{{row.starLevel}}</td>
+            <td>{{row.fansCount}}</td>
+            <td>{{row.beanByDay}}</td>
+            <td>{{row.beanByMonth}}</td>
+            <td>{{row.minTask}}</td>
+            <td>{{row.maxTask}}</td>
+            <td>{{row.workTimeByMonth}}</td>
+            <td>{{row.workTimeByDay}}</td>
+            <td>{{row.regDate}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

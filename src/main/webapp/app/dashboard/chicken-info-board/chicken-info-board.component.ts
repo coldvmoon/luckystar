@@ -9,7 +9,7 @@ import {ChickenInfoBoardService} from './chicken-info-board.service'
     templateUrl: './chicken-info-board.component.html'
 })
 export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
-
+    data:any
     constructor(
         private chickenInfoBoardService: ChickenInfoBoardService,
     ) {
@@ -29,7 +29,7 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     }
 
     private onSuccess(data, headers) {
-
+        this.data = data
     }
     private onError(error) {
 
