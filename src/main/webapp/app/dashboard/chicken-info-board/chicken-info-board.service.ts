@@ -15,11 +15,14 @@ export class ChickenInfoBoardService {
 
 
     query(req?: any): Observable<ResponseWrapper> {
-        const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
+        // const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl+"?day="+req)
             .map((res: Response) => this.convertResponse(res));
     }
 
+    recentTime():Observable<ResponseWrapper>{
+       return this.http.get("api/recent-time");
+    }
 
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();

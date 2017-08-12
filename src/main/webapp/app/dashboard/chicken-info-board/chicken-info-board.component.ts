@@ -11,6 +11,8 @@ import {ChickenInfoBoardService} from './chicken-info-board.service'
 })
 export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     data:any
+    recentTime:any
+    day:any
     constructor(
         private chickenInfoBoardService: ChickenInfoBoardService,
     ) {
@@ -23,17 +25,37 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         );
     }
     ngOnInit(): void {
-        this.loadAll()
+        // this.loadAll()
+        this.chickenInfoBoardService.recentTime().subscribe(
+            (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
     }
 
     ngOnDestroy(): void {
     }
 
+    private onSuccess1(data, headers) {
+        this.recentTime = data.json()
+        this.chickenInfoBoardService.query(this.recentTime[0]).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+
+    }
     private onSuccess(data, headers) {
-        this.data = data
+        this.data = data;
+
     }
     private onError(error) {
 
     }
 
+    statement(day?:string):void{
+        // this.day=day
+        this.chickenInfoBoardService.query(day).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
 }
