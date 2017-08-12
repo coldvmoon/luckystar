@@ -17,13 +17,13 @@ export class TimeFormat implements PipeTransform {
         let time: number = parseInt(value);
         let second: number = Math.floor(time%60);
         let hour: number = Math.floor(time/3600);
-        time = time/3600;
+        time = time - 3600*hour;
         let minute: number = Math.floor(time/60);
         let str ="";
         if(hour>0){
             str+=hour+"时";
         }
-        if(minute>0){
+        if(minute>=0){
             str+=minute+"分";
         }
         if(second>=0){
