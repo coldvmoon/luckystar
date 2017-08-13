@@ -68,13 +68,13 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/labor-union'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
+        // this.router.navigate(['/labor-union'], {
+        //     queryParams: {
+        //         page: this.page,
+        //         size: this.itemsPerPage,
+        //         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+        //     }
+        // });
         this.loadAll();
     }
 
