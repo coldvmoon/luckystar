@@ -59,10 +59,10 @@
         </div>
 
         <div class="form-group">
-            <label jhiTranslate="luckystarApp.taskInfo.chickenInfo" for="field_chickenInfo">Chicken Info</label>
-            <select class="form-control" id="field_chickenInfo" name="chickenInfo" [(ngModel)]="taskInfo.chickenInfo" >
+            <label jhiTranslate="luckystarApp.taskInfo.userInfo" for="field_userInfo">User Info</label>
+            <select class="form-control" id="field_userInfo" name="userInfo" [(ngModel)]="taskInfo.userInfo" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="chickenInfoOption.id === taskInfo.chickenInfo?.id ? taskInfo.chickenInfo : chickenInfoOption" *ngFor="let chickenInfoOption of chickeninfos; trackBy: trackChickenInfoById">{{chickenInfoOption.id}}</option>
+                <option [ngValue]="userInfoOption.id === taskInfo.userInfo?.id ? taskInfo.userInfo : userInfoOption" *ngFor="let userInfoOption of userinfos; trackBy: trackUserInfoById">{{userInfoOption.id}}</option>
             </select>
         </div>
     </div>

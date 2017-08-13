@@ -9,10 +9,29 @@ import { TaskInfoDetailComponent } from './task-info-detail.component';
 import { TaskInfoPopupComponent } from './task-info-dialog.component';
 import { TaskInfoDeletePopupComponent } from './task-info-delete-dialog.component';
 
+@Injectable()
+export class TaskInfoResolvePagingParams implements Resolve<any> {
+
+    constructor(private paginationUtil: JhiPaginationUtil) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const page = route.queryParams['page'] ? route.queryParams['page'] : '1';
+        const sort = route.queryParams['sort'] ? route.queryParams['sort'] : 'id,asc';
+        return {
+            page: this.paginationUtil.parsePage(page),
+            predicate: this.paginationUtil.parsePredicate(sort),
+            ascending: this.paginationUtil.parseAscending(sort)
+      };
+    }
+}
+
 export const taskInfoRoute: Routes = [
     {
         path: 'task-info',
         component: TaskInfoComponent,
+        resolve: {
+            'pagingParams': TaskInfoResolvePagingParams
+        },
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'luckystarApp.taskInfo.home.title'

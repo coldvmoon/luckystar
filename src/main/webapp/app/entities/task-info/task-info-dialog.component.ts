@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { TaskInfo } from './task-info.model';
 import { TaskInfoPopupService } from './task-info-popup.service';
 import { TaskInfoService } from './task-info.service';
-import { ChickenInfo, ChickenInfoService } from '../chicken-info';
+import { UserInfo, UserInfoService } from '../user-info';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -21,21 +21,21 @@ export class TaskInfoDialogComponent implements OnInit {
     taskInfo: TaskInfo;
     isSaving: boolean;
 
-    chickeninfos: ChickenInfo[];
+    userinfos: UserInfo[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private alertService: JhiAlertService,
         private taskInfoService: TaskInfoService,
-        private chickenInfoService: ChickenInfoService,
+        private userInfoService: UserInfoService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.chickenInfoService.query()
-            .subscribe((res: ResponseWrapper) => { this.chickeninfos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.userInfoService.query()
+            .subscribe((res: ResponseWrapper) => { this.userinfos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -78,7 +78,7 @@ export class TaskInfoDialogComponent implements OnInit {
         this.alertService.error(error.message, null, null);
     }
 
-    trackChickenInfoById(index: number, item: ChickenInfo) {
+    trackUserInfoById(index: number, item: UserInfo) {
         return item.id;
     }
 }

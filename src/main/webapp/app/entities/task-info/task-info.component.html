@@ -15,12 +15,12 @@
     <div class="table-responsive" *ngIf="taskInfos">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="luckystarApp.taskInfo.minTask">Min Task</span></th>
-            <th><span jhiTranslate="luckystarApp.taskInfo.maxTask">Max Task</span></th>
-            <th><span jhiTranslate="luckystarApp.taskInfo.curMonth">Cur Month</span></th>
-            <th><span jhiTranslate="luckystarApp.taskInfo.chickenInfo">Chicken Info</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="minTask"><span jhiTranslate="luckystarApp.taskInfo.minTask">Min Task</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="maxTask"><span jhiTranslate="luckystarApp.taskInfo.maxTask">Max Task</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="curMonth"><span jhiTranslate="luckystarApp.taskInfo.curMonth">Cur Month</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="userInfo.id"><span jhiTranslate="luckystarApp.taskInfo.userInfo">User Info</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,8 +31,8 @@
                 <td>{{taskInfo.maxTask}}</td>
                 <td>{{taskInfo.curMonth}}</td>
                 <td>
-                    <div *ngIf="taskInfo.chickenInfo">
-                        <a [routerLink]="['../chicken-info', taskInfo.chickenInfo?.id ]" >{{taskInfo.chickenInfo?.id}}</a>
+                    <div *ngIf="taskInfo.userInfo">
+                        <a [routerLink]="['../user-info', taskInfo.userInfo?.id ]" >{{taskInfo.userInfo?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -63,4 +63,13 @@
             </tbody>
         </table>
     </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div *ngIf="taskInfos && taskInfos.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

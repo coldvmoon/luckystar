@@ -20,82 +20,70 @@
         {
             "fieldName": "starLevel",
             "javadoc": "繁星等级",
-            "fieldType": "Integer",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "starName",
+            "javadoc": "繁星等级名称",
+            "fieldType": "String",
             "fieldValidateRules": [
-                "required"
-            ]
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
         },
         {
             "fieldName": "richLevel",
             "javadoc": "财富等级",
-            "fieldType": "Integer",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "richName",
+            "javadoc": "财富等级名称",
+            "fieldType": "String",
             "fieldValidateRules": [
-                "required"
-            ]
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
         },
         {
             "fieldName": "fisrtBean",
             "javadoc": "当天初始星豆数",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Float"
         },
         {
             "fieldName": "beanTotal",
-            "javadoc": "任务数",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "javadoc": "星豆总数",
+            "fieldType": "Float"
         },
         {
             "fieldName": "coin",
             "javadoc": "星币数",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Float"
         },
         {
             "fieldName": "coinTotal",
             "javadoc": "星币总数",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Float"
         },
         {
             "fieldName": "fansCount",
             "javadoc": "被关注数",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Integer"
         },
         {
             "fieldName": "followCount",
             "javadoc": "关注数",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Integer"
         },
         {
             "fieldName": "experience",
             "javadoc": "经验值",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Float"
         },
         {
             "fieldName": "workTime",
             "javadoc": "工作时长",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Integer"
         },
         {
             "fieldName": "curMonth",
@@ -125,6 +113,6 @@
     "changelogDate": "20170809162246",
     "entityTableName": "work_info",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no"
 }

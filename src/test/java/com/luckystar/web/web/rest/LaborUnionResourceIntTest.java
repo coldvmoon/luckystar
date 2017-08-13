@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.luckystar.web.domain.enumeration.State;
+import com.luckystar.web.domain.enumeration.Source;
 /**
  * Test class for the LaborUnionResource REST controller.
  *
@@ -51,6 +52,9 @@ public class LaborUnionResourceIntTest {
 
     private static final State DEFAULT_STATE = State.OFF;
     private static final State UPDATED_STATE = State.ON;
+
+    private static final Source DEFAULT_TYPE = Source.FANXIN;
+    private static final Source UPDATED_TYPE = Source.FANXIN;
 
     @Autowired
     private LaborUnionRepository laborUnionRepository;
@@ -92,7 +96,8 @@ public class LaborUnionResourceIntTest {
             .lId(DEFAULT_L_ID)
             .name(DEFAULT_NAME)
             .regDate(DEFAULT_REG_DATE)
-            .state(DEFAULT_STATE);
+            .state(DEFAULT_STATE)
+            .type(DEFAULT_TYPE);
         return laborUnion;
     }
 
@@ -120,6 +125,7 @@ public class LaborUnionResourceIntTest {
         assertThat(testLaborUnion.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLaborUnion.getRegDate()).isEqualTo(DEFAULT_REG_DATE);
         assertThat(testLaborUnion.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testLaborUnion.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -215,6 +221,24 @@ public class LaborUnionResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = laborUnionRepository.findAll().size();
+        // set the field null
+        laborUnion.setType(null);
+
+        // Create the LaborUnion, which fails.
+
+        restLaborUnionMockMvc.perform(post("/api/labor-unions")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(laborUnion)))
+            .andExpect(status().isBadRequest());
+
+        List<LaborUnion> laborUnionList = laborUnionRepository.findAll();
+        assertThat(laborUnionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLaborUnions() throws Exception {
         // Initialize the database
         laborUnionRepository.saveAndFlush(laborUnion);
@@ -227,7 +251,8 @@ public class LaborUnionResourceIntTest {
             .andExpect(jsonPath("$.[*].lId").value(hasItem(DEFAULT_L_ID)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].regDate").value(hasItem(DEFAULT_REG_DATE.toString())))
-            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())));
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -244,7 +269,8 @@ public class LaborUnionResourceIntTest {
             .andExpect(jsonPath("$.lId").value(DEFAULT_L_ID))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.regDate").value(DEFAULT_REG_DATE.toString()))
-            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()));
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -268,7 +294,8 @@ public class LaborUnionResourceIntTest {
             .lId(UPDATED_L_ID)
             .name(UPDATED_NAME)
             .regDate(UPDATED_REG_DATE)
-            .state(UPDATED_STATE);
+            .state(UPDATED_STATE)
+            .type(UPDATED_TYPE);
 
         restLaborUnionMockMvc.perform(put("/api/labor-unions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -283,6 +310,7 @@ public class LaborUnionResourceIntTest {
         assertThat(testLaborUnion.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLaborUnion.getRegDate()).isEqualTo(UPDATED_REG_DATE);
         assertThat(testLaborUnion.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testLaborUnion.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

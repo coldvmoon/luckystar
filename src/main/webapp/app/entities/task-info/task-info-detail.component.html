@@ -16,10 +16,10 @@
         <dd>
             <span>{{taskInfo.curMonth}}</span>
         </dd>
-        <dt><span jhiTranslate="luckystarApp.taskInfo.chickenInfo">Chicken Info</span></dt>
+        <dt><span jhiTranslate="luckystarApp.taskInfo.userInfo">User Info</span></dt>
         <dd>
-            <div *ngIf="taskInfo.chickenInfo">
-                <a [routerLink]="['/chicken-info', taskInfo.chickenInfo?.id]">{{taskInfo.chickenInfo?.id}}</a>
+            <div *ngIf="taskInfo.userInfo">
+                <a [routerLink]="['/user-info', taskInfo.userInfo?.id]">{{taskInfo.userInfo?.id}}</a>
             </div>
         </dd>
     </dl>

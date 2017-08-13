@@ -49,8 +49,14 @@ public class WorkInfoResourceIntTest {
     private static final Integer DEFAULT_STAR_LEVEL = 1;
     private static final Integer UPDATED_STAR_LEVEL = 2;
 
+    private static final String DEFAULT_STAR_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_STAR_NAME = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_RICH_LEVEL = 1;
     private static final Integer UPDATED_RICH_LEVEL = 2;
+
+    private static final String DEFAULT_RICH_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_RICH_NAME = "BBBBBBBBBB";
 
     private static final Float DEFAULT_FISRT_BEAN = 1F;
     private static final Float UPDATED_FISRT_BEAN = 2F;
@@ -124,7 +130,9 @@ public class WorkInfoResourceIntTest {
         WorkInfo workInfo = new WorkInfo()
             .starId(DEFAULT_STAR_ID)
             .starLevel(DEFAULT_STAR_LEVEL)
+            .starName(DEFAULT_STAR_NAME)
             .richLevel(DEFAULT_RICH_LEVEL)
+            .richName(DEFAULT_RICH_NAME)
             .fisrtBean(DEFAULT_FISRT_BEAN)
             .beanTotal(DEFAULT_BEAN_TOTAL)
             .coin(DEFAULT_COIN)
@@ -161,7 +169,9 @@ public class WorkInfoResourceIntTest {
         WorkInfo testWorkInfo = workInfoList.get(workInfoList.size() - 1);
         assertThat(testWorkInfo.getStarId()).isEqualTo(DEFAULT_STAR_ID);
         assertThat(testWorkInfo.getStarLevel()).isEqualTo(DEFAULT_STAR_LEVEL);
+        assertThat(testWorkInfo.getStarName()).isEqualTo(DEFAULT_STAR_NAME);
         assertThat(testWorkInfo.getRichLevel()).isEqualTo(DEFAULT_RICH_LEVEL);
+        assertThat(testWorkInfo.getRichName()).isEqualTo(DEFAULT_RICH_NAME);
         assertThat(testWorkInfo.getFisrtBean()).isEqualTo(DEFAULT_FISRT_BEAN);
         assertThat(testWorkInfo.getBeanTotal()).isEqualTo(DEFAULT_BEAN_TOTAL);
         assertThat(testWorkInfo.getCoin()).isEqualTo(DEFAULT_COIN);
@@ -200,186 +210,6 @@ public class WorkInfoResourceIntTest {
         int databaseSizeBeforeTest = workInfoRepository.findAll().size();
         // set the field null
         workInfo.setStarId(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkStarLevelIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setStarLevel(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkRichLevelIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setRichLevel(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkFisrtBeanIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setFisrtBean(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkBeanTotalIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setBeanTotal(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkCoinIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setCoin(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkCoinTotalIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setCoinTotal(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkFansCountIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setFansCount(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkFollowCountIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setFollowCount(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkExperienceIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setExperience(null);
-
-        // Create the WorkInfo, which fails.
-
-        restWorkInfoMockMvc.perform(post("/api/work-infos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(workInfo)))
-            .andExpect(status().isBadRequest());
-
-        List<WorkInfo> workInfoList = workInfoRepository.findAll();
-        assertThat(workInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkWorkTimeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = workInfoRepository.findAll().size();
-        // set the field null
-        workInfo.setWorkTime(null);
 
         // Create the WorkInfo, which fails.
 
@@ -459,7 +289,9 @@ public class WorkInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(workInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID.intValue())))
             .andExpect(jsonPath("$.[*].starLevel").value(hasItem(DEFAULT_STAR_LEVEL)))
+            .andExpect(jsonPath("$.[*].starName").value(hasItem(DEFAULT_STAR_NAME.toString())))
             .andExpect(jsonPath("$.[*].richLevel").value(hasItem(DEFAULT_RICH_LEVEL)))
+            .andExpect(jsonPath("$.[*].richName").value(hasItem(DEFAULT_RICH_NAME.toString())))
             .andExpect(jsonPath("$.[*].fisrtBean").value(hasItem(DEFAULT_FISRT_BEAN.doubleValue())))
             .andExpect(jsonPath("$.[*].beanTotal").value(hasItem(DEFAULT_BEAN_TOTAL.doubleValue())))
             .andExpect(jsonPath("$.[*].coin").value(hasItem(DEFAULT_COIN.doubleValue())))
@@ -486,7 +318,9 @@ public class WorkInfoResourceIntTest {
             .andExpect(jsonPath("$.id").value(workInfo.getId().intValue()))
             .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID.intValue()))
             .andExpect(jsonPath("$.starLevel").value(DEFAULT_STAR_LEVEL))
+            .andExpect(jsonPath("$.starName").value(DEFAULT_STAR_NAME.toString()))
             .andExpect(jsonPath("$.richLevel").value(DEFAULT_RICH_LEVEL))
+            .andExpect(jsonPath("$.richName").value(DEFAULT_RICH_NAME.toString()))
             .andExpect(jsonPath("$.fisrtBean").value(DEFAULT_FISRT_BEAN.doubleValue()))
             .andExpect(jsonPath("$.beanTotal").value(DEFAULT_BEAN_TOTAL.doubleValue()))
             .andExpect(jsonPath("$.coin").value(DEFAULT_COIN.doubleValue()))
@@ -520,7 +354,9 @@ public class WorkInfoResourceIntTest {
         updatedWorkInfo
             .starId(UPDATED_STAR_ID)
             .starLevel(UPDATED_STAR_LEVEL)
+            .starName(UPDATED_STAR_NAME)
             .richLevel(UPDATED_RICH_LEVEL)
+            .richName(UPDATED_RICH_NAME)
             .fisrtBean(UPDATED_FISRT_BEAN)
             .beanTotal(UPDATED_BEAN_TOTAL)
             .coin(UPDATED_COIN)
@@ -544,7 +380,9 @@ public class WorkInfoResourceIntTest {
         WorkInfo testWorkInfo = workInfoList.get(workInfoList.size() - 1);
         assertThat(testWorkInfo.getStarId()).isEqualTo(UPDATED_STAR_ID);
         assertThat(testWorkInfo.getStarLevel()).isEqualTo(UPDATED_STAR_LEVEL);
+        assertThat(testWorkInfo.getStarName()).isEqualTo(UPDATED_STAR_NAME);
         assertThat(testWorkInfo.getRichLevel()).isEqualTo(UPDATED_RICH_LEVEL);
+        assertThat(testWorkInfo.getRichName()).isEqualTo(UPDATED_RICH_NAME);
         assertThat(testWorkInfo.getFisrtBean()).isEqualTo(UPDATED_FISRT_BEAN);
         assertThat(testWorkInfo.getBeanTotal()).isEqualTo(UPDATED_BEAN_TOTAL);
         assertThat(testWorkInfo.getCoin()).isEqualTo(UPDATED_COIN);

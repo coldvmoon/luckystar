@@ -21,6 +21,7 @@
             <th jhiSortBy="name"><span jhiTranslate="luckystarApp.laborUnion.name">Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="regDate"><span jhiTranslate="luckystarApp.laborUnion.regDate">Reg Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="state"><span jhiTranslate="luckystarApp.laborUnion.state">State</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span jhiTranslate="luckystarApp.laborUnion.type">Type</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +32,7 @@
                 <td>{{laborUnion.name}}</td>
                 <td>{{laborUnion.regDate | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'luckystarApp.State.' + laborUnion.state}}">{{laborUnion.state}}</td>
+                <td jhiTranslate="{{'luckystarApp.Source.' + laborUnion.type}}">{{laborUnion.type}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

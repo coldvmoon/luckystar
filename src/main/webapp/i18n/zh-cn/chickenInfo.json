@@ -14,17 +14,7 @@
             },
             "detail": {
                 "title": "Chicken Info"
-            },
-            "userName": "User Name",
-            "nickName": "Nick Name",
-            "starId": "Star Id",
-            "regDate": "Reg Date",
-            "cookie": "Cookie",
-            "timeRate": "Time Rate",
-            "beanRate": "Bean Rate",
-            "state": "State",
-            "taskInfo": "Task Info",
-            "laborUnion": "Labor Union"
+            }
         }
     }
 }

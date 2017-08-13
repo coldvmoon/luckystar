@@ -5,6 +5,10 @@ const enum State {
     'ON'
 }
 
+const enum Source {
+    'FANXIN'
+}
+
 export class LaborUnion implements BaseEntity {
     constructor(
         public id?: number,
@@ -12,7 +16,8 @@ export class LaborUnion implements BaseEntity {
         public name?: string,
         public regDate?: any,
         public state?: State,
-        public chickenInfos?: BaseEntity[],
+        public type?: Source,
+        public userInfos?: BaseEntity[],
         public users?: User[],
     ) {
     }

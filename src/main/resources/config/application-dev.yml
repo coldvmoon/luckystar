@@ -26,7 +26,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://192.168.8.207:13306/luckystar1?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://192.168.8.207:13306/luckystar2?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: wumart
         password: '!QAZxsw2'
         hikari:

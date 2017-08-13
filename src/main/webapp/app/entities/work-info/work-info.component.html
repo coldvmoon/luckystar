@@ -15,23 +15,25 @@
     <div class="table-responsive" *ngIf="workInfos">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.starId">Star Id</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.starLevel">Star Level</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.richLevel">Rich Level</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.fisrtBean">Fisrt Bean</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.beanTotal">Bean Total</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.coin">Coin</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.coinTotal">Coin Total</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.fansCount">Fans Count</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.followCount">Follow Count</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.experience">Experience</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.workTime">Work Time</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.curMonth">Cur Month</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.curDay">Cur Day</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.lastTime">Last Time</span></th>
-            <th><span jhiTranslate="luckystarApp.workInfo.taskInfo">Task Info</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="starId"><span jhiTranslate="luckystarApp.workInfo.starId">Star Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="starLevel"><span jhiTranslate="luckystarApp.workInfo.starLevel">Star Level</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="starName"><span jhiTranslate="luckystarApp.workInfo.starName">Star Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="richLevel"><span jhiTranslate="luckystarApp.workInfo.richLevel">Rich Level</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="richName"><span jhiTranslate="luckystarApp.workInfo.richName">Rich Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="fisrtBean"><span jhiTranslate="luckystarApp.workInfo.fisrtBean">Fisrt Bean</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="beanTotal"><span jhiTranslate="luckystarApp.workInfo.beanTotal">Bean Total</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="coin"><span jhiTranslate="luckystarApp.workInfo.coin">Coin</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="coinTotal"><span jhiTranslate="luckystarApp.workInfo.coinTotal">Coin Total</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="fansCount"><span jhiTranslate="luckystarApp.workInfo.fansCount">Fans Count</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="followCount"><span jhiTranslate="luckystarApp.workInfo.followCount">Follow Count</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="experience"><span jhiTranslate="luckystarApp.workInfo.experience">Experience</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="workTime"><span jhiTranslate="luckystarApp.workInfo.workTime">Work Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="curMonth"><span jhiTranslate="luckystarApp.workInfo.curMonth">Cur Month</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="curDay"><span jhiTranslate="luckystarApp.workInfo.curDay">Cur Day</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastTime"><span jhiTranslate="luckystarApp.workInfo.lastTime">Last Time</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="taskInfo.id"><span jhiTranslate="luckystarApp.workInfo.taskInfo">Task Info</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -40,7 +42,9 @@
                 <td><a [routerLink]="['../work-info', workInfo.id ]">{{workInfo.id}}</a></td>
                 <td>{{workInfo.starId}}</td>
                 <td>{{workInfo.starLevel}}</td>
+                <td>{{workInfo.starName}}</td>
                 <td>{{workInfo.richLevel}}</td>
+                <td>{{workInfo.richName}}</td>
                 <td>{{workInfo.fisrtBean}}</td>
                 <td>{{workInfo.beanTotal}}</td>
                 <td>{{workInfo.coin}}</td>
@@ -85,4 +89,13 @@
             </tbody>
         </table>
     </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div *ngIf="workInfos && workInfos.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
 </div>

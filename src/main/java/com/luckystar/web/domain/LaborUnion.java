@@ -13,6 +13,8 @@ import java.util.Objects;
 
 import com.luckystar.web.domain.enumeration.State;
 
+import com.luckystar.web.domain.enumeration.Source;
+
 /**
  * A LaborUnion.
  */
@@ -60,9 +62,18 @@ public class LaborUnion implements Serializable {
     @Column(name = "state", nullable = false)
     private State state;
 
+    /**
+     * 数据采集来源 0：繁星
+     */
+    @NotNull
+    @ApiModelProperty(value = "数据采集来源 0：繁星", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "jhi_type", nullable = false)
+    private Source type;
+
     @OneToMany(mappedBy = "laborUnion")
     @JsonIgnore
-    private Set<ChickenInfo> chickenInfos = new HashSet<>();
+    private Set<UserInfo> userInfos = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "labor_union_user",
@@ -130,29 +141,42 @@ public class LaborUnion implements Serializable {
         this.state = state;
     }
 
-    public Set<ChickenInfo> getChickenInfos() {
-        return chickenInfos;
+    public Source getType() {
+        return type;
     }
 
-    public LaborUnion chickenInfos(Set<ChickenInfo> chickenInfos) {
-        this.chickenInfos = chickenInfos;
+    public LaborUnion type(Source type) {
+        this.type = type;
         return this;
     }
 
-    public LaborUnion addChickenInfo(ChickenInfo chickenInfo) {
-        this.chickenInfos.add(chickenInfo);
-        chickenInfo.setLaborUnion(this);
+    public void setType(Source type) {
+        this.type = type;
+    }
+
+    public Set<UserInfo> getUserInfos() {
+        return userInfos;
+    }
+
+    public LaborUnion userInfos(Set<UserInfo> userInfos) {
+        this.userInfos = userInfos;
         return this;
     }
 
-    public LaborUnion removeChickenInfo(ChickenInfo chickenInfo) {
-        this.chickenInfos.remove(chickenInfo);
-        chickenInfo.setLaborUnion(null);
+    public LaborUnion addUserInfo(UserInfo userInfo) {
+        this.userInfos.add(userInfo);
+        userInfo.setLaborUnion(this);
         return this;
     }
 
-    public void setChickenInfos(Set<ChickenInfo> chickenInfos) {
-        this.chickenInfos = chickenInfos;
+    public LaborUnion removeUserInfo(UserInfo userInfo) {
+        this.userInfos.remove(userInfo);
+        userInfo.setLaborUnion(null);
+        return this;
+    }
+
+    public void setUserInfos(Set<UserInfo> userInfos) {
+        this.userInfos = userInfos;
     }
 
     public Set<User> getUsers() {
@@ -164,17 +188,17 @@ public class LaborUnion implements Serializable {
         return this;
     }
 
-//    public LaborUnion addUser(User user) {
-//        this.users.add(user);
+    public LaborUnion addUser(User user) {
+        this.users.add(user);
 //        user.getLaborUnions().add(this);
-//        return this;
-//    }
-//
-//    public LaborUnion removeUser(User user) {
-//        this.users.remove(user);
+        return this;
+    }
+
+    public LaborUnion removeUser(User user) {
+        this.users.remove(user);
 //        user.getLaborUnions().remove(this);
-//        return this;
-//    }
+        return this;
+    }
 
     public void setUsers(Set<User> users) {
         this.users = users;
@@ -208,6 +232,7 @@ public class LaborUnion implements Serializable {
             ", name='" + getName() + "'" +
             ", regDate='" + getRegDate() + "'" +
             ", state='" + getState() + "'" +
+            ", type='" + getType() + "'" +
             "}";
     }
 }

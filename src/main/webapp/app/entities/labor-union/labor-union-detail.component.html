@@ -20,6 +20,10 @@
         <dd>
             <span jhiTranslate="{{'luckystarApp.State.' + laborUnion.state}}">{{laborUnion.state}}</span>
         </dd>
+        <dt><span jhiTranslate="luckystarApp.laborUnion.type">Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'luckystarApp.Source.' + laborUnion.type}}">{{laborUnion.type}}</span>
+        </dd>
         <dt><span jhiTranslate="luckystarApp.laborUnion.user">User</span></dt>
         <dd>
             <span *ngFor="let user of laborUnion.users; let last = last">

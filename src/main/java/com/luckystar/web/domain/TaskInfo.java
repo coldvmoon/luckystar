@@ -52,7 +52,7 @@ public class TaskInfo implements Serializable {
     private Set<WorkInfo> workInfos = new HashSet<>();
 
     @ManyToOne
-    private ChickenInfo chickenInfo;
+    private UserInfo userInfo;
 
     public Long getId() {
         return id;
@@ -126,17 +126,17 @@ public class TaskInfo implements Serializable {
         this.workInfos = workInfos;
     }
 
-    public ChickenInfo getChickenInfo() {
-        return chickenInfo;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public TaskInfo chickenInfo(ChickenInfo chickenInfo) {
-        this.chickenInfo = chickenInfo;
+    public TaskInfo userInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
         return this;
     }
 
-    public void setChickenInfo(ChickenInfo chickenInfo) {
-        this.chickenInfo = chickenInfo;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     @Override

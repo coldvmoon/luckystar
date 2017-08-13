@@ -33,81 +33,87 @@ public class WorkInfo implements Serializable {
     /**
      * 繁星等级
      */
-    @NotNull
-    @ApiModelProperty(value = "繁星等级", required = true)
-    @Column(name = "star_level", nullable = false)
+    @ApiModelProperty(value = "繁星等级")
+    @Column(name = "star_level")
     private Integer starLevel;
+
+    /**
+     * 繁星等级名称
+     */
+    @Size(max = 20)
+    @ApiModelProperty(value = "繁星等级名称")
+    @Column(name = "star_name", length = 20)
+    private String starName;
 
     /**
      * 财富等级
      */
-    @NotNull
-    @ApiModelProperty(value = "财富等级", required = true)
-    @Column(name = "rich_level", nullable = false)
+    @ApiModelProperty(value = "财富等级")
+    @Column(name = "rich_level")
     private Integer richLevel;
+
+    /**
+     * 财富等级名称
+     */
+    @Size(max = 20)
+    @ApiModelProperty(value = "财富等级名称")
+    @Column(name = "rich_name", length = 20)
+    private String richName;
 
     /**
      * 当天初始星豆数
      */
-    @NotNull
-    @ApiModelProperty(value = "当天初始星豆数", required = true)
-    @Column(name = "fisrt_bean", nullable = false)
+    @ApiModelProperty(value = "当天初始星豆数")
+    @Column(name = "fisrt_bean")
     private Float fisrtBean;
 
     /**
-     * 任务数
+     * 星豆总数
      */
-    @NotNull
-    @ApiModelProperty(value = "任务数", required = true)
-    @Column(name = "bean_total", nullable = false)
+    @ApiModelProperty(value = "星豆总数")
+    @Column(name = "bean_total")
     private Float beanTotal;
 
     /**
      * 星币数
      */
-    @NotNull
-    @ApiModelProperty(value = "星币数", required = true)
-    @Column(name = "coin", nullable = false)
+    @ApiModelProperty(value = "星币数")
+    @Column(name = "coin")
     private Float coin;
 
     /**
      * 星币总数
      */
-    @NotNull
-    @ApiModelProperty(value = "星币总数", required = true)
-    @Column(name = "coin_total", nullable = false)
+    @ApiModelProperty(value = "星币总数")
+    @Column(name = "coin_total")
     private Float coinTotal;
 
     /**
      * 被关注数
      */
-    @NotNull
-    @ApiModelProperty(value = "被关注数", required = true)
-    @Column(name = "fans_count", nullable = false)
+    @ApiModelProperty(value = "被关注数")
+    @Column(name = "fans_count")
     private Integer fansCount;
 
     /**
      * 关注数
      */
-    @NotNull
-    @ApiModelProperty(value = "关注数", required = true)
-    @Column(name = "follow_count", nullable = false)
+    @ApiModelProperty(value = "关注数")
+    @Column(name = "follow_count")
     private Integer followCount;
 
     /**
      * 经验值
      */
-    @NotNull
-    @ApiModelProperty(value = "经验值", required = true)
-    @Column(name = "experience", nullable = false)
+    @ApiModelProperty(value = "经验值")
+    @Column(name = "experience")
     private Float experience;
 
     /**
      * 工作时长
      */
-    @NotNull
-    @ApiModelProperty(value = "工作时长", required = true)
-    @Column(name = "work_time", nullable = false)
+    @ApiModelProperty(value = "工作时长")
+    @Column(name = "work_time")
     private Integer workTime;
 
     /**
@@ -171,6 +177,19 @@ public class WorkInfo implements Serializable {
         this.starLevel = starLevel;
     }
 
+    public String getStarName() {
+        return starName;
+    }
+
+    public WorkInfo starName(String starName) {
+        this.starName = starName;
+        return this;
+    }
+
+    public void setStarName(String starName) {
+        this.starName = starName;
+    }
+
     public Integer getRichLevel() {
         return richLevel;
     }
@@ -182,6 +201,19 @@ public class WorkInfo implements Serializable {
 
     public void setRichLevel(Integer richLevel) {
         this.richLevel = richLevel;
+    }
+
+    public String getRichName() {
+        return richName;
+    }
+
+    public WorkInfo richName(String richName) {
+        this.richName = richName;
+        return this;
+    }
+
+    public void setRichName(String richName) {
+        this.richName = richName;
     }
 
     public Float getFisrtBean() {
@@ -366,7 +398,9 @@ public class WorkInfo implements Serializable {
             "id=" + getId() +
             ", starId='" + getStarId() + "'" +
             ", starLevel='" + getStarLevel() + "'" +
+            ", starName='" + getStarName() + "'" +
             ", richLevel='" + getRichLevel() + "'" +
+            ", richName='" + getRichName() + "'" +
             ", fisrtBean='" + getFisrtBean() + "'" +
             ", beanTotal='" + getBeanTotal() + "'" +
             ", coin='" + getCoin() + "'" +

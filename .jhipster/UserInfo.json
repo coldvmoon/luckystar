@@ -1,0 +1,137 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "taskInfo",
+            "otherEntityName": "taskInfo",
+            "otherEntityRelationshipName": "userInfo"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "laborUnion",
+            "otherEntityName": "laborUnion",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "userName",
+            "javadoc": "真名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "nickName",
+            "javadoc": "艺名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "phoneNumber",
+            "javadoc": "手机号",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "qq",
+            "javadoc": "手机号",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "weiChat",
+            "javadoc": "微信号",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "starId",
+            "javadoc": "繁星id",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "regDate",
+            "javadoc": "注册时间",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "loginName",
+            "javadoc": "繁星登录名",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "password",
+            "javadoc": "繁星登录密码",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "cookie",
+            "javadoc": "登录后的cookie信息，需要人工定期维护",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10480
+        },
+        {
+            "fieldName": "timeRate",
+            "javadoc": "考勤倍率",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "beanRate",
+            "javadoc": "星豆倍率",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastMaintain",
+            "javadoc": "上次一维护cookie时间",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "state",
+            "javadoc": "0：停用 1：在用",
+            "fieldType": "State",
+            "fieldValues": "OFF,ON",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170813071434",
+    "entityTableName": "user_info",
+    "dto": "no",
+    "pagination": "pager",
+    "service": "no"
+}

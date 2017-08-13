@@ -1,0 +1,36 @@
+{
+    "luckystarApp": {
+        "userInfo" : {
+            "home": {
+                "title": "User Infos",
+                "createLabel": "Create a new User Info",
+                "createOrEditLabel": "Create or edit a User Info"
+            },
+            "created": "A new User Info is created with identifier {{ param }}",
+            "updated": "A User Info is updated with identifier {{ param }}",
+            "deleted": "A User Info is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Info {{ id }}?"
+            },
+            "detail": {
+                "title": "User Info"
+            },
+            "userName": "User Name",
+            "nickName": "Nick Name",
+            "phoneNumber": "Phone Number",
+            "qq": "Qq",
+            "weiChat": "Wei Chat",
+            "starId": "Star Id",
+            "regDate": "Reg Date",
+            "loginName": "Login Name",
+            "password": "Password",
+            "cookie": "Cookie",
+            "timeRate": "Time Rate",
+            "beanRate": "Bean Rate",
+            "lastMaintain": "Last Maintain",
+            "state": "State",
+            "taskInfo": "Task Info",
+            "laborUnion": "Labor Union"
+        }
+    }
+}

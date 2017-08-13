@@ -13,6 +13,7 @@ import {
     TaskInfoDeleteDialogComponent,
     taskInfoRoute,
     taskInfoPopupRoute,
+    TaskInfoResolvePagingParams,
 } from './';
 
 const ENTITY_STATES = [
@@ -43,6 +44,7 @@ const ENTITY_STATES = [
     providers: [
         TaskInfoService,
         TaskInfoPopupService,
+        TaskInfoResolvePagingParams,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

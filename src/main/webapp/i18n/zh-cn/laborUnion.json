@@ -19,7 +19,8 @@
             "name": "Name",
             "regDate": "Reg Date",
             "state": "State",
-            "chickenInfo": "Chicken Info",
+            "type": "Type",
+            "userInfo": "User Info",
             "user": "User"
         }
     }

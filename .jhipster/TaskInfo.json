@@ -9,8 +9,8 @@
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "chickenInfo",
-            "otherEntityName": "chickenInfo",
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
             "otherEntityField": "id"
         }
     ],
@@ -43,6 +43,6 @@
     "changelogDate": "20170809162245",
     "entityTableName": "task_info",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no"
 }

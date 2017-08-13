@@ -3,8 +3,8 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "chickenInfo",
-            "otherEntityName": "chickenInfo",
+            "relationshipName": "userInfo",
+            "otherEntityName": "userInfo",
             "otherEntityRelationshipName": "laborUnion"
         },
         {
@@ -48,6 +48,15 @@
             "javadoc": "0：停用 1：在用",
             "fieldType": "State",
             "fieldValues": "OFF,ON",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "type",
+            "javadoc": "数据采集来源 0：繁星",
+            "fieldType": "Source",
+            "fieldValues": "FANXIN",
             "fieldValidateRules": [
                 "required"
             ]
