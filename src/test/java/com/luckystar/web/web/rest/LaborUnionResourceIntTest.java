@@ -53,8 +53,8 @@ public class LaborUnionResourceIntTest {
     private static final State DEFAULT_STATE = State.OFF;
     private static final State UPDATED_STATE = State.ON;
 
-    private static final Source DEFAULT_TYPE = Source.FANXIN;
-    private static final Source UPDATED_TYPE = Source.FANXIN;
+    private static final Source DEFAULT_TYPE = Source.FANXING;
+    private static final Source UPDATED_TYPE = Source.FANXING;
 
     @Autowired
     private LaborUnionRepository laborUnionRepository;

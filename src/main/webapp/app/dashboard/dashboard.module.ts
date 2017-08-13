@@ -2,11 +2,10 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { LuckystarSharedModule } from '../shared';
-
+import { LuckystarChickenInfoBoardModule } from './chicken-info-board/chicken-info-board.module';
 import {
-    ChickenInfoBoardService,
-    ChickenInfoBoardComponent,
-    dashboardState
+
+
 } from './';
 import {WorkTimeBoardComponent} from "./work-time-board/work-time-board.component";
 import {WorkTimeBoardService} from "./work-time-board/work-time-board.service";
@@ -14,15 +13,13 @@ import {WorkTimeBoardService} from "./work-time-board/work-time-board.service";
 @NgModule({
     imports: [
         LuckystarSharedModule,
-        RouterModule.forRoot(dashboardState, { useHash: true })
+        LuckystarChickenInfoBoardModule
+        // RouterModule.forRoot(dashboardState, { useHash: true })
     ],
     declarations: [
-        ChickenInfoBoardComponent,
         WorkTimeBoardComponent
     ],
     providers: [
-        ChickenInfoBoardService,
-        ChickenInfoBoardComponent,
         WorkTimeBoardService,
         WorkTimeBoardComponent
     ],

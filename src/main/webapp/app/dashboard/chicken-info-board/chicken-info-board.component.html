@@ -1,48 +1,92 @@
-<select  #day  (change)="statement(day.value)">
-    <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
-</select>
-<!--{{day}}-->
+<!--<select  #day  (change)="statement(day.value)">-->
+    <!--<option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>-->
+<!--</select>-->
+<!--&lt;!&ndash;{{day}}&ndash;&gt;-->
 
-<!--<input [ngModel]="day" (ngModelChange)="statement(day)">-->
+<!--&lt;!&ndash;<input [ngModel]="day" (ngModelChange)="statement(day)">&ndash;&gt;-->
 
-<!--<input #day (keyup)="0">-->
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <!--<th scope="col">排序</th>-->
-            <th scope="col">姓名</th>
-            <th scope="col">艺名</th>
-            <th scope="col">繁星ID</th>
-            <th scope="col">明星等级</th>
-            <th scope="col">财富等级</th>
-            <th scope="col">关注数</th>
-            <th scope="col">星豆数</th>
-            <th scope="col">月总数</th>
-            <th scope="col">任务数</th>
-            <th scope="col">目标数</th>
-            <th scope="col">时长</th>
-            <th scope="col">天数</th>
-            <th scope="col">开播日期</th>
-            <!--<th scope="col">状态</th>-->
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let row of data">
-            <td>{{row.userName}}</td>
-            <td>{{row.nickName}}</td>
-            <td>{{row.starId}}</td>
-            <td>{{row.starLevel}}</td>
-            <td>{{row.richLevel}}</td>
-            <td>{{row.fansCount}}</td>
-            <td>{{row.beanByDay}}</td>
-            <td>{{row.beanByMonth}}</td>
-            <td>{{row.minTask}}</td>
-            <td>{{row.maxTask}}</td>
-            <td>{{row.workTimeByMonth|timeFormat}}</td>
-            <td>{{row.workTimeByDay}}</td>
-            <td>{{row.regDate | date:'mediumDate'}}</td>
-        </tr>
-        </tbody>
-    </table>
+<!--&lt;!&ndash;<input #day (keyup)="0">&ndash;&gt;-->
+<!--<div class="table-responsive">-->
+    <!--<table class="table table-striped">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--&lt;!&ndash;<th scope="col">排序</th>&ndash;&gt;-->
+            <!--<th scope="col">姓名</th>-->
+            <!--<th scope="col">艺名</th>-->
+            <!--<th scope="col">繁星ID</th>-->
+            <!--<th scope="col">明星等级</th>-->
+            <!--<th scope="col">明星级别</th>-->
+            <!--<th scope="col">财富等级</th>-->
+            <!--<th scope="col">财富级别</th>-->
+            <!--<th scope="col">关注数</th>-->
+            <!--<th scope="col">星豆数</th>-->
+            <!--<th scope="col">月总数</th>-->
+            <!--<th scope="col">任务数</th>-->
+            <!--<th scope="col">目标数</th>-->
+            <!--<th scope="col">时长</th>-->
+            <!--<th scope="col">天数</th>-->
+            <!--<th scope="col">开播日期</th>-->
+            <!--&lt;!&ndash;<th scope="col">状态</th>&ndash;&gt;-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr *ngFor="let row of data">-->
+            <!--<td>{{row.userName}}</td>-->
+            <!--<td>{{row.nickName}}</td>-->
+            <!--<td>{{row.starId}}</td>-->
+            <!--<td>{{row.starLevel}}</td>-->
+            <!--<td>{{row.starLevel}}</td>-->
+            <!--<td>{{row.richLevel}}</td>-->
+            <!--<td>{{row.richLevel}}</td>-->
+            <!--<td>{{row.fansCount}}</td>-->
+            <!--<td>{{row.beanByDay}}</td>-->
+            <!--<td>{{row.beanByMonth}}</td>-->
+            <!--<td>{{row.minTask}}</td>-->
+            <!--<td>{{row.maxTask}}</td>-->
+            <!--<td>{{row.workTimeByMonth|timeFormat}}</td>-->
+            <!--<td>{{row.workTimeByDay}}</td>-->
+            <!--<td>{{row.regDate | date:'mediumDate'}}</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+<!--</div>-->
+
+
+
+<div>
+    <h2>
+        <span jhiTranslate="dashboard.userInfo">业绩排行</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <!--<div class="table-responsive" *ngIf="laborUnionBoards">-->
+        <!--<table class="table table-striped">-->
+            <!--<thead>-->
+            <!--<tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" >-->
+                <!--&lt;!&ndash;<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>&ndash;&gt;-->
+                <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
+                <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr *ngFor="let row of laborUnionBoards ;trackBy: trackId">-->
+                <!--<td>{{row.userName}}</td>-->
+                <!--<td>{{row.nickName}}</td>-->
+                <!--&lt;!&ndash;<td>{{row.name}}</td>&ndash;&gt;-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; Pager is not implemented yet, so this is normal pagination instead &ndash;&gt;-->
+    <!--<div *ngIf="laborUnions && laborUnions.length">-->
+        <!--<div class="row justify-content-center">-->
+            <!--<jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>-->
+        <!--</div>-->
+        <!--<div class="row justify-content-center">-->
+            <!--<ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
+
