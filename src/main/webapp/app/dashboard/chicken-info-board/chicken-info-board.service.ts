@@ -15,8 +15,8 @@ export class ChickenInfoBoardService {
 
 
     query(req?: any): Observable<ResponseWrapper> {
-        // const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl+"?day="+req)
+        const options = createRequestOption(req);
+        return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }
 

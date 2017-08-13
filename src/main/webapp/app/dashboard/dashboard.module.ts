@@ -3,10 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { LuckystarSharedModule } from '../shared';
 import { LuckystarChickenInfoBoardModule } from './chicken-info-board/chicken-info-board.module';
-import {
 
-
-} from './';
 import {WorkTimeBoardComponent} from "./work-time-board/work-time-board.component";
 import {WorkTimeBoardService} from "./work-time-board/work-time-board.service";
 

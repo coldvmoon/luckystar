@@ -1,7 +1,6 @@
 package com.luckystar.web.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -9,6 +8,9 @@ import java.io.Serializable;
  */
 @Entity
 public class UserInfoBoard implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "user_name", length = 10, nullable = false)
     private String userName;
 
@@ -18,5 +20,13 @@ public class UserInfoBoard implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

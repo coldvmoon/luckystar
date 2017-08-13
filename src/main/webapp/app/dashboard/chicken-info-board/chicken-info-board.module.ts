@@ -18,7 +18,7 @@ const ENTITY_STATES = [
     imports: [
         // ChickenInfoBoardService,
         // ChickenInfoBoardComponent,
-        // LuckystarSharedModule,
+        LuckystarSharedModule,
         // LuckystarAdminModule,
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],

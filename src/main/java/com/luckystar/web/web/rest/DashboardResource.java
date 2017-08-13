@@ -2,7 +2,9 @@ package com.luckystar.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.luckystar.web.domain.LaborUnion;
+import com.luckystar.web.domain.UserInfoBoard;
 import com.luckystar.web.repository.LaborUnionRepository;
+import com.luckystar.web.repository.UserInfoBoardRepository;
 import com.luckystar.web.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.joda.time.DateTime;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +32,15 @@ public class DashboardResource {
 
 
     @Autowired
+    private UserInfoBoardRepository userInfoBoardRepository;
+    @Autowired
     private LaborUnionRepository laborUnionRepository;
     @Autowired
     private EntityManager em;
 
     @GetMapping("/chicken-infos-board")
     @Timed
-    public ResponseEntity<List<LaborUnion>> getAllChickenInfosBoard(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<UserInfoBoard>> getAllChickenInfosBoard(@Param("day") String day,@ApiParam Pageable pageable) {
 //        log.debug("REST request to get a page of ChickenInfos");
 //        Query query = em.createNativeQuery("SELECT  ci.user_name,  ci.nick_name,  ci.star_id,  wi.star_level,  wi.rich_level,  wi.fans_count,  (wi.bean_total - wi.fisrt_bean) AS bean_by_day,  ti.min_task,  ti.max_task,  ci.reg_date,  (SELECT     SUM(wi2.bean_total - wi2.fisrt_bean)   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS bean_by_month,  (SELECT     SUM(wi2.work_time) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,wi.work_time,wi.star_name,wi.rich_name FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_day = '"+day+"'");
 //        List<Object[]> list = query.getResultList();
@@ -61,7 +66,7 @@ public class DashboardResource {
 //            data.add(res);
 //        }
 
-        Page<LaborUnion> page = laborUnionRepository.findAll(pageable);
+        Page<UserInfoBoard> page = userInfoBoardRepository.getAllChickenInfosBoard(day,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/labor-unions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -69,7 +74,7 @@ public class DashboardResource {
     @GetMapping("/work-time-board")
     @Timed
     public ResponseEntity<List<Map>> getWorkTimeBoard(@ApiParam Pageable pageable) {
-        Query query = em.createNativeQuery("SELECT  ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
+        Query query = em.createNativeQuery("SELECT ci.id,ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
 //        List<Object[]> list = query.getResultList();
 //        List<Map> data = new ArrayList<>();
 //        for (Object[] obj : list) {
@@ -83,7 +88,7 @@ public class DashboardResource {
 //            res.put("curDay", obj[6]);
 //            data.add(res);
 //        }
-
+    userInfoBoardRepository.find(pageable);
 
         return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
     }

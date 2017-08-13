@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Rx';
-import { JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Rx';
+import {JhiEventManager, JhiParseLinks, JhiPaginationUtil, JhiLanguageService, JhiAlertService} from 'ng-jhipster';
 
-import { LaborUnionBoard } from './chicken-info-board.model';
-import { ChickenInfoBoardService } from './chicken-info-board.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
-import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import {LaborUnionBoard} from './chicken-info-board.model';
+import {ChickenInfoBoardService} from './chicken-info-board.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
+import {PaginationConfig} from '../../blocks/config/uib-pagination.config';
 
 @Component({
     selector: 'jhi-labor-union',
@@ -28,18 +28,17 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
-    constructor(
-        private chickenInfoBoardService: ChickenInfoBoardService,
-        private parseLinks: JhiParseLinks,
-        private alertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager,
-        private paginationUtil: JhiPaginationUtil,
-        private paginationConfig: PaginationConfig
-    ) {
+    recentTime:any;
+    day:any;
+    constructor(private chickenInfoBoardService: ChickenInfoBoardService,
+                private parseLinks: JhiParseLinks,
+                private alertService: JhiAlertService,
+                private principal: Principal,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private eventManager: JhiEventManager,
+                private paginationUtil: JhiPaginationUtil,
+                private paginationConfig: PaginationConfig) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data['pagingParams'].page;
@@ -51,22 +50,26 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
 
     loadAll() {
         this.chickenInfoBoardService.query({
+            query:{day: this.day},
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+            sort: this.sort()
+        }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
+
     transition() {
-        this.router.navigate(['/labor-union'], {queryParams:
-            {
+        this.router.navigate(['/labor-union'], {
+            queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -83,12 +86,27 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         }]);
         this.loadAll();
     }
+
     ngOnInit() {
-        this.loadAll();
+        this.chickenInfoBoardService.recentTime().subscribe(
+            (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+
+
+    }
+
+    private onSuccess1(data, headers) {
+        this.recentTime = data.json()
+        this.chickenInfoBoardService.query(this.recentTime[0]).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInLaborUnions();
+
     }
 
     ngOnDestroy() {
@@ -98,6 +116,7 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     trackId(index: number, item: LaborUnionBoard) {
         return item.id;
     }
+
     registerChangeInLaborUnions() {
         this.eventSubscriber = this.eventManager.subscribe('laborUnionListModification', (response) => this.loadAll());
     }
@@ -117,7 +136,13 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         // this.page = pagingParams.page;
         this.laborUnionBoards = data;
     }
+
     private onError(error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    statement(day?:string):void{
+        this.day=day;
+        this.loadAll();
     }
 }

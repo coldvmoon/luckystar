@@ -1,8 +1,7 @@
-<!--<select  #day  (change)="statement(day.value)">-->
-    <!--<option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>-->
-<!--</select>-->
-<!--&lt;!&ndash;{{day}}&ndash;&gt;-->
-
+<select  #day  (change)="statement(day.value)">
+    <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
+</select>
+{{day.value}}
 <!--&lt;!&ndash;<input [ngModel]="day" (ngModelChange)="statement(day)">&ndash;&gt;-->
 
 <!--&lt;!&ndash;<input #day (keyup)="0">&ndash;&gt;-->
@@ -61,25 +60,25 @@
     <div class="row">
     </div>
     <br/>
-    <!--<div class="table-responsive" *ngIf="laborUnionBoards">-->
-        <!--<table class="table table-striped">-->
-            <!--<thead>-->
-            <!--<tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" >-->
-                <!--&lt;!&ndash;<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>&ndash;&gt;-->
-                <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
-                <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr *ngFor="let row of laborUnionBoards ;trackBy: trackId">-->
-                <!--<td>{{row.userName}}</td>-->
-                <!--<td>{{row.nickName}}</td>-->
-                <!--&lt;!&ndash;<td>{{row.name}}</td>&ndash;&gt;-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
-    <!--&lt;!&ndash; Pager is not implemented yet, so this is normal pagination instead &ndash;&gt;-->
+    <div class="table-responsive" *ngIf="laborUnionBoards">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" >
+                <!--<th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>-->
+                <th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of laborUnionBoards ;trackBy: trackId">
+                <td>{{row.userName}}xx</td>
+                <td>{{row.userName}}xx</td>
+                <!--<td>{{row.name}}</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
     <!--<div *ngIf="laborUnions && laborUnions.length">-->
         <!--<div class="row justify-content-center">-->
             <!--<jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>-->
