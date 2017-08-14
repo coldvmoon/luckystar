@@ -1,55 +1,3 @@
-<select  #day  (change)="statement(day.value)">
-    <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
-</select>
-{{day.value}}
-<!--&lt;!&ndash;<input [ngModel]="day" (ngModelChange)="statement(day)">&ndash;&gt;-->
-
-<!--&lt;!&ndash;<input #day (keyup)="0">&ndash;&gt;-->
-<!--<div class="table-responsive">-->
-    <!--<table class="table table-striped">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--&lt;!&ndash;<th scope="col">排序</th>&ndash;&gt;-->
-            <!--<th scope="col">姓名</th>-->
-            <!--<th scope="col">艺名</th>-->
-            <!--<th scope="col">繁星ID</th>-->
-            <!--<th scope="col">明星等级</th>-->
-            <!--<th scope="col">明星级别</th>-->
-            <!--<th scope="col">财富等级</th>-->
-            <!--<th scope="col">财富级别</th>-->
-            <!--<th scope="col">关注数</th>-->
-            <!--<th scope="col">星豆数</th>-->
-            <!--<th scope="col">月总数</th>-->
-            <!--<th scope="col">任务数</th>-->
-            <!--<th scope="col">目标数</th>-->
-            <!--<th scope="col">时长</th>-->
-            <!--<th scope="col">天数</th>-->
-            <!--<th scope="col">开播日期</th>-->
-            <!--&lt;!&ndash;<th scope="col">状态</th>&ndash;&gt;-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr *ngFor="let row of data">-->
-            <!--<td>{{row.userName}}</td>-->
-            <!--<td>{{row.nickName}}</td>-->
-            <!--<td>{{row.starId}}</td>-->
-            <!--<td>{{row.starLevel}}</td>-->
-            <!--<td>{{row.starLevel}}</td>-->
-            <!--<td>{{row.richLevel}}</td>-->
-            <!--<td>{{row.richLevel}}</td>-->
-            <!--<td>{{row.fansCount}}</td>-->
-            <!--<td>{{row.beanByDay}}</td>-->
-            <!--<td>{{row.beanByMonth}}</td>-->
-            <!--<td>{{row.minTask}}</td>-->
-            <!--<td>{{row.maxTask}}</td>-->
-            <!--<td>{{row.workTimeByMonth|timeFormat}}</td>-->
-            <!--<td>{{row.workTimeByDay}}</td>-->
-            <!--<td>{{row.regDate | date:'mediumDate'}}</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
-<!--</div>-->
-
 
 
 <div>
@@ -60,32 +8,61 @@
     <div class="row">
     </div>
     <br/>
+    <select  #day  (change)="statement(day.value)">
+        <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
+    </select>
     <div class="table-responsive" *ngIf="laborUnionBoards">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)" >
-                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-                <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
+                <th jhiSortBy="user_name"><span>姓名</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="nick_name"><span>艺名</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="star_id"><span>繁星ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="star_level"><span>明星等级</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="star_name"><span>明星级别</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="rich_level"><span>财富等级</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="rich_name"><span>财富级别</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="fans_count"><span>关注数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="bean_by_day"><span>星豆数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="bean_by_month"><span>月总数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="min_task"><span>任务数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="max_task"><span>目标数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="worktime_by_month"><span>时长</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="work_time"><span>天数</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="reg_date"><span>开播日期</span> <span class="fa fa-sort"></span></th>
                 <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let row of laborUnionBoards ;trackBy: trackId">
-                <td>{{row.userName}}xx</td>
-                <td>{{row.userName}}xx</td>
+                <td>{{row.userName}}</td>
+                <td>{{row.nickName}}</td>
+                <td>{{row.starId}}</td>
+                <td>{{row.starLevel}}</td>
+                <td>{{row.starLevel}}</td>
+                <td>{{row.richLevel}}</td>
+                <td>{{row.richLevel}}</td>
+                <td>{{row.fansCount}}</td>
+                <td>{{row.beanByDay}}</td>
+                <td>{{row.beanByMonth}}</td>
+                <td>{{row.minTask}}</td>
+                <td>{{row.maxTask}}</td>
+                <td>{{row.workTimeByMonth|timeFormat}}</td>
+                <td>{{row.workTime}}</td>
+                <td>{{row.regDate | date:'mediumDate'}}</td>
                 <!--<td>{{row.name}}</td>-->
             </tr>
             </tbody>
         </table>
     </div>
     <!-- Pager is not implemented yet, so this is normal pagination instead -->
-    <!--<div *ngIf="laborUnions && laborUnions.length">-->
-        <!--<div class="row justify-content-center">-->
-            <!--<jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>-->
-        <!--</div>-->
-        <!--<div class="row justify-content-center">-->
-            <!--<ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div *ngIf="laborUnionBoards && laborUnionBoards.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page"  (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
 </div>
 
