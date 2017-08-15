@@ -1,24 +1,20 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 import { LuckystarSharedModule } from '../shared';
 import { LuckystarChickenInfoBoardModule } from './chicken-info-board/chicken-info-board.module';
 
-import {WorkTimeBoardComponent} from "./work-time-board/work-time-board.component";
-import {WorkTimeBoardService} from "./work-time-board/work-time-board.service";
+import {LuckystarWorkTimeBoardModule} from "./work-time-board/work-time-board.module";
 
 @NgModule({
     imports: [
         LuckystarSharedModule,
-        LuckystarChickenInfoBoardModule
+        LuckystarChickenInfoBoardModule,
+        LuckystarWorkTimeBoardModule
         // RouterModule.forRoot(dashboardState, { useHash: true })
     ],
     declarations: [
-        WorkTimeBoardComponent
     ],
     providers: [
-        WorkTimeBoardService,
-        WorkTimeBoardComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

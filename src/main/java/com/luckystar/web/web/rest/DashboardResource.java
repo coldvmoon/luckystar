@@ -97,7 +97,7 @@ public class DashboardResource {
 //            res.put("curDay", obj[6]);
 //            data.add(res);
 //        }
-    userInfoBoardRepository.find(pageable);
+//    userInfoBoardRepository.find(pageable);
 
         return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
     }
