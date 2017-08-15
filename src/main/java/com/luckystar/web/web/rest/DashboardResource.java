@@ -18,6 +18,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -40,7 +41,7 @@ public class DashboardResource {
 
     @GetMapping("/chicken-infos-board")
     @Timed
-    public ResponseEntity<List<UserInfoBoard>> getAllChickenInfosBoard(@Param("day") String day,@ApiParam Pageable pageable) {
+    public ResponseEntity<List<UserInfoBoard>> getAllChickenInfosBoard(String day, String userName, String nickName, Long starId, Long phoneNumber, Long qq, String weiChar,@ApiParam Pageable pageable) {
 //        log.debug("REST request to get a page of ChickenInfos");
 //        Query query = em.createNativeQuery("SELECT  ci.user_name,  ci.nick_name,  ci.star_id,  wi.star_level,  wi.rich_level,  wi.fans_count,  (wi.bean_total - wi.fisrt_bean) AS bean_by_day,  ti.min_task,  ti.max_task,  ci.reg_date,  (SELECT     SUM(wi2.bean_total - wi2.fisrt_bean)   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS bean_by_month,  (SELECT     SUM(wi2.work_time) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,wi.work_time,wi.star_name,wi.rich_name FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_day = '"+day+"'");
 //        List<Object[]> list = query.getResultList();
@@ -66,11 +67,19 @@ public class DashboardResource {
 //            data.add(res);
 //        }
 
-        Page<UserInfoBoard> page = userInfoBoardRepository.getAllChickenInfosBoard(day,pageable);
+        Page<UserInfoBoard> page = userInfoBoardRepository.getAllChickenInfosBoard(day,userName,nickName,starId,phoneNumber,qq,weiChar,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/labor-unions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+    private String fuzzyQuery(String query){
+        if(StringUtils.isEmpty(query)){
+            return "%";
+        }else {
+            return "%"+query+"%";
+        }
+    }
     @GetMapping("/work-time-board")
     @Timed
     public ResponseEntity<List<Map>> getWorkTimeBoard(@ApiParam Pageable pageable) {
@@ -92,6 +101,7 @@ public class DashboardResource {
 
         return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
     }
+
 
     @GetMapping("/recent-time")
     @Timed

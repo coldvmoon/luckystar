@@ -46,17 +46,17 @@ public class UserInfoResourceIntTest {
     private static final String DEFAULT_NICK_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NICK_NAME = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_PHONE_NUMBER = 1L;
-    private static final Long UPDATED_PHONE_NUMBER = 2L;
+    private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_QQ = 1L;
-    private static final Long UPDATED_QQ = 2L;
+    private static final String DEFAULT_QQ = "AAAAAAAAAA";
+    private static final String UPDATED_QQ = "BBBBBBBBBB";
 
     private static final String DEFAULT_WEI_CHAT = "AAAAAAAAAA";
     private static final String UPDATED_WEI_CHAT = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_STAR_ID = 1L;
-    private static final Long UPDATED_STAR_ID = 2L;
+    private static final String DEFAULT_STAR_ID = "AAAAAAAAAA";
+    private static final String UPDATED_STAR_ID = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_REG_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_REG_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -348,10 +348,10 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(userInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].nickName").value(hasItem(DEFAULT_NICK_NAME.toString())))
-            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.intValue())))
-            .andExpect(jsonPath("$.[*].qq").value(hasItem(DEFAULT_QQ.intValue())))
+            .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER.toString())))
+            .andExpect(jsonPath("$.[*].qq").value(hasItem(DEFAULT_QQ.toString())))
             .andExpect(jsonPath("$.[*].weiChat").value(hasItem(DEFAULT_WEI_CHAT.toString())))
-            .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID.intValue())))
+            .andExpect(jsonPath("$.[*].starId").value(hasItem(DEFAULT_STAR_ID.toString())))
             .andExpect(jsonPath("$.[*].regDate").value(hasItem(DEFAULT_REG_DATE.toString())))
             .andExpect(jsonPath("$.[*].loginName").value(hasItem(DEFAULT_LOGIN_NAME.toString())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
@@ -375,10 +375,10 @@ public class UserInfoResourceIntTest {
             .andExpect(jsonPath("$.id").value(userInfo.getId().intValue()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.nickName").value(DEFAULT_NICK_NAME.toString()))
-            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.intValue()))
-            .andExpect(jsonPath("$.qq").value(DEFAULT_QQ.intValue()))
+            .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER.toString()))
+            .andExpect(jsonPath("$.qq").value(DEFAULT_QQ.toString()))
             .andExpect(jsonPath("$.weiChat").value(DEFAULT_WEI_CHAT.toString()))
-            .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID.intValue()))
+            .andExpect(jsonPath("$.starId").value(DEFAULT_STAR_ID.toString()))
             .andExpect(jsonPath("$.regDate").value(DEFAULT_REG_DATE.toString()))
             .andExpect(jsonPath("$.loginName").value(DEFAULT_LOGIN_NAME.toString()))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))

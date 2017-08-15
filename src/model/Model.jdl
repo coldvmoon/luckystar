@@ -10,10 +10,10 @@ entity LaborUnion {
 entity UserInfo {
 	userName String required maxlength(10) /** 真名 */
 	nickName String maxlength(50) /** 艺名 */
-	phoneNumber Long /** 手机号 */
-	qq Long /** 手机号 */
+	phoneNumber String maxlength(50) /** 手机号 */
+	qq String maxlength(50) /** 手机号 */
 	weiChat String maxlength(50) /** 微信号 */
-	starId Long required  /** 繁星id */
+	starId String maxlength(50) required  /** 繁星id */
 	regDate LocalDate required /** 注册时间 */
 	loginName String required maxlength(50) /** 繁星登录名  */
 	password String required maxlength(50) /** 繁星登录密码 */

@@ -46,16 +46,18 @@ public class UserInfo implements Serializable {
     /**
      * 手机号
      */
+    @Size(max = 50)
     @ApiModelProperty(value = "手机号")
-    @Column(name = "phone_number")
-    private Long phoneNumber;
+    @Column(name = "phone_number", length = 50)
+    private String phoneNumber;
 
     /**
      * 手机号
      */
+    @Size(max = 50)
     @ApiModelProperty(value = "手机号")
-    @Column(name = "qq")
-    private Long qq;
+    @Column(name = "qq", length = 50)
+    private String qq;
 
     /**
      * 微信号
@@ -69,9 +71,10 @@ public class UserInfo implements Serializable {
      * 繁星id
      */
     @NotNull
+    @Size(max = 50)
     @ApiModelProperty(value = "繁星id", required = true)
-    @Column(name = "star_id", nullable = false)
-    private Long starId;
+    @Column(name = "star_id", length = 50, nullable = false)
+    private String starId;
 
     /**
      * 注册时间
@@ -180,29 +183,29 @@ public class UserInfo implements Serializable {
         this.nickName = nickName;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public UserInfo phoneNumber(Long phoneNumber) {
+    public UserInfo phoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         return this;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getQq() {
+    public String getQq() {
         return qq;
     }
 
-    public UserInfo qq(Long qq) {
+    public UserInfo qq(String qq) {
         this.qq = qq;
         return this;
     }
 
-    public void setQq(Long qq) {
+    public void setQq(String qq) {
         this.qq = qq;
     }
 
@@ -219,16 +222,16 @@ public class UserInfo implements Serializable {
         this.weiChat = weiChat;
     }
 
-    public Long getStarId() {
+    public String getStarId() {
         return starId;
     }
 
-    public UserInfo starId(Long starId) {
+    public UserInfo starId(String starId) {
         this.starId = starId;
         return this;
     }
 
-    public void setStarId(Long starId) {
+    public void setStarId(String starId) {
         this.starId = starId;
     }
 

@@ -37,12 +37,20 @@
         {
             "fieldName": "phoneNumber",
             "javadoc": "手机号",
-            "fieldType": "Long"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
         },
         {
             "fieldName": "qq",
             "javadoc": "手机号",
-            "fieldType": "Long"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
         },
         {
             "fieldName": "weiChat",
@@ -56,10 +64,12 @@
         {
             "fieldName": "starId",
             "javadoc": "繁星id",
-            "fieldType": "Long",
+            "fieldType": "String",
             "fieldValidateRules": [
+                "maxlength",
                 "required"
-            ]
+            ],
+            "fieldValidateRulesMaxlength": 50
         },
         {
             "fieldName": "regDate",
