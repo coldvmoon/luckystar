@@ -7,6 +7,7 @@ import {LaborUnionBoard} from './chicken-info-board.model';
 import {ChickenInfoBoardService} from './chicken-info-board.service';
 import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {PaginationConfig} from '../../blocks/config/uib-pagination.config';
+import {BaseEntity} from "../../shared/model/base-entity";
 
 @Component({
     selector: 'jhi-labor-union',
@@ -28,8 +29,15 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    recentTime:any;
-    day:any;
+    recentTime: any;
+    day: any;
+    userName: string;
+    nickName: string;
+    starId: string;
+    phoneNumber: string;
+    qq: string;
+    weiChat: string;
+
     constructor(private chickenInfoBoardService: ChickenInfoBoardService,
                 private parseLinks: JhiParseLinks,
                 private alertService: JhiAlertService,
@@ -50,7 +58,15 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
 
     loadAll() {
         this.chickenInfoBoardService.query({
-            query:{day: this.day},
+            query: {
+                day: this.day,
+                userName: this.userName,
+                nickName: this.nickName,
+                starId: this.starId,
+                phoneNumber: this.phoneNumber,
+                qq: this.qq,
+                weiChat: this.weiChat
+            },
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()
@@ -141,8 +157,11 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         this.alertService.error(error.message, null, null);
     }
 
-    statement(day?:string):void{
-        this.day=day;
+    statement(day?: string): void {
+        this.day = day;
         this.loadAll();
     }
+
 }
+
+

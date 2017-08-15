@@ -121,6 +121,27 @@ public class UserInfoBoard implements Serializable {
     @Column(name = "bean_by_day")
     private Long beanByDay;
 
+
+    /**
+     * 手机号
+     */
+    @Column(name = "phone_number", length = 50)
+    private String phoneNumber;
+
+    /**
+     * 手机号
+     */
+
+    @Column(name = "qq", length = 50)
+    private String qq;
+
+    /**
+     * 微信号
+     */
+    @Column(name = "wei_chat", length = 50)
+    private String weiChat;
+
+
     public Long getId() {
         return id;
     }
@@ -247,5 +268,29 @@ public class UserInfoBoard implements Serializable {
 
     public void setBeanByDay(Long beanByDay) {
         this.beanByDay = beanByDay;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getWeiChat() {
+        return weiChat;
+    }
+
+    public void setWeiChat(String weiChat) {
+        this.weiChat = weiChat;
     }
 }
