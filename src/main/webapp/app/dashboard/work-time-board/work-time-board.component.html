@@ -1,32 +1,122 @@
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th >姓名</th>
-            <th >艺名</th>
-            <th >繁星ID</th>
-            <th>时间(参考)</th>
-            <th>考勤天数</th>
-            <!--<th>天数</th>-->
-            <th *ngFor="let day of uniqueDate">
-                {{day| date:'mediumDate'}}
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let row of data">
-            <!--{{row}}-->
-            <td>{{row.data.userName}}</td>
-            <td>{{row.data.nickName}}</td>
-            <td>{{row.data.starId}}</td>
-            <td>{{row.data.totalTime|timeFormat}}</td>
-            <td>{{row.data.totalDay}}</td>
-            <!--<td>{{row.data.totalTime}}</td>-->
-            <td *ngFor="let day of uniqueDate" ng>
-                {{(row.date[day]?row.date[day]:0) |timeFormat}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div>
+    <h2>
+        <h1  style="text-align: center">考勤</h1>
+    </h2>
+
+    <jhi-alert></jhi-alert>
+    <br>
+
+    <div>
+        <!--<form (ngSubmit)="onSubmit()" >-->
+        <!--<div class="row">-->
+        <div class="row">
+            <div class="col-md-1 jh-form-key">姓名:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="userName"
+                >
+            </div>
+
+            <div class="col-md-1 jh-form-key">艺名:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="nickName"
+                >
+            </div>
+            <div class="col-md-1 jh-form-key">繁星ID:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="starId"
+                >
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class=" col-md-1 jh-form-key">手机:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="phoneNumber"
+                >
+            </div>
+
+            <div class="col-md-1 jh-form-key">QQ:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="qq"
+                >
+            </div>
+            <div class="col-md-1 jh-form-key">微信:</div>
+            <div class="col-md-3">
+                <input type="text" class="form-control"
+
+                       [(ngModel)]="weiChat"
+                >
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1 jh-form-key">时间:</div>
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-8">
+                <button style="float:right"  class="btn btn-success" (click)="loadAll()">搜索</button>
+            </div>
+        </div>
+        <!--</form>-->
+        <br/>
+        <div class="table-responsive" *ngIf="data">
+            <table class="table table-striped">
+                <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="user_name"><span>姓名</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="nick_name"><span>艺名</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="star_id"><span>繁星ID</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="total_time"><span>时间(参考</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="total_day"><span>考勤天数</span> <span class="fa fa-sort"></span></th>
+                    <th *ngFor="let day of uniqueDate">
+                        {{day| date:'mediumDate'}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of data ;trackBy: trackId">
+                    <td>{{row.data.userName}}</td>
+                    <td>{{row.data.nickName}}</td>
+                    <td>{{row.data.starId}}</td>
+                    <td>{{row.data.totalTime|timeFormat}}</td>
+                    <td>{{row.data.totalDay}}</td>
+                    <!--<td>{{row.data.totalTime}}</td>-->
+                    <td *ngFor="let day of uniqueDate" ng>
+                        {{(row.date[day]?row.date[day]:0) |timeFormat}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div *ngIf="laborUnionBoards && laborUnionBoards.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page"
+                                (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
 </div>
-<script src="underscore-min.js"></script>
+
+<style>
+    .jh-form-key {
+        text-align: right;
+        line-height: 34px;
+        padding-right: 0px;
+    }
+</style>
+

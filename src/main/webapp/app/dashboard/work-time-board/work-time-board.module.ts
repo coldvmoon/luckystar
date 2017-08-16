@@ -6,7 +6,8 @@ import { LuckystarAdminModule } from '../../admin/admin.module';
 import {
     workTimeBoardRoute,
     WorkTimeBoardComponent,
-    WorkTimeBoardService
+    WorkTimeBoardService,
+    WorkTimeBoardResolvePagingParams
     // ChickenInfoBoardService,
     // ChickenInfoBoardComponent,
     // ChickenInfoBoardRoute,
@@ -34,7 +35,8 @@ const ENTITY_STATES = [
         WorkTimeBoardComponent
     ],
     providers: [
-        WorkTimeBoardService
+        WorkTimeBoardService,
+        WorkTimeBoardResolvePagingParams
         // ChickenInfoBoardService,
         // ChickenInfoBoardComponent
         // ChickenInfoBoardResolvePagingParams,

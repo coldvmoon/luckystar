@@ -3,8 +3,10 @@ package com.luckystar.web.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.luckystar.web.domain.LaborUnion;
 import com.luckystar.web.domain.UserInfoBoard;
+import com.luckystar.web.domain.WorkTimeBoard;
 import com.luckystar.web.repository.LaborUnionRepository;
 import com.luckystar.web.repository.UserInfoBoardRepository;
+import com.luckystar.web.repository.WorkTimeBoardRepository;
 import com.luckystar.web.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.joda.time.DateTime;
@@ -35,7 +37,7 @@ public class DashboardResource {
     @Autowired
     private UserInfoBoardRepository userInfoBoardRepository;
     @Autowired
-    private LaborUnionRepository laborUnionRepository;
+    private WorkTimeBoardRepository workTimeBoardRepository;
     @Autowired
     private EntityManager em;
 
@@ -82,8 +84,8 @@ public class DashboardResource {
     }
     @GetMapping("/work-time-board")
     @Timed
-    public ResponseEntity<List<Map>> getWorkTimeBoard(@ApiParam Pageable pageable) {
-        Query query = em.createNativeQuery("SELECT ci.id,ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
+    public ResponseEntity<List<WorkTimeBoard>> getWorkTimeBoard(Integer day, String userName, String nickName, String starId, String phoneNumber, String qq, String weiChar,@ApiParam Pageable pageable) {
+//        Query query = em.createNativeQuery("SELECT ci.id,ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
 //        List<Object[]> list = query.getResultList();
 //        List<Map> data = new ArrayList<>();
 //        for (Object[] obj : list) {
@@ -99,7 +101,23 @@ public class DashboardResource {
 //        }
 //    userInfoBoardRepository.find(pageable);
 
-        return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
+        DateTime dt = new DateTime();
+
+        Page<WorkTimeBoard> page= null;
+        if(day==null){
+            day=1;
+        }
+        if(day.equals(30)) {
+            page = workTimeBoardRepository.getWorkTimeBoardCurMonth(5544l, Long.valueOf(dt.toString("yyyyMM")), fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
+        }else {
+            List<String> days = new ArrayList<>();
+            for(int i=0;i<day;i++){
+                days.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
+            }
+            page = workTimeBoardRepository.getWorkTimeBoardByDay(5544l, days, fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/labor-unions");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 
