@@ -62,7 +62,13 @@
         <div class="row">
             <div class="col-md-1 jh-form-key">时间:</div>
             <div class="col-md-3">
-
+                <select #day (change)="statement(day.value)">
+                    <option value="0">今天</option>
+                    <option value="1">昨天</option>
+                    <option value="3">最近3天</option>
+                    <option value="7">最近7天</option>
+                    <option value="">最近7天</option>
+                </select>
             </div>
             <div class="col-md-8">
                 <button style="float:right"  class="btn btn-success" (click)="loadAll()">搜索</button>
@@ -100,7 +106,7 @@
             </table>
         </div>
         <!-- Pager is not implemented yet, so this is normal pagination instead -->
-        <div *ngIf="laborUnionBoards && laborUnionBoards.length">
+        <div *ngIf="data && data.length">
             <div class="row justify-content-center">
                 <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
             </div>

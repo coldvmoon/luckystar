@@ -27,9 +27,17 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-
+    laborUnionBoards:any
     data: any
     uniqueDate:any
+
+    day: any;
+    userName: string;
+    nickName: string;
+    starId: string;
+    phoneNumber: string;
+    qq: string;
+    weiChat: string;
 
     constructor(private workTimeBoardService: WorkTimeBoardService,
                 private parseLinks: JhiParseLinks,
@@ -50,7 +58,20 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.workTimeBoardService.query().subscribe(
+        this.workTimeBoardService.query({
+            query: {
+                day: this.day,
+                userName: this.userName,
+                nickName: this.nickName,
+                starId: this.starId,
+                phoneNumber: this.phoneNumber,
+                qq: this.qq,
+                weiChat: this.weiChat
+            },
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -66,16 +87,18 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     private onSuccess(data, headers) {
         var map = {};
         var tmp = {};
+        var uniqueId:number[] = [];
         for (let x in data) {
             if (!map[data[x].starId]) {
                 map[data[x].starId] = {data: data[x], date: {}};
+                uniqueId.push(data[x].starId)
             }
             map[data[x].starId].date[data[x].curDay]=data[x].workTime
             tmp[data[x].curDay] = true;
         }
         this.data=[];
-        for(let x in map){
-            this.data.push(map[x])
+        for(let x in uniqueId){
+            this.data.push(map[uniqueId[x]])
         }
 
         this.uniqueDate=[];
@@ -88,6 +111,21 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
 
     }
 
+    sort() {
+        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+        // if (this.predicate !== 'id') {
+        //     result.push('id');
+        // }
+        return result;
+    }
+
+    loadPage(page: number) {
+        if (page !== this.previousPage) {
+            this.previousPage = page;
+            this.transition();
+        }
+    }
+
     transition() {
         // this.router.navigate(['/labor-union'], {
         //     queryParams: {
@@ -96,6 +134,20 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
         //         sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         //     }
         // });
+        this.loadAll();
+    }
+
+    clear() {
+        this.page = 0;
+        this.router.navigate(['/labor-union', {
+            page: this.page,
+            sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+        }]);
+        this.loadAll();
+    }
+
+    statement(day?: string): void {
+        this.day = day;
         this.loadAll();
     }
 

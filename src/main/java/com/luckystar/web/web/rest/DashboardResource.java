@@ -111,7 +111,7 @@ public class DashboardResource {
             page = workTimeBoardRepository.getWorkTimeBoardCurMonth(5544l, Long.valueOf(dt.toString("yyyyMM")), fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
         }else {
             List<String> days = new ArrayList<>();
-            for(int i=0;i<day;i++){
+            for(int i=0;i<=day;i++){
                 days.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
             }
             page = workTimeBoardRepository.getWorkTimeBoardByDay(5544l, days, fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);

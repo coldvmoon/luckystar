@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 public class WorkTimeBoard  implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * 真名
@@ -34,6 +34,9 @@ public class WorkTimeBoard  implements Serializable {
 
     @Column(name = "total_day")
     private Double totalDay;
+
+    @Column(name = "work_time")
+    private Double workTime;
 
     @Column(name = "cur_day")
     private LocalDate curDay;
@@ -92,5 +95,13 @@ public class WorkTimeBoard  implements Serializable {
 
     public void setCurDay(LocalDate curDay) {
         this.curDay = curDay;
+    }
+
+    public Double getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(Double workTime) {
+        this.workTime = workTime;
     }
 }
