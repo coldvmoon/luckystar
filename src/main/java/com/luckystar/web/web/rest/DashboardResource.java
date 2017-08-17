@@ -33,7 +33,6 @@ public class DashboardResource {
     private final Logger log = LoggerFactory.getLogger(DashboardResource.class);
 
 
-
     @Autowired
     private UserInfoBoardRepository userInfoBoardRepository;
     @Autowired
@@ -43,7 +42,7 @@ public class DashboardResource {
 
     @GetMapping("/chicken-infos-board")
     @Timed
-    public ResponseEntity<List<UserInfoBoard>> getAllChickenInfosBoard(String day, String userName, String nickName, String starId, String phoneNumber, String qq, String weiChar,@ApiParam Pageable pageable) {
+    public ResponseEntity<List<UserInfoBoard>> getAllChickenInfosBoard(String day, String userName, String nickName, String starId, String phoneNumber, String qq, String weiChar, @ApiParam Pageable pageable) {
 //        log.debug("REST request to get a page of ChickenInfos");
 //        Query query = em.createNativeQuery("SELECT  ci.user_name,  ci.nick_name,  ci.star_id,  wi.star_level,  wi.rich_level,  wi.fans_count,  (wi.bean_total - wi.fisrt_bean) AS bean_by_day,  ti.min_task,  ti.max_task,  ci.reg_date,  (SELECT     SUM(wi2.bean_total - wi2.fisrt_bean)   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS bean_by_month,  (SELECT     SUM(wi2.work_time) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,wi.work_time,wi.star_name,wi.rich_name FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_day = '"+day+"'");
 //        List<Object[]> list = query.getResultList();
@@ -69,22 +68,23 @@ public class DashboardResource {
 //            data.add(res);
 //        }
 
-        Page<UserInfoBoard> page = userInfoBoardRepository.getAllChickenInfosBoard(5544l,day,fuzzyQuery(userName),fuzzyQuery(nickName),fuzzyQuery(starId),fuzzyQuery(phoneNumber),fuzzyQuery(qq),fuzzyQuery(weiChar),pageable);
+        Page<UserInfoBoard> page = userInfoBoardRepository.getAllChickenInfosBoard(5544l, day, fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/labor-unions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 
-    private String fuzzyQuery(String query){
-        if(StringUtils.isEmpty(query)){
+    private String fuzzyQuery(String query) {
+        if (StringUtils.isEmpty(query)) {
             return "%";
-        }else {
-            return "%"+query+"%";
+        } else {
+            return "%" + query + "%";
         }
     }
+
     @GetMapping("/work-time-board")
     @Timed
-    public ResponseEntity<List<WorkTimeBoard>> getWorkTimeBoard(Integer day, String userName, String nickName, String starId, String phoneNumber, String qq, String weiChar,@ApiParam Pageable pageable) {
+    public ResponseEntity<List<WorkTimeBoard>> getWorkTimeBoard(Integer day, String userName, String nickName, String starId, String phoneNumber, String qq, String weiChar, @ApiParam Pageable pageable) {
 //        Query query = em.createNativeQuery("SELECT ci.id,ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
 //        List<Object[]> list = query.getResultList();
 //        List<Map> data = new ArrayList<>();
@@ -103,15 +103,18 @@ public class DashboardResource {
 
         DateTime dt = new DateTime();
 
-        Page<WorkTimeBoard> page= null;
-        if(day==null){
-            day=1;
+        Page<WorkTimeBoard> page = null;
+        if (day == null) {
+            day = 1;
         }
-        if(day.equals(30)) {
+        if (day.equals(30)) {
             page = workTimeBoardRepository.getWorkTimeBoardCurMonth(5544l, Long.valueOf(dt.toString("yyyyMM")), fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
-        }else {
+        }
+        if (day.equals(1)) {
+            page = workTimeBoardRepository.getWorkTimeBoardCurMonth(5544l, Long.valueOf(dt.plusDays(-1).toString("yyyyMM")), fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
+        } else {
             List<String> days = new ArrayList<>();
-            for(int i=0;i<=day;i++){
+            for (int i = 0; i <= day; i++) {
                 days.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
             }
             page = workTimeBoardRepository.getWorkTimeBoardByDay(5544l, days, fuzzyQuery(userName), fuzzyQuery(nickName), fuzzyQuery(starId), fuzzyQuery(phoneNumber), fuzzyQuery(qq), fuzzyQuery(weiChar), pageable);
@@ -128,7 +131,7 @@ public class DashboardResource {
         List<String> res = new ArrayList();
 
         DateTime dt = new DateTime();
-        for(int i = 0;i<7;i++) {
+        for (int i = 0; i < 7; i++) {
             res.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
         }
         return new ResponseEntity<>(res, HttpStatus.OK);

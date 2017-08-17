@@ -85,6 +85,10 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     }
 
     private onSuccess(data, headers) {
+        this.links = this.parseLinks.parse(headers.get('link'));
+        // this.totalItems = headers.get('X-Total-Count');
+
+
         var map = {};
         var tmp = {};
         var uniqueId:number[] = [];
@@ -101,10 +105,16 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
             this.data.push(map[uniqueId[x]])
         }
 
-        this.uniqueDate=[];
+
+        var uniqueDate:string[] = [];
         for(let x in tmp){
-            this.uniqueDate.push(x);
+            uniqueDate.push(x);
         }
+      this.uniqueDate=  uniqueDate.sort((a,b)=>  {
+          return a<b?1:-1;
+      })
+        this.totalItems=uniqueId.length;
+        this.queryCount = this.totalItems;
     }
 
     private onError(error) {

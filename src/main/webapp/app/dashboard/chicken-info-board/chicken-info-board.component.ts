@@ -114,19 +114,13 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
 
     private onSuccess1(data, headers) {
         this.recentTime = data.json()
-        this.chickenInfoBoardService.query(this.recentTime[0]).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
-        this.principal.identity().then((account) => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInLaborUnions();
+        this.day = this.recentTime[0];
+        this.loadAll();
 
     }
 
     ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
+        // this.eventManager.destroy(this.eventSubscriber);
     }
 
     trackId(index: number, item: LaborUnionBoard) {
