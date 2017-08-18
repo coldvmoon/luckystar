@@ -41,14 +41,14 @@
             <span>{{userInfo.password}}</span>
         </dd>
         <dt><span jhiTranslate="luckystarApp.userInfo.cookie">Cookie</span></dt>
-        <dd>
+        <dd *jhiHasAnyAuthority="['ROLE_ADMIN']">
             <span>{{userInfo.cookie}}</span>
         </dd>
         <dt><span jhiTranslate="luckystarApp.userInfo.timeRate">Time Rate</span></dt>
-        <dd>
+        <dd *jhiHasAnyAuthority="['ROLE_ADMIN']">
             <span>{{userInfo.timeRate}}</span>
         </dd>
-        <dt><span jhiTranslate="luckystarApp.userInfo.beanRate">Bean Rate</span></dt>
+        <dt *jhiHasAnyAuthority="['ROLE_ADMIN']"><span jhiTranslate="luckystarApp.userInfo.beanRate">Bean Rate</span></dt>
         <dd>
             <span>{{userInfo.beanRate}}</span>
         </dd>
@@ -60,12 +60,12 @@
         <dd>
             <span jhiTranslate="{{'luckystarApp.State.' + userInfo.state}}">{{userInfo.state}}</span>
         </dd>
-        <dt><span jhiTranslate="luckystarApp.userInfo.laborUnion">Labor Union</span></dt>
-        <dd>
-            <div *ngIf="userInfo.laborUnion">
-                <a [routerLink]="['/labor-union', userInfo.laborUnion?.id]">{{userInfo.laborUnion?.id}}</a>
-            </div>
-        </dd>
+        <!--<dt><span jhiTranslate="luckystarApp.userInfo.laborUnion">Labor Union</span></dt>-->
+        <!--<dd>-->
+            <!--<div *ngIf="userInfo.laborUnion">-->
+                <!--<a [routerLink]="['/labor-union', userInfo.laborUnion?.id]">{{userInfo.laborUnion?.id}}</a>-->
+            <!--</div>-->
+        <!--</dd>-->
     </dl>
 
     <button type="submit"

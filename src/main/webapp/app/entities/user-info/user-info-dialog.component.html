@@ -132,7 +132,7 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN']" class="form-group" >
             <label class="form-control-label" jhiTranslate="luckystarApp.userInfo.cookie" for="field_cookie">Cookie</label>
             <input type="text" class="form-control" name="cookie" id="field_cookie"
                 [(ngModel)]="userInfo.cookie" maxlength="10480" />
@@ -143,7 +143,7 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN']" class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.userInfo.timeRate" for="field_timeRate">Time Rate</label>
             <input type="number" class="form-control" name="timeRate" id="field_timeRate"
                 [(ngModel)]="userInfo.timeRate" required />
@@ -158,7 +158,7 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN']" class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.userInfo.beanRate" for="field_beanRate">Bean Rate</label>
             <input type="number" class="form-control" name="beanRate" id="field_beanRate"
                 [(ngModel)]="userInfo.beanRate" required />
@@ -197,11 +197,11 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div  class="form-group">
             <label jhiTranslate="luckystarApp.userInfo.laborUnion" for="field_laborUnion">Labor Union</label>
             <select class="form-control" id="field_laborUnion" name="laborUnion" [(ngModel)]="userInfo.laborUnion" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="laborUnionOption.id === userInfo.laborUnion?.id ? userInfo.laborUnion : laborUnionOption" *ngFor="let laborUnionOption of laborunions; trackBy: trackLaborUnionById">{{laborUnionOption.id}}</option>
+                <option [ngValue]="laborUnionOption.id === userInfo.laborUnion?.id ? userInfo.laborUnion : laborUnionOption" *ngFor="let laborUnionOption of laborunions; trackBy: trackLaborUnionById">{{laborUnionOption.name}}</option>
             </select>
         </div>
     </div>

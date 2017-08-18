@@ -25,13 +25,13 @@
             <th jhiSortBy="starId"><span jhiTranslate="luckystarApp.userInfo.starId">Star Id</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="regDate"><span jhiTranslate="luckystarApp.userInfo.regDate">Reg Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="loginName"><span jhiTranslate="luckystarApp.userInfo.loginName">Login Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="password"><span jhiTranslate="luckystarApp.userInfo.password">Password</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="cookie"><span jhiTranslate="luckystarApp.userInfo.cookie">Cookie</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="timeRate"><span jhiTranslate="luckystarApp.userInfo.timeRate">Time Rate</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="beanRate"><span jhiTranslate="luckystarApp.userInfo.beanRate">Bean Rate</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="password"><span jhiTranslate="luckystarApp.userInfo.password">Password</span> <span class="fa fa-sort"></span></th>-->
+            <th *jhiHasAnyAuthority="['ROLE_ADMIN']" jhiSortBy="cookie"><span jhiTranslate="luckystarApp.userInfo.cookie">Cookie</span> <span class="fa fa-sort"></span></th>
+            <th *jhiHasAnyAuthority="['ROLE_ADMIN']" jhiSortBy="timeRate"><span jhiTranslate="luckystarApp.userInfo.timeRate">Time Rate</span> <span class="fa fa-sort"></span></th>
+            <th *jhiHasAnyAuthority="['ROLE_ADMIN']" jhiSortBy="beanRate"><span jhiTranslate="luckystarApp.userInfo.beanRate">Bean Rate</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="lastMaintain"><span jhiTranslate="luckystarApp.userInfo.lastMaintain">Last Maintain</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="state"><span jhiTranslate="luckystarApp.userInfo.state">State</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="laborUnion.id"><span jhiTranslate="luckystarApp.userInfo.laborUnion">Labor Union</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="laborUnion.id"><span jhiTranslate="luckystarApp.userInfo.laborUnion">Labor Union</span> <span class="fa fa-sort"></span></th>-->
             <th></th>
             </tr>
             </thead>
@@ -46,17 +46,17 @@
                 <td>{{userInfo.starId}}</td>
                 <td>{{userInfo.regDate | date:'mediumDate'}}</td>
                 <td>{{userInfo.loginName}}</td>
-                <td>{{userInfo.password}}</td>
-                <td>{{userInfo.cookie}}</td>
-                <td>{{userInfo.timeRate}}</td>
-                <td>{{userInfo.beanRate}}</td>
+                <!--<td>{{userInfo.password}}</td>-->
+                <td *jhiHasAnyAuthority="['ROLE_ADMIN']">{{userInfo.cookie}}</td>
+                <td *jhiHasAnyAuthority="['ROLE_ADMIN']">{{userInfo.timeRate}}</td>
+                <td *jhiHasAnyAuthority="['ROLE_ADMIN']">{{userInfo.beanRate}}</td>
                 <td>{{userInfo.lastMaintain | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'luckystarApp.State.' + userInfo.state}}">{{userInfo.state}}</td>
-                <td>
-                    <div *ngIf="userInfo.laborUnion">
-                        <a [routerLink]="['../labor-union', userInfo.laborUnion?.id ]" >{{userInfo.laborUnion?.id}}</a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div *ngIf="userInfo.laborUnion">-->
+                        <!--<a [routerLink]="['../labor-union', userInfo.laborUnion?.id ]" >{{userInfo.laborUnion?.id}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
