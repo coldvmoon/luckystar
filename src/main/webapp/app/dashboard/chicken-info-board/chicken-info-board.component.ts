@@ -56,7 +56,7 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     loadAll() {
         this.chickenInfoBoardService.query({
             query: {
-                day: this.day,
+                day: this.day.year+"-"+this.day.month+"-"+this.day.day,
                 laborUnionId:this.labor,
                 searchCondition: this.searchCondition
             },
@@ -97,6 +97,12 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        var date = new Date();
+        this.day={
+            year:date.getFullYear(),
+            month:date.getMonth()+1,
+            day:date.getDate()
+        }
         this.chickenInfoBoardService.recentTime().subscribe(
             (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
@@ -110,7 +116,6 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         this.recentTime = data.date;
         this.laborUnions = data.laborUnions;
 
-        this.day = this.recentTime[0];
         this.labor = this.laborUnions[0].lId;
         this.loadAll();
 

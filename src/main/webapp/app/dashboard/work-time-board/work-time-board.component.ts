@@ -65,6 +65,8 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
         this.workTimeBoardService.query({
             query: {
                 day: this.day,
+                laborUnionId:this.labor,
+                date:this.regDate.year+"-"+this.regDate.month+"-"+this.regDate.day,
                 userName: this.userName,
                 nickName: this.nickName,
                 starId: this.starId,
@@ -82,6 +84,13 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.day=0;
+        var date = new Date();
+        this.regDate={
+            year:date.getFullYear(),
+            month:date.getMonth()+1,
+            day:date.getDate()
+        }
         this.workTimeBoardService.recentTime().subscribe(
             (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
@@ -174,9 +183,8 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
-    statement(day?: string): void {
-        this.day = day;
+    statementLabor(labor?: string): void {
+        this.labor = labor;
         this.loadAll();
     }
-
 }

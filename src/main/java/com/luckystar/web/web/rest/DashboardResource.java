@@ -86,7 +86,7 @@ public class DashboardResource {
 
     @GetMapping("/work-time-board")
     @Timed
-    public ResponseEntity<List<WorkTimeBoard>> getWorkTimeBoard(Long laborUnionId, Integer day, String searchCondition, @ApiParam Pageable pageable) {
+    public ResponseEntity<List<WorkTimeBoard>> getWorkTimeBoard(Long laborUnionId,String date, Integer day, String searchCondition, @ApiParam Pageable pageable) {
 //        Query query = em.createNativeQuery("SELECT ci.id,ci.user_name,  ci.nick_name,  ci.star_id,  (SELECT     SUM(work_time) AS all_time   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month1,  (SELECT     SUM(IF(work_time > 14400, 1, 0.5)) AS bean   FROM work_info wi2   WHERE ti.cur_month = wi2.cur_month       AND wi2.star_id = wi.star_id) AS worktime_by_month,  wi.work_time,  wi.cur_day FROM labor_union lu,  user_info ci,  task_info ti,  work_info wi WHERE lu.id  = ci.labor_union_id    AND ci.star_id = wi.star_id    AND wi.task_info_id = ti.id     AND lu.l_id = '5544'    AND wi.cur_month = 201708");
 //        List<Object[]> list = query.getResultList();
 //        List<Map> data = new ArrayList<>();
@@ -103,7 +103,7 @@ public class DashboardResource {
 //        }
 //    userInfoBoardRepository.find(pageable);
 
-        DateTime dt = new DateTime();
+        DateTime dt = new DateTime(date);
 
         Page<WorkTimeBoard> page = null;
         if (day == null) {

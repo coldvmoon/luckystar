@@ -67,10 +67,12 @@
                 </select>
             </div>
             <div class="col-md-1 jh-form-key">时间:</div>
-            <div class="col-md-2">
-                <select #day (change)="statement(day.value)">
-                    <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
-                </select>
+            <div class="col-md-2" style="display: flex;">
+                <input id="field_regDate" type="text" class="form-control" name="regDate" ngbDatepicker  #regDateDp="ngbDatepicker" [(ngModel)]="day"
+                       required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="regDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
             </div>
             <div class="col-md-1 jh-form-key">关键字:</div>
             <div class="col-md-2">
@@ -95,9 +97,9 @@
                     <th jhiSortBy="qq"><span>QQ</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="wei_chat"><span>微信</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="star_level"><span>明星等级</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="star_name"><span>明星级别</span> <span class="fa fa-sort"></span></th>
+                    <!--<th jhiSortBy="star_name"><span>明星级别</span> <span class="fa fa-sort"></span></th>-->
                     <th jhiSortBy="rich_level"><span>财富等级</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="rich_name"><span>财富级别</span> <span class="fa fa-sort"></span></th>
+                    <!--<th jhiSortBy="rich_name"><span>财富级别</span> <span class="fa fa-sort"></span></th>-->
                     <th jhiSortBy="fans_count"><span>关注数</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="bean_by_day"><span>星豆数</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="bean_by_month"><span>月总数</span> <span class="fa fa-sort"></span></th>
@@ -118,9 +120,9 @@
                     <td>{{row.qq}}</td>
                     <td>{{row.weiChat}}</td>
                     <td>{{row.starLevel}}</td>
-                    <td>{{row.starName}}</td>
+                    <!--<td>{{row.starName}}</td>-->
                     <td>{{row.richLevel}}</td>
-                    <td>{{row.richName}}</td>
+                    <!--<td>{{row.richName}}</td>-->
                     <td>{{row.fansCount}}</td>
                     <td>{{row.beanByDay}}</td>
                     <td>{{row.beanByMonth}}</td>
@@ -152,5 +154,9 @@
         text-align: right;
         line-height: 34px;
         padding-right: 0px;
+    }
+    .jh-select{
+        height: 38px;
+        vertical-align: middle
     }
 </style>

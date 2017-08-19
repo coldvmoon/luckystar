@@ -62,26 +62,25 @@
         <div class="row">
             <div class="col-md-1 jh-form-key">公会:</div>
             <div class="col-md-2">
-                <select #labor (change)="statementLabor(labor.value)">
+                <select  (change)="loadAll()" class="jh-select" [(ngModel)]="labor">
                     <option *ngFor="let opt of laborUnions" [value]="opt.lId">{{opt.name}}</option>
                 </select>
             </div>
-
             <div class="col-md-1 jh-form-key">时间:</div>
-            <div class="input-group">
+            <div class="col-md-2" style="display: flex;">
                 <input id="field_regDate" type="text" class="form-control" name="regDate" ngbDatepicker  #regDateDp="ngbDatepicker" [(ngModel)]="regDate"
                        required/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" (click)="regDateDp.toggle()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
-            <div class="col-md-2">
-                <select #day (change)="statement(day.value)">
-                    <option value="0">今天</option>
-                    <option value="1">昨天</option>
-                    <option value="3">最近3天</option>
-                    <option value="7">最近7天</option>
-                    <option value="">最近7天</option>
+            <div class="col-md-1">
+                <select  class="jh-select" [(ngModel)]="day" (change)="loadAll()">
+                    <option value="0">当天</option>
+                    <option value="1">之前1天</option>
+                    <option value="3">之前3天</option>
+                    <option value="7">之前7天</option>
+                    <option value="30">当月</option>
                 </select>
             </div>
             <div class="col-md-1 jh-form-key">关键字:</div>
@@ -90,7 +89,7 @@
                        [(ngModel)]="searchCondition">
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button style="float:right"  class="btn btn-success" (click)="loadAll()">搜索</button>
             </div>
         </div>
@@ -115,8 +114,8 @@
                     <td>{{row.data.userName}}</td>
                     <td>{{row.data.nickName}}</td>
                     <td>{{row.data.starId}}</td>
-                    <td>{{row.data.totalTime|timeFormat}}</td>
-                    <td>{{row.data.totalDay}}</td>
+                    <td>{{row.data.workTimeByMonth|timeFormat}}</td>
+                    <td>{{row.data.judgeTimeByMonth}}</td>
                     <!--<td>{{row.data.totalTime}}</td>-->
                     <td *ngFor="let day of uniqueDate" ng>
                         {{(row.date[day]?row.date[day]:0) |timeFormat}}
@@ -143,6 +142,10 @@
         text-align: right;
         line-height: 34px;
         padding-right: 0px;
+    }
+    .jh-select{
+        height: 38px;
+        vertical-align: middl
     }
 </style>
 
