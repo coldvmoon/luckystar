@@ -81,6 +81,9 @@ public class LaborUnion implements Serializable {
                inverseJoinColumns = @JoinColumn(name="users_id", referencedColumnName="id"))
     private Set<User> users = new HashSet<>();
 
+//    @ManyToOne
+//    private User user;
+
     public Long getId() {
         return id;
     }
@@ -203,6 +206,19 @@ public class LaborUnion implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public LaborUnion user(User user) {
+//        this.user = user;
+//        return this;
+//    }
+
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     @Override
     public boolean equals(Object o) {

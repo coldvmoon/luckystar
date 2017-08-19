@@ -55,6 +55,8 @@ public class UserInfoResource {
         if (userInfo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userInfo cannot already have an ID")).body(null);
         }
+        userInfo.setBeanRate(1f);
+        userInfo.setTimeRate(1f);
         UserInfo result = userInfoRepository.save(userInfo);
         return ResponseEntity.created(new URI("/api/user-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

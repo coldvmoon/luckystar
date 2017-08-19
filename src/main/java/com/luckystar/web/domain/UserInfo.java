@@ -113,17 +113,17 @@ public class UserInfo implements Serializable {
     /**
      * 考勤倍率
      */
-    @NotNull
+//    @NotNull
     @ApiModelProperty(value = "考勤倍率", required = true)
-    @Column(name = "time_rate", nullable = false)
+    @Column(name = "time_rate", nullable = true)
     private Float timeRate;
 
     /**
      * 星豆倍率
      */
-    @NotNull
+//    @NotNull
     @ApiModelProperty(value = "星豆倍率", required = true)
-    @Column(name = "bean_rate", nullable = false)
+    @Column(name = "bean_rate", nullable = true)
     private Float beanRate;
 
     /**
