@@ -1,9 +1,14 @@
 package com.luckystar.web.domain;
 
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class WorkTimeBoard  implements Serializable {
@@ -28,80 +33,108 @@ public class WorkTimeBoard  implements Serializable {
     @Column(name = "star_id")
     private Long starId;
 
+	/**
+	 * 按月统计的工作时长
+	 */
+	@Column(name = "worktime_by_month")
+	private Long workTimeByMonth;
 
-    @Column(name = "total_time")
-    private Double totalTime;
+	/**
+	 * 按界定标准划分后的合格天数
+	 */
+	@Column(name = "judge_by_month")
+	private String judgeTimeByMonth;
 
-    @Column(name = "total_day")
-    private Double totalDay;
-
+	/**
+	 * 按天统计的工作时长
+	 */
     @Column(name = "work_time")
     private Double workTime;
 
+    /**
+     * 具体日期
+     */
     @Column(name = "cur_day")
     private LocalDate curDay;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
+	
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
+	
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 
-    public String getNickName() {
-        return nickName;
-    }
+	public String getNickName() {
+		return nickName;
+	}
+	
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	
 
-    public Long getStarId() {
-        return starId;
-    }
+	public Long getStarId() {
+		return starId;
+	}
+	
 
-    public void setStarId(Long starId) {
-        this.starId = starId;
-    }
+	public void setStarId(Long starId) {
+		this.starId = starId;
+	}
+	
 
-    public Double getTotalTime() {
-        return totalTime;
-    }
+	public Long getWorkTimeByMonth() {
+		return workTimeByMonth;
+	}
+	
 
-    public void setTotalTime(Double totalTime) {
-        this.totalTime = totalTime;
-    }
+	public void setWorkTimeByMonth(Long workTimeByMonth) {
+		this.workTimeByMonth = workTimeByMonth;
+	}
+	
 
-    public Double getTotalDay() {
-        return totalDay;
-    }
+	public String getJudgeTimeByMonth() {
+		return judgeTimeByMonth;
+	}
+	
 
-    public void setTotalDay(Double totalDay) {
-        this.totalDay = totalDay;
-    }
+	public void setJudgeTimeByMonth(String judgeTimeByMonth) {
+		this.judgeTimeByMonth = judgeTimeByMonth;
+	}
+	
 
-    public LocalDate getCurDay() {
-        return curDay;
-    }
+	public Double getWorkTime() {
+		return workTime;
+	}
+	
 
-    public void setCurDay(LocalDate curDay) {
-        this.curDay = curDay;
-    }
+	public void setWorkTime(Double workTime) {
+		this.workTime = workTime;
+	}
+	
 
-    public Double getWorkTime() {
-        return workTime;
-    }
+	public LocalDate getCurDay() {
+		return curDay;
+	}
+	
 
-    public void setWorkTime(Double workTime) {
-        this.workTime = workTime;
-    }
+	public void setCurDay(LocalDate curDay) {
+		this.curDay = curDay;
+	}
+	
+
 }

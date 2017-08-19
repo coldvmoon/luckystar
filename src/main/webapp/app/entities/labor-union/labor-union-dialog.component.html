@@ -74,7 +74,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="luckystarApp.laborUnion.type" for="field_type">Type</label>
             <select class="form-control" name="type" [(ngModel)]="laborUnion.type" id="field_type"  required>
-                <option value="FANXIN" jhiTranslate="luckystarApp.Source.FANXIN">FANXIN</option>
+                <option value="FANXING" jhiTranslate="luckystarApp.Source.FANXING">FANXIN</option>
             </select>
             <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
                 <small class="form-text text-danger"
@@ -88,13 +88,6 @@
             <label jhiTranslate="luckystarApp.laborUnion.user" for="field_user">User</label>
             <select class="form-control" id="field_user" multiple name="user" [(ngModel)]="laborUnion.users">
                 <option [ngValue]="getSelected(laborUnion.users, userOption)" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label jhiTranslate="luckystarApp.laborUnion.user" for="field_user">User</label>
-            <select class="form-control" id="field_user" name="user" [(ngModel)]="laborUnion.user" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="userOption.id === laborUnion.user?.id ? laborUnion.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
             </select>
         </div>
     </div>

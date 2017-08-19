@@ -12,8 +12,8 @@
             },
             "entities": {
                 "main": "数据",
-                "laborUnion": "Labor Union",
-                "taskInfo": "Task Info",
+                "laborUnion": "公会管理",
+                "taskInfo": "任务管理",
                 "workInfo": "Work Info",
                 "userInfo": "成员管理",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"

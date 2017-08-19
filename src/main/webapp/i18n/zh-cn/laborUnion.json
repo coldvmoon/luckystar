@@ -2,9 +2,9 @@
     "luckystarApp": {
         "laborUnion" : {
             "home": {
-                "title": "Labor Unions",
-                "createLabel": "Create a new Labor Union",
-                "createOrEditLabel": "Create or edit a Labor Union"
+                "title": "公会管理",
+                "createLabel": "新增公会",
+                "createOrEditLabel": "新增或变更公会"
             },
             "created": "A new Labor Union is created with identifier {{ param }}",
             "updated": "A Labor Union is updated with identifier {{ param }}",
@@ -13,16 +13,15 @@
                 "question": "Are you sure you want to delete Labor Union {{ id }}?"
             },
             "detail": {
-                "title": "Labor Union"
+                "title": "公会信息"
             },
-            "lId": "L Id",
-            "name": "Name",
-            "regDate": "Reg Date",
-            "state": "State",
-            "type": "Type",
+            "lId": "公会id",
+            "name": "公会名称",
+            "regDate": "注册时间",
+            "state": "状态",
+            "type": "数据来源",
             "userInfo": "User Info",
-            "user": "User",
-            "user": "User"
+            "user": "管理员"
         }
     }
 }
