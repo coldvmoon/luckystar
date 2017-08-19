@@ -1,10 +1,7 @@
 package com.luckystar.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.luckystar.web.domain.LaborUnion;
-import com.luckystar.web.domain.User;
-import com.luckystar.web.domain.UserInfoBoard;
-import com.luckystar.web.domain.WorkTimeBoard;
+import com.luckystar.web.domain.*;
 import com.luckystar.web.repository.LaborUnionRepository;
 import com.luckystar.web.repository.UserInfoBoardRepository;
 import com.luckystar.web.repository.UserRepository;
@@ -139,10 +136,14 @@ public class DashboardResource {
 
         res.put("date",date);
 
+        List<LaborUnion> laborUnions=null;
         Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
-
-        res.put("laborUnions",laborUnionRepository.findByUserIsCurrentUser(user.get().getId()));
-
+        if(user.get().getLogin().equals("system")){
+            laborUnions = laborUnionRepository.findAll();
+        }else {
+            laborUnions = laborUnionRepository.findByUserIsCurrentUser(user.get().getId());
+        }
+        res.put("laborUnions",laborUnions);
 
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

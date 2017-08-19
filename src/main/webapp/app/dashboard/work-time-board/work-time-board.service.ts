@@ -33,5 +33,8 @@ export class WorkTimeBoardService {
         entity.regDate = this.dateUtils
             .convertLocalDateFromServer(entity.regDate);
     }
+    recentTime():Observable<ResponseWrapper>{
+        return this.http.get("api/recent-time");
+    }
 
 }

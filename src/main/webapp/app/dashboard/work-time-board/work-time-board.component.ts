@@ -28,9 +28,13 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     laborUnionBoards:any
+    labor:any
     data: any
     uniqueDate:any
 
+    laborUnions:any
+
+    regDate:any
     day: any;
     userName: string;
     nickName: string;
@@ -78,10 +82,24 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.loadAll()
+        this.workTimeBoardService.recentTime().subscribe(
+            (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+
     }
 
     ngOnDestroy(): void {
+    }
+
+
+    private onSuccess1(data, headers) {
+        var data  = data.json();
+        this.laborUnions = data.laborUnions;
+
+        this.labor = this.laborUnions[0].lId;
+        this.loadAll();
+
     }
 
     private onSuccess(data, headers) {
