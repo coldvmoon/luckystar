@@ -1,15 +1,20 @@
 package com.luckystar.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.luckystar.web.domain.LaborUnion;
+import com.luckystar.web.domain.User;
 import com.luckystar.web.domain.UserInfo;
 
 import com.luckystar.web.repository.UserInfoRepository;
+import com.luckystar.web.repository.UserRepository;
+import com.luckystar.web.security.SecurityUtils;
 import com.luckystar.web.web.rest.util.HeaderUtil;
 import com.luckystar.web.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +42,8 @@ public class UserInfoResource {
 
     private final UserInfoRepository userInfoRepository;
 
+    @Autowired
+    private UserRepository userRepository;
     public UserInfoResource(UserInfoRepository userInfoRepository) {
         this.userInfoRepository = userInfoRepository;
     }
@@ -95,7 +102,14 @@ public class UserInfoResource {
     @Timed
     public ResponseEntity<List<UserInfo>> getAllUserInfos(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of UserInfos");
-        Page<UserInfo> page = userInfoRepository.findAll(pageable);
+
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        Page<UserInfo> page=null;
+        if(user.get().getLogin().equals("system")){
+            page = userInfoRepository.findAll(pageable);
+        }else {
+            page = userInfoRepository.findByUserIsCurrentUser(user.get().getId(),pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

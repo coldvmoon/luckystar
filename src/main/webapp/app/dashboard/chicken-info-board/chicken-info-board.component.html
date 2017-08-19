@@ -8,68 +8,79 @@
 
     <div>
         <!--<form (ngSubmit)="onSubmit()" >-->
-            <!--<div class="row">-->
-            <div class="row">
-                <div class="col-md-1 jh-form-key">姓名:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
+        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-1 jh-form-key">姓名:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
 
-                           [(ngModel)]="userName"
-                    >
-                </div>
+        <!--[(ngModel)]="userName"-->
+        <!--&gt;-->
+        <!--</div>-->
 
-                <div class="col-md-1 jh-form-key">艺名:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
+        <!--<div class="col-md-1 jh-form-key">艺名:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
 
-                           [(ngModel)]="nickName"
-                    >
-                </div>
-                <div class="col-md-1 jh-form-key">繁星ID:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
+        <!--[(ngModel)]="nickName"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-1 jh-form-key">繁星ID:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
 
-                           [(ngModel)]="starId"
-                    >
-                </div>
+        <!--[(ngModel)]="starId"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<br>-->
+        <!--<div class="row">-->
+        <!--<div class=" col-md-1 jh-form-key">手机:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
+
+        <!--[(ngModel)]="phoneNumber"-->
+        <!--&gt;-->
+        <!--</div>-->
+
+        <!--<div class="col-md-1 jh-form-key">QQ:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
+
+        <!--[(ngModel)]="qq"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--<div class="col-md-1 jh-form-key">微信:</div>-->
+        <!--<div class="col-md-3">-->
+        <!--<input type="text" class="form-control"-->
+
+        <!--[(ngModel)]="weiChat"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <br>
+        <div class="row">
+            <div class="col-md-1 jh-form-key">公会:</div>
+            <div class="col-md-2">
+                <select #labor (change)="statementLabor(labor.value)">
+                    <option *ngFor="let opt of laborUnions" [value]="opt.lId">{{opt.name}}</option>
+                </select>
             </div>
-            <br>
-            <div class="row">
-                <div class=" col-md-1 jh-form-key">手机:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
-
-                           [(ngModel)]="phoneNumber"
-                    >
-                </div>
-
-                <div class="col-md-1 jh-form-key">QQ:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
-
-                           [(ngModel)]="qq"
-                    >
-                </div>
-                <div class="col-md-1 jh-form-key">微信:</div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control"
-
-                           [(ngModel)]="weiChat"
-                    >
-                </div>
+            <div class="col-md-1 jh-form-key">时间:</div>
+            <div class="col-md-2">
+                <select #day (change)="statement(day.value)">
+                    <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
+                </select>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-1 jh-form-key">时间:</div>
-                <div class="col-md-3">
-                    <select #day (change)="statement(day.value)">
-                        <option *ngFor="let opt of recentTime" [value]="opt">{{opt}}</option>
-                    </select>
-                </div>
-                <div class="col-md-8">
-                    <button style="float:right"  class="btn btn-success" (click)="loadAll()">搜索</button>
-                </div>
+            <div class="col-md-1 jh-form-key">关键字:</div>
+            <div class="col-md-2">
+                <input type="text" class="form-control"
+                       [(ngModel)]="searchCondition">
             </div>
+            <div class="col-md-3">
+                <button style="float:right" class="btn btn-success" (click)="loadAll()">搜索</button>
+            </div>
+        </div>
         <!--</form>-->
         <br/>
 

@@ -1,15 +1,20 @@
 package com.luckystar.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.luckystar.web.domain.User;
+import com.luckystar.web.domain.UserInfo;
 import com.luckystar.web.domain.WorkInfo;
 
+import com.luckystar.web.repository.UserRepository;
 import com.luckystar.web.repository.WorkInfoRepository;
+import com.luckystar.web.security.SecurityUtils;
 import com.luckystar.web.web.rest.util.HeaderUtil;
 import com.luckystar.web.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +42,8 @@ public class WorkInfoResource {
 
     private final WorkInfoRepository workInfoRepository;
 
+    @Autowired
+    private UserRepository userRepository;
     public WorkInfoResource(WorkInfoRepository workInfoRepository) {
         this.workInfoRepository = workInfoRepository;
     }
@@ -93,7 +100,14 @@ public class WorkInfoResource {
     @Timed
     public ResponseEntity<List<WorkInfo>> getAllWorkInfos(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of WorkInfos");
-        Page<WorkInfo> page = workInfoRepository.findAll(pageable);
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+        Page<WorkInfo> page=null;
+        if(user.get().getLogin().equals("system")){
+            page = workInfoRepository.findAll(pageable);
+        }else {
+            page = workInfoRepository.findByUserIsCurrentUser(user.get().getId(),pageable);
+        }
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/work-infos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

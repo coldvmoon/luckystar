@@ -7,7 +7,7 @@ import {LaborUnionBoard} from './chicken-info-board.model';
 import {ChickenInfoBoardService} from './chicken-info-board.service';
 import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {PaginationConfig} from '../../blocks/config/uib-pagination.config';
-import {BaseEntity} from "../../shared/model/base-entity";
+import { LaborUnionService } from '../../entities/labor-union/labor-union.service';
 
 @Component({
     selector: 'jhi-labor-union',
@@ -31,14 +31,11 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     reverse: any;
     recentTime: any;
     day: any;
-    userName: string;
-    nickName: string;
-    starId: string;
-    phoneNumber: string;
-    qq: string;
-    weiChat: string;
-
+    labor:any;
+    searchCondition: string;
+    laborUnions:any
     constructor(private chickenInfoBoardService: ChickenInfoBoardService,
+                private laborUnionService:LaborUnionService,
                 private parseLinks: JhiParseLinks,
                 private alertService: JhiAlertService,
                 private principal: Principal,
@@ -60,12 +57,8 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
         this.chickenInfoBoardService.query({
             query: {
                 day: this.day,
-                userName: this.userName,
-                nickName: this.nickName,
-                starId: this.starId,
-                phoneNumber: this.phoneNumber,
-                qq: this.qq,
-                weiChat: this.weiChat
+                laborUnionId:this.labor,
+                searchCondition: this.searchCondition
             },
             page: this.page - 1,
             size: this.itemsPerPage,
@@ -113,8 +106,12 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
     }
 
     private onSuccess1(data, headers) {
-        this.recentTime = data.json()
+        var data  = data.json();
+        this.recentTime = data.date;
+        this.laborUnions = data.laborUnions;
+
         this.day = this.recentTime[0];
+        this.labor = this.laborUnions[0].lId;
         this.loadAll();
 
     }
@@ -153,6 +150,11 @@ export class ChickenInfoBoardComponent implements OnInit, OnDestroy {
 
     statement(day?: string): void {
         this.day = day;
+        this.loadAll();
+    }
+
+    statementLabor(labor?: string): void {
+        this.labor = labor;
         this.loadAll();
     }
 

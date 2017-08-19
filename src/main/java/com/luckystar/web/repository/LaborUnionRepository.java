@@ -19,6 +19,9 @@ public interface LaborUnionRepository extends JpaRepository<LaborUnion,Long> {
     @Query(value = "select * FROM labor_union,labor_union_user WHERE labor_union.id=labor_union_user.labor_unions_id AND labor_union_user.users_id = ?1 /* #pageable */",nativeQuery = true)
     Page<LaborUnion> findByUserIsCurrentUser(Long id,Pageable pageable);
 
+    @Query(value = "select * FROM labor_union,labor_union_user WHERE labor_union.id=labor_union_user.labor_unions_id AND labor_union_user.users_id = ?1 /* #pageable */",nativeQuery = true)
+    List<LaborUnion> findByUserIsCurrentUser(Long id);
+
     @Query("select distinct labor_union from LaborUnion labor_union left join fetch labor_union.users")
     List<LaborUnion> findAllWithEagerRelationships();
 

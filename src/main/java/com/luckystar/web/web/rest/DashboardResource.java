@@ -2,11 +2,14 @@ package com.luckystar.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.luckystar.web.domain.LaborUnion;
+import com.luckystar.web.domain.User;
 import com.luckystar.web.domain.UserInfoBoard;
 import com.luckystar.web.domain.WorkTimeBoard;
 import com.luckystar.web.repository.LaborUnionRepository;
 import com.luckystar.web.repository.UserInfoBoardRepository;
+import com.luckystar.web.repository.UserRepository;
 import com.luckystar.web.repository.WorkTimeBoardRepository;
+import com.luckystar.web.security.SecurityUtils;
 import com.luckystar.web.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import org.joda.time.DateTime;
@@ -38,7 +41,9 @@ public class DashboardResource {
     @Autowired
     private WorkTimeBoardRepository workTimeBoardRepository;
     @Autowired
-    private EntityManager em;
+    private LaborUnionRepository laborUnionRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/chicken-infos-board")
     @Timed
@@ -123,14 +128,22 @@ public class DashboardResource {
 
     @GetMapping("/recent-time")
     @Timed
-    public ResponseEntity<List<String>> getRecentTime() {
-//        List<String> Jot
-        List<String> res = new ArrayList();
+    public ResponseEntity<HashMap<String,Object>> getRecentTime() {
+        HashMap<String,Object> res = new HashMap<>();
+        List<String> date = new ArrayList();
 
         DateTime dt = new DateTime();
         for (int i = 0; i < 7; i++) {
-            res.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
+            date.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
         }
+
+        res.put("date",date);
+
+        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+
+        res.put("laborUnions",laborUnionRepository.findByUserIsCurrentUser(user.get().getId()));
+
+
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
