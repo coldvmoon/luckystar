@@ -36,12 +36,7 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
 
     regDate:any
     day: any;
-    userName: string;
-    nickName: string;
-    starId: string;
-    phoneNumber: string;
-    qq: string;
-    weiChat: string;
+    searchCondition:any
 
     constructor(private workTimeBoardService: WorkTimeBoardService,
                 private parseLinks: JhiParseLinks,
@@ -67,12 +62,7 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
                 day: this.day,
                 laborUnionId:this.labor,
                 date:this.regDate.year+"-"+this.regDate.month+"-"+this.regDate.day,
-                userName: this.userName,
-                nickName: this.nickName,
-                starId: this.starId,
-                phoneNumber: this.phoneNumber,
-                qq: this.qq,
-                weiChat: this.weiChat
+                searchCondition: this.searchCondition
             },
             page: this.page - 1,
             size: this.itemsPerPage,
@@ -188,3 +178,4 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 }
+

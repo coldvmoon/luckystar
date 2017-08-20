@@ -85,7 +85,7 @@
             </div>
             <div class="col-md-1 jh-form-key">关键字:</div>
             <div class="col-md-2">
-                <input type="text" class="form-control"
+                <input type="text" class="form-control" placeholder="输入用户名/昵称/繁星号/手机号/QQ号/微信号进行搜索"
                        [(ngModel)]="searchCondition">
             </div>
 
@@ -100,11 +100,11 @@
                 <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <th jhiSortBy="user_name"><span>姓名</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="nick_name"><span>艺名</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="nick_name"><span>昵称</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="star_id"><span>繁星ID</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="total_time"><span>时间(参考</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="total_day"><span>考勤天数</span> <span class="fa fa-sort"></span></th>
-                    <th *ngFor="let day of uniqueDate">
+                    <th jhiSortBy="total_time"><span>月工作时长</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="total_day"><span>合格天数</span> <span class="fa fa-sort"></span></th>
+                    <th *ngFor="let day of uniqueDate" >
                         {{day| date:'mediumDate'}}
                     </th>
                 </tr>
@@ -117,7 +117,7 @@
                     <td>{{row.data.workTimeByMonth|timeFormat}}</td>
                     <td>{{row.data.judgeTimeByMonth}}</td>
                     <!--<td>{{row.data.totalTime}}</td>-->
-                    <td *ngFor="let day of uniqueDate" ng>
+                    <td *ngFor="let day of uniqueDate" myHighlight [highlightColor]="row.date[day]"  >
                         {{(row.date[day]?row.date[day]:0) |timeFormat}}
                     </td>
                 </tr>
@@ -145,7 +145,9 @@
     }
     .jh-select{
         height: 38px;
-        vertical-align: middl
+        vertical-align: middle
     }
 </style>
 
+<!--<p myHighlight highlightColor="yellow">Highlighted in yellow</p>-->
+<!--<p myHighlight [highlightColor]="orange">Highlighted in orange</p>-->

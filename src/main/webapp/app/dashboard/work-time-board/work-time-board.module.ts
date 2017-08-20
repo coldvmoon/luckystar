@@ -7,7 +7,8 @@ import {
     workTimeBoardRoute,
     WorkTimeBoardComponent,
     WorkTimeBoardService,
-    WorkTimeBoardResolvePagingParams
+    WorkTimeBoardResolvePagingParams,
+    HighlightDirective
     // ChickenInfoBoardService,
     // ChickenInfoBoardComponent,
     // ChickenInfoBoardRoute,
@@ -28,11 +29,12 @@ const ENTITY_STATES = [
     ],
     declarations: [
         // ChickenInfoBoardService,
-        WorkTimeBoardComponent
+        WorkTimeBoardComponent,
+        HighlightDirective
     ],
     entryComponents: [
         // ChickenInfoBoardService,
-        WorkTimeBoardComponent
+        WorkTimeBoardComponent,
     ],
     providers: [
         WorkTimeBoardService,

@@ -76,7 +76,7 @@
             </div>
             <div class="col-md-1 jh-form-key">关键字:</div>
             <div class="col-md-2">
-                <input type="text" class="form-control"
+                <input type="text" class="form-control" placeholder="输入用户名/昵称/繁星号/手机号/QQ号/微信号进行搜索"
                        [(ngModel)]="searchCondition">
             </div>
             <div class="col-md-3">
@@ -91,7 +91,7 @@
                 <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
                     <th jhiSortBy="user_name"><span>姓名</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="nick_name"><span>艺名</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="nick_name"><span>昵称</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="star_id"><span>繁星ID</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="phone_number"><span>手机</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="qq"><span>QQ</span> <span class="fa fa-sort"></span></th>
@@ -105,8 +105,8 @@
                     <th jhiSortBy="bean_by_month"><span>月总数</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="min_task"><span>任务数</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="max_task"><span>目标数</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="worktime_by_month"><span>时长</span> <span class="fa fa-sort"></span></th>
-                    <th jhiSortBy="work_time"><span>天数</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="worktime_by_month"><span>月工作时长</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="work_time"><span>合格天数</span> <span class="fa fa-sort"></span></th>
                     <th jhiSortBy="reg_date"><span>开播日期</span> <span class="fa fa-sort"></span></th>
                     <!--<th jhiSortBy="userName"> <span class="fa fa-sort"></span></th>-->
                 </tr>
@@ -129,7 +129,7 @@
                     <td>{{row.minTask}}</td>
                     <td>{{row.maxTask}}</td>
                     <td>{{row.workTimeByMonth|timeFormat}}</td>
-                    <td>{{row.workTime}}</td>
+                    <td>{{row.judgeTimeByMonth}}</td>
                     <td>{{row.regDate | date:'mediumDate'}}</td>
                     <!--<td>{{row.name}}</td>-->
                 </tr>
