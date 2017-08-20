@@ -8,10 +8,13 @@ import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 import {PaginationConfig} from '../../blocks/config/uib-pagination.config';
 
 import {WorkTimeBoardService} from './work-time-board.service'
+import {CustomDatepickerI18n, I18n} from "../../shared/datepicker-i18n";
+import {NgbDatepickerI18n} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'jhi-work-time-board',
-    templateUrl: './work-time-board.component.html'
+    templateUrl: './work-time-board.component.html',
+    providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     currentAccount: any;
