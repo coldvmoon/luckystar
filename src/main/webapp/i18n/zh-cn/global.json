@@ -14,7 +14,7 @@
                 "main": "数据",
                 "laborUnion": "公会管理",
                 "taskInfo": "任务管理",
-                "workInfo": "Work Info",
+                "workInfo": "工作管理",
                 "userInfo": "成员管理",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
