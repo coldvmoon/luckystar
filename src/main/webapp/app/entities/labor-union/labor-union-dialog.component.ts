@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDatepickerI18n, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { LaborUnion } from './labor-union.model';
@@ -11,10 +11,12 @@ import { LaborUnionPopupService } from './labor-union-popup.service';
 import { LaborUnionService } from './labor-union.service';
 import { User, UserService } from '../../shared';
 import { ResponseWrapper } from '../../shared';
+import {CustomDatepickerI18n, I18n} from "../../shared/datepicker-i18n";
 
 @Component({
     selector: 'jhi-labor-union-dialog',
-    templateUrl: './labor-union-dialog.component.html'
+    templateUrl: './labor-union-dialog.component.html',
+    providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class LaborUnionDialogComponent implements OnInit {
 

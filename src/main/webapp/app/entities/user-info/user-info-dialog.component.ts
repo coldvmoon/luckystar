@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDatepickerI18n, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { UserInfo } from './user-info.model';
@@ -11,10 +11,12 @@ import { UserInfoPopupService } from './user-info-popup.service';
 import { UserInfoService } from './user-info.service';
 import { LaborUnion, LaborUnionService } from '../labor-union';
 import { ResponseWrapper } from '../../shared';
+import {CustomDatepickerI18n, I18n} from "../../shared/datepicker-i18n";
 
 @Component({
     selector: 'jhi-user-info-dialog',
-    templateUrl: './user-info-dialog.component.html'
+    templateUrl: './user-info-dialog.component.html',
+    providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class UserInfoDialogComponent implements OnInit {
 

@@ -7,10 +7,13 @@ import { LaborUnion } from './labor-union.model';
 import { LaborUnionService } from './labor-union.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import {CustomDatepickerI18n, I18n} from "../../shared/datepicker-i18n";
+import {NgbDatepickerI18n} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'jhi-labor-union',
-    templateUrl: './labor-union.component.html'
+    templateUrl: './labor-union.component.html',
+    providers: [I18n, {provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n}]
 })
 export class LaborUnionComponent implements OnInit, OnDestroy {
 
