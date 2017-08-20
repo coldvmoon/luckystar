@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-1 jh-form-key">时间:</div>
             <div class="col-md-2" style="display: flex;">
-                <input id="field_regDate" type="text" class="form-control" name="regDate" ngbDatepicker  #regDateDp="ngbDatepicker" [(ngModel)]="day"
+                <input id="field_regDate" type="text" class="form-control" name="regDate" ngbDatepicker  #regDateDp="ngbDatepicker" [(ngModel)]="day" [minDate]="minDate" [maxDate]="maxDate"
                        required/>
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" (click)="regDateDp.toggle()"><i class="fa fa-calendar"></i></button>

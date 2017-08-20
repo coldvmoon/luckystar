@@ -37,7 +37,8 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
     regDate:any
     day: any;
     searchCondition:any
-
+    minDate:any;
+    maxDate:any;
     constructor(private workTimeBoardService: WorkTimeBoardService,
                 private parseLinks: JhiParseLinks,
                 private alertService: JhiAlertService,
@@ -81,6 +82,12 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
             month:date.getMonth()+1,
             day:date.getDate()
         }
+
+        this.maxDate=Object.create(this.regDate);
+        const minDate =Object.create(this.regDate);
+        minDate.month-=3;
+        this.minDate=minDate;
+
         this.workTimeBoardService.recentTime().subscribe(
             (res: ResponseWrapper) => this.onSuccess1(res, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
