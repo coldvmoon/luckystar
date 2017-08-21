@@ -113,7 +113,7 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
 
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
-        // this.totalItems = headers.get('X-Total-Count');
+        this.totalItems = headers.get('X-Total-Count');
 
 
         var map = {};
@@ -140,7 +140,7 @@ export class WorkTimeBoardComponent implements OnInit, OnDestroy {
       this.uniqueDate=  uniqueDate.sort((a,b)=>  {
           return a<b?1:-1;
       })
-        this.totalItems=uniqueId.length;
+        // this.totalItems=uniqueId.length;
         this.queryCount = this.totalItems;
     }
 

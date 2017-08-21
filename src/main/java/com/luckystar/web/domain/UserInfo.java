@@ -97,9 +97,9 @@ public class UserInfo implements Serializable {
      * 繁星登录密码
      */
     @NotNull
-    @Size(max = 50)
+    @Size(max = 500)
     @ApiModelProperty(value = "繁星登录密码", required = true)
-    @Column(name = "jhi_password", length = 50, nullable = false)
+    @Column(name = "jhi_password", length = 500, nullable = false)
     private String password;
 
     /**
