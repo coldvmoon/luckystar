@@ -22,7 +22,7 @@ export class ChickenInfoBoardResolvePagingParams implements Resolve<any> {
 }
 
 export const ChickenInfoBoardRoute: Routes = [{
-    path: 'chicken-info-board',
+    path: 'user-info-board',
     component: ChickenInfoBoardComponent,
     resolve: {
         'pagingParams': ChickenInfoBoardResolvePagingParams

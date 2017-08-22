@@ -105,21 +105,20 @@ public class DashboardResource {
 
         DateTime dt = new DateTime(date);
 
-        Page<WorkTimeBoard> page = null;
+        List<WorkTimeBoard> List = null;
         if (day == null) {
             day = 1;
         }
         if (day.equals(30)) {
-            page = workTimeBoardRepository.getWorkTimeBoardCurMonth(laborUnionId, Long.valueOf(dt.toString("yyyyMM")), fuzzyQuery(searchCondition), pageable);
+            List = workTimeBoardRepository.getWorkTimeBoardCurMonth(laborUnionId, Long.valueOf(dt.toString("yyyyMM")), fuzzyQuery(searchCondition));
         } else {
             List<String> days = new ArrayList<>();
             for (int i = 0; i <= day; i++) {
                 days.add(dt.plusDays(-i).toString("yyyy-MM-dd"));
             }
-            page = workTimeBoardRepository.getWorkTimeBoardByDay(laborUnionId, days, fuzzyQuery(searchCondition), pageable);
+            List = workTimeBoardRepository.getWorkTimeBoardByDay(laborUnionId, days, fuzzyQuery(searchCondition));
         }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/labor-unions");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(List, HttpStatus.OK);
     }
 
 
